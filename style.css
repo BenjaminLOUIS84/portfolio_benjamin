@@ -172,6 +172,12 @@ figcaption {
     padding-bottom: 40px;
 }
 
+h3 {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color: var(--color-third);
+}
+
 /* INFO///////////////////////////////////////////////////////////////////// */
 
 #info {

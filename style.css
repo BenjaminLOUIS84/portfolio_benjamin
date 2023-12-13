@@ -22,10 +22,25 @@ html {
 }
 
 .wrapper {
+    width: -webkit-fill-available;
     text-align: center;
     display: flex;
     flex-direction: column;
     font-family: var(--police-primary);
+    background: var(--color-secondary);
+    position: fixed;
+}
+
+main {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    font-family: var(--police-primary);
+}
+
+body {
+    display: flex;
+    flex-direction: column;
 }
 
 /*HEADER///////////////////////////////////////////////////////////////////////////////////////////////*/
@@ -116,9 +131,10 @@ figcaption {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding-top: 20px;
+    padding-top: 180px;
     padding-bottom: 100px;
     background: var(--color-primary);
+    position:static;
 }
 
 .illustration {
@@ -390,7 +406,7 @@ figcaption {
         background-size: cover;
         background-repeat: no-repeat;
     }
-    
+
     a {
         font-size: 1.8em;
         padding: 1px;

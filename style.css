@@ -77,11 +77,6 @@ nav {
     height: 60px;
 }
 
-nav .lk {
-    width: 1.5%;
-    filter: invert();
-}
-
 .menu {
     font-size: 1.2em;
     font-weight: bold;
@@ -130,67 +125,8 @@ figcaption {
     width: 100%;
 }
 
-/* #background-video {
-    width: 40%;
-} */
-
-/* #background-video {
-    height: 100vh;
-    width: 100vw;
-    object-fit: cover;
-    position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    z-index: -1;
-    opacity: 70%;
-} */
-
-h2 {
-    font-size: 4em;
-    color: rgba(204, 0, 0, 1);
-    padding-bottom: 80px;
-}
-
 .accueil figure {
-    justify-content: space-between;
-    width: 23%;
-}
-
-.photo {
-    width: 50%;
-}
-
-/* ACTIVITES ///////////////////////////////////////////////////////////////////*/
-
-.features {
-    background: white;
-    display: flex;
-    flex-direction: column;
-    padding-top: 10px;
-}
-
-h3 {
-    font-size: 1.8em;
-}
-
-.bloc3 {
-    display: flex;
-    flex-direction: row;
-    align-items: initial;
-    justify-content: space-between;
-    gap: 10px;
-    padding: 10px;
-    margin-bottom: 100px;
-}
-
-h4 {
-    font-size: 1.7em;
-}
-
-.text2 {
-    text-align: center;
+    width: 25%;
 }
 
 .ico {
@@ -203,7 +139,6 @@ h4 {
     display: flex;
     flex-direction: column;
     background: var(--color-secondary);
-    padding-top: 20px;
     text-align: center;
 }
 
@@ -219,7 +154,7 @@ h4 {
 .pied {
     display: flex;
     flex-direction: row;
-    align-items:center;
+    align-items: center;
     justify-content: space-between;
 }
 
@@ -230,19 +165,6 @@ h4 {
     display: flex;
     flex-direction: row;
     gap: 20px;
-}
-
-.acces .text3 {
-    color: black;
-    margin-bottom: 20px;
-}
-
-.acces a {
-    font-size: 1.2em;
-}
-
-.acces a:hover {
-    color: black;
 }
 
 .boutonScroll {
@@ -325,15 +247,9 @@ h4 {
         margin-left: 120px;
     }
 
-    .text {
-        text-align: justify;
-        margin-left: 40px;
-    }
-
     h1 {
         font-size: 2em;
         text-align: center;
-        margin-left: 40px;
     }
 
     /*////////////////////////////FOOTER///////////////////////////*/
@@ -346,12 +262,6 @@ h4 {
     .text3 {
         margin-bottom: 20px;
         font-size: 1em;
-    }
-
-    .acces {
-        margin-bottom: 20px;
-        margin-top: 20px;
-        font-size: 0.5em;
     }
 
     #info {
@@ -367,18 +277,17 @@ h4 {
     .wrapper {
         width: 100%;
         margin: auto;
-        line-height: 1.5;
-    }
-
-    header {
-        height: 120px;
     }
 
     .head {
         display: flex;
         justify-content: space-between;
+        text-align: left;
     }
 
+    header {
+        display: none;
+    }
 
     /* Desactiver cette fonction pour que le menu burger fonctionne*/
 
@@ -413,14 +322,6 @@ h4 {
 
     /*////////////////////////////ACCUEIL///////////////////////////*/
 
-    .accueil {
-        width: 0px;
-        padding-right: 0px;
-        padding-top: 0px;
-        margin-bottom: 0px;
-        padding-bottom: 0px;
-    }
-
     .name {
         display: flex;
         flex-direction: row;
@@ -447,6 +348,24 @@ h4 {
         transition: ease-in-out 0.5s;
     }
 
+    .ico {
+        width: 50%;
+    }
+
+    h1 {
+        font-size: 1.5em;
+        text-align: center;
+    }
+
+    .accueil figure {
+        width: 90%;
+    }
+
+    figcaption {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
     /*////////////////////////////MENU BURGER///////////////////////////*/
 
     .menu {
@@ -454,7 +373,6 @@ h4 {
     }
 
     .meal {
-        border-radius: 10px;
         display: flex;
         cursor: pointer;
     }
@@ -462,249 +380,6 @@ h4 {
     .meal:hover {
         opacity: 50%;
         cursor: pointer;
-    }
-
-    /*//////////////////////////////////////////////////////////////////*/
-
-    .nom {
-        font-size: 2.5em;
-        font-weight: bold;
-        text-align: center;
-        margin-left: 0px;
-        margin-right: 0px;
-        color: rgba(204, 0, 0, 1);
-        margin-bottom: 20px;
-    }
-
-    h2 {
-        font-size: 4em;
-        color: rgba(204, 0, 0, 1);
-        padding-bottom: 40px;
-    }
-
-    /*////////////////////////////FEATURES///////////////////////////*/
-
-    .illustrationC {
-        display: flex;
-        width: 460px;
-    }
-
-    .text1 {
-        padding: 20px;
-    }
-
-    .ico {
-        width: 50%;
-    }
-
-    .icoA {
-        width: 50%;
-    }
-
-    .icoF {
-        display: none;
-    }
-
-    .bloc3 {
-        margin: 0px 0px 40px 0px;
-        gap: 0px;
-        flex-direction: column;
-    }
-
-    .bloc3 h4 {
-        padding-bottom: 10px;
-    }
-
-    .feat {
-        padding: 10px;
-        margin: 10px;
-    }
-
-    .feat:hover {
-        animation: none;
-    }
-
-    /* Générer un caroussel glissement AUTO*/
-
-    .bloc3 {
-        position: relative;
-        overflow: auto;
-        display: flex;
-        justify-content: left;
-        scroll-snap-type: x mandatory;
-        flex-direction: row;
-        margin-left: 20px;
-    }
-
-    .feat {
-        position: sticky;
-        object-fit: cover;
-        flex-shrink: 0;
-        scroll-snap-align: start;
-
-        /* Pour centrer la première image du caroussel et gérer l'espace entre les images*/
-        width: 100%;
-        max-width: 500px;
-
-        /*Pour scroller auto*/
-        animation: scroll 20s linear infinite;
-    }
-
-    /*////////////////////////////TEAM///////////////////////////*/
-
-    h3 {
-        font-size: 1.5em;
-    }
-
-    .team h1 {
-        margin-left: 0px;
-        color: black;
-    }
-
-    .team h3 {
-        font-size: 1.5em;
-    }
-
-    .team .text3 {
-        font-size: 1.2em;
-        margin-bottom: 10px;
-    }
-
-    .team {
-        gap: 0px;
-        justify-content: center;
-        padding-bottom: 20px;
-        padding-left: 0px;
-        padding-right: 15px;
-    }
-
-    .ico3 {
-        left: 220px;
-        top: 50px;
-    }
-
-    .team figure {
-        width: 300px;
-    }
-
-    .pcs1 {
-        width: 100%;
-    }
-
-    .ico3 {
-        padding-top: 30px;
-    }
-
-    .ico4 {
-        padding-top: 50px;
-        left: -5px;
-    }
-
-    .icoFb,
-    .icoIn,
-    .icoLkd,
-    .icoTk,
-    .icoYt,
-    .icoTw,
-    .icoLSp,
-    .icoPp {
-        width: 40%;
-        filter: invert();
-    }
-
-    /*////////////////////////////GET START///////////////////////////*/
-
-    .getStart h5 {
-        font-size: 1.2em;
-    }
-
-    .text4 {
-        padding-left: 30px;
-        padding-right: 30px;
-    }
-
-    .log {
-        width: 70%;
-    }
-
-    h5 {
-        margin-top: 20px;
-    }
-
-    .revolution {
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .logRevolution {
-        width: 50%;
-    }
-
-    /* #background-video {
-        width: 100%;
-    } */
-    /*////////////////////////////PRICE///////////////////////////*/
-
-    /* Générer un caroussel glissement AU DOIGT*/
-
-    .price {
-        scroll-snap-type: x mandatory;
-        overflow: auto;
-    }
-
-    .blocPrice {
-        position: relative;
-        display: flex;
-        justify-content: left;
-        flex-direction: row;
-        width: 330px;
-    }
-
-    .blocPrice:hover {
-        animation: none;
-    }
-
-    .pack {
-        position: sticky;
-        object-fit: cover;
-        flex-shrink: 0;
-        scroll-snap-align: start;
-
-        /* Pour centrer la première image du caroussel et gérer l'espace entre les images*/
-        width: 100%;
-        max-width: 1000px;
-    }
-
-    .log {
-        width: 100%;
-    }
-
-    .front {
-        box-shadow: none;
-    }
-
-    .back h2 {
-        padding-bottom: 20px;
-    }
-
-    .back {
-        height: max-content;
-    }
-
-    .boutonJoin {
-        padding-left: 60px;
-        padding-right: 60px;
-    }
-
-    a {
-        font-size: 1.5em;
-    }
-
-    h4 {
-        font-size: 1.7em;
     }
 
     /*////////////////////////////FOOTER///////////////////////////*/
@@ -722,34 +397,9 @@ h4 {
         font-size: 0.5em;
     }
 
-    .acces {
-        margin-bottom: 0px;
-        margin-top: 0px;
-        font-size: 1em;
-        gap: 10px;
-    }
-
-    .acces a {
-        font-size: 0.7em;
-    }
-
     #info {
         padding-bottom: 0px;
-        text-align: center;
-    }
-
-    .icoFb,
-    .icoIn,
-    .icoLkd,
-    .icoTk {
-
-        width: 40%;
-    }
-
-    .logQR {
-        width: 20%;
-        align-items: center;
-        filter: invert(1);
+        text-align: left;
     }
 
 }
@@ -757,12 +407,8 @@ h4 {
 /*///////////////////////////NORMES///////////////////////////*/
 
 /* Mobile */
-@media (min-width: 0) and (max-width: 768px) {
+/* @media (min-width: 0) and (max-width: 768px) {
 
-    /* h1 {
-        font-size: 9vw;
-        padding: 2vh 0;
-    } */
 
     h2 {
         font-size: 7vw;
@@ -771,4 +417,4 @@ h4 {
     p {
         font-size: 4vw;
     }
-}
+} */

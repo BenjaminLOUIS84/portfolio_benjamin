@@ -15,7 +15,7 @@ html {
     /* COULEURS */
     --color-primary: rgb(27, 22, 36);
     --color-secondary: white;
-    --color-third: gray;
+    --color-third: #A5B4FC;
 
     /* POLICES */
     --police-primary: Verdana, Geneva, Tahoma, sans-serif;
@@ -117,7 +117,7 @@ figcaption {
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: justify;
+    text-align: center;
     padding-left: 100px;
     padding-right: 100px;
     padding-bottom: 60px;
@@ -148,7 +148,7 @@ figcaption {
 /*  Pour mettre une image fixe en arrière plan*/
 
 .getStart {
-    color: white;
+    color: var(--color-secondary);
     background-image: url("images/parallax.png");
     background-attachment: fixed;
     background-size: cover;
@@ -218,8 +218,7 @@ h3 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-left: 380px;
-    padding-top: 60px;
+    margin: auto;
     font-size: larger;
 }
 
@@ -228,6 +227,55 @@ h3 {
     display: flex;
 }
 
+/* PORTFOLIO///////////////////////////////////////////////////////////////////// */
+
+.portfolio-section-photos {
+    background-color: var(--color-secondary);   
+}
+.portfolio-section-photos h2 {
+    color: black;
+    margin-top: 80px;
+    margin-bottom: 80px;
+    text-align: center;
+}
+ 
+/* A PROPOS///////////////////////////////////////////////////////////////////// */
+
+/*Pour faire apparaitre des bordures*/
+.border {
+    color: var(--color-secondary);
+    border-right: 1px solid var(--color-third);
+    border-bottom: 1px solid var(--color-third);
+    padding: 50px;
+    width: 50%;
+    margin: auto;
+    margin-bottom: 80px;
+}
+
+.border h2 {
+    margin-top: 30px;
+}
+
+.border ul {
+    margin-top: 30px;
+}
+
+.border+div {
+    text-align: center;
+}
+
+.button {
+    margin-top: 40px;
+}
+
+.ancre {
+    background: linear-gradient(#8E86B5, #ACAEED);
+    border: none;
+    border-radius: 50px;
+    color: var(--color-secondary);
+    padding: 20px 30px;
+    display: inline-block;
+}
 
 /* INFO///////////////////////////////////////////////////////////////////// */
 
@@ -267,21 +315,7 @@ h3 {
     width: 50%;
 }
 
-.boutonScroll {
-    width: 3%;
-    border-radius: 50%;
-    position: fixed;
-    top: 580px;
-    left: 1230px;
-    transition: .5s ease-in-out;
-}
-
-.boutonScroll:hover {
-    cursor: pointer;
-}
-
 /*///////////////////////////////////////RESPONSIVE/////////////////////////////////////////*/
-
 
 /*////////////////INSPECTER - BUREAU - PAGE WEB///////////////////*/
 @media only screen and (max-width: 1196px) {
@@ -297,7 +331,7 @@ h3 {
 
     .head {
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between;
         text-align: left;
     }
 
@@ -537,6 +571,7 @@ h3 {
         bottom: 7px;
         width: 100%;
     }
+
     /*////////////////////////////FOOTER///////////////////////////*/
 
     .reseaux {

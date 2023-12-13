@@ -168,15 +168,66 @@ figcaption {
     font-weight: lighter;
 }
 
-.projetPhp {
-    padding-bottom: 40px;
-}
-
 h3 {
     padding-top: 20px;
     padding-bottom: 20px;
     color: var(--color-third);
 }
+
+.blocProjet {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+}
+
+.photo {
+    width: 100%;
+    filter: grayscale(0%);
+    /* box-shadow: 5px 10px 10px rgb(0, 0, 0); */
+}
+
+/*  Pour créer un effet d'assombrissemen
+ avec informations sur les photos*/
+
+.lien-conteneur-photo {
+    position: relative;
+}
+
+.photo-hover {
+    position: absolute;
+    top: 10px;
+    bottom: 13px;
+    right: 0px;
+    left: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    font-size: small;
+    color: white;
+    background: black;
+    opacity: 90%;
+    display: none;
+    transition: .5s ease-in-out;
+    width: 98%;
+    text-align: justify;
+}
+
+.inf {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 380px;
+    padding-top: 60px;
+    font-size: larger;
+}
+
+/*Pour activer l'effet au passage de la souris*/
+.lien-conteneur-photo:hover .photo-hover {
+    display: flex;
+}
+
 
 /* INFO///////////////////////////////////////////////////////////////////// */
 

@@ -373,6 +373,10 @@ figcaption {
         padding-right: 20px;
     }
 
+    .menu {
+        display: none;
+    }
+
     /*////////////////////////////MENU BURGER///////////////////////////*/
 
     .wrapperMenu {
@@ -403,11 +407,6 @@ figcaption {
         transition: ease-in-out 0.5s;
         padding-top: 185px;
         padding-bottom: 185px;
-    }
-
-
-    .menu {
-        display: none;
     }
 
     #menu {

@@ -187,12 +187,24 @@ figcaption {
 @media only screen and (max-width: 1196px) {
 
     h1 {
-        font-size: 0.5em;
+        font-size: 1.2em;
     }
 
     a {
         font-size: 0.7em;
         padding: 3px;
+    }
+
+    .head {
+        display: flex;
+        justify-content: space-around;
+        text-align: left;
+    }
+
+    .pied {
+        display: flex;
+        justify-content: space-around;
+        text-align: left;
     }
 
 }
@@ -219,6 +231,15 @@ figcaption {
         margin-left: 0px;
     }
 
+    header {
+        height: 10px;
+    }
+
+    head {
+        display: flex;
+        justify-content: space-between;
+    }
+
     /*////////////////////////////MENU BURGER///////////////////////////*/
 
     .menu {
@@ -234,10 +255,9 @@ figcaption {
 
     .accueil {
         padding-right: 0px;
-        padding-top: 0px;
-        padding-bottom: 0px;
+        padding-top: 20px;
+        padding-bottom: 20px;
         margin-bottom: 40px;
-        margin-left: 60px;
     }
 
     .bloc {
@@ -277,12 +297,6 @@ figcaption {
     .wrapper {
         width: 100%;
         margin: auto;
-    }
-
-    .head {
-        display: flex;
-        justify-content: space-between;
-        text-align: left;
     }
 
     header {
@@ -330,7 +344,7 @@ figcaption {
     }
 
     a {
-        font-size: 2em;
+        font-size: 1.8em;
         padding: 1px;
     }
 

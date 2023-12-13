@@ -286,7 +286,7 @@ figcaption {
     }
 
     header {
-        display: none;
+        height: 10px;
     }
 
     /* Desactiver cette fonction pour que le menu burger fonctionne*/
@@ -330,18 +330,16 @@ figcaption {
     }
 
     a {
-        font-size: 0.5em;
+        font-size: 2em;
         padding: 1px;
     }
 
     nav {
         display: flex;
-        flex-direction: row;
+        justify-content: center;
         margin: 20px;
-        height: 90px;
+        height: 200px;
         background: white;
-        border-radius: 10px;
-        box-shadow: 0px 10px 10px rgb(0, 0, 0);
 
         /*Faire apparaitre cet élément*/
         animation: appear 1s;
@@ -372,6 +370,12 @@ figcaption {
         display: none;
     }
 
+    #menu {
+        display: flex;
+        flex-direction: column;
+        line-height: 2;
+    }
+
     .meal {
         display: flex;
         cursor: pointer;
@@ -380,6 +384,10 @@ figcaption {
     .meal:hover {
         opacity: 50%;
         cursor: pointer;
+    }
+
+    .home {
+        width: 20%;
     }
 
     /*////////////////////////////FOOTER///////////////////////////*/

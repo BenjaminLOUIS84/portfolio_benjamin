@@ -110,18 +110,17 @@ h1 {
     font-weight: bold;
 }
 
-p {
+figcaption {
+
     color: var(--color-secondary);
     font-weight: lighter;
-}
-
-figcaption {
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: justify;
     padding-left: 100px;
     padding-right: 100px;
+    padding-bottom: 60px;
 }
 
 /* ACCUEIL ////////////////////////////////////////////////////////////////*/
@@ -134,7 +133,7 @@ figcaption {
     padding-top: 180px;
     padding-bottom: 100px;
     background: var(--color-primary);
-    position:static;
+    position: static;
 }
 
 .illustration {
@@ -159,6 +158,18 @@ figcaption {
 .getStart h2 {
     padding-top: 100px;
     padding-bottom: 100px;
+}
+
+/* ACTU///////////////////////////////////////////////////////////////////// */
+
+.actu {
+    background: var(--color-primary);
+    color: var(--color-secondary);
+    font-weight: lighter;
+}
+
+.projetPhp {
+    padding-bottom: 40px;
 }
 
 /* INFO///////////////////////////////////////////////////////////////////// */
@@ -448,6 +459,12 @@ figcaption {
     .home {
         width: 20%;
         filter: invert();
+    }
+
+    /*////////////////////////////ACTU///////////////////////////*/
+
+    .projetPhp {
+        width: -webkit-fill-available;
     }
 
     /*////////////////////////////FOOTER///////////////////////////*/

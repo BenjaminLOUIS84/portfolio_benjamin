@@ -178,13 +178,36 @@ figcaption {
 
 /* PORTFOLIO///////////////////////////////////////////////////////////////////// */
 
+
+.wrapperPortfolio {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    font-family: var(--police-primary);
+    background: var(--color-secondary);
+}
+
+.accueilPortfolio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background: var(--color-primary);
+}
+
+.accueilPortfolio h1 {
+    padding: 10px;
+}
+
 .portfolio-section-photos {
     background-color: var(--color-secondary);   
 }
 .portfolio-section-photos h2 {
     color: black;
-    margin-top: 80px;
-    margin-bottom: 80px;
+    margin-top: 60px;
+    margin-bottom: 60px;
     text-align: center;
 }
 
@@ -315,6 +338,18 @@ figcaption {
 
 .ico {
     width: 50%;
+}
+
+.boutonScroll {
+    width: 3%;
+    position: fixed;
+    top: 560px;
+    left: 1190px;
+    transition: .5s ease-in-out;
+}
+
+.boutonScroll:hover {
+    cursor: pointer;
 }
 
 /*///////////////////////////////////////RESPONSIVE/////////////////////////////////////////*/
@@ -484,6 +519,11 @@ figcaption {
         text-align: center;
     }
 
+    .accueil {
+        padding-top: 140px;
+        padding-bottom: 0px;
+    }
+
     .accueil figure {
         width: 90%;
     }
@@ -495,6 +535,15 @@ figcaption {
 
     .menu {
         display: none;
+    }
+
+    .border {
+        width: 95%;
+    }
+
+    .ancre {
+        font-size: 1em;
+        margin-bottom: 40px;
     }
 
     /*////////////////////////////MENU BURGER///////////////////////////*/
@@ -562,8 +611,6 @@ figcaption {
 
     .inf {
         font-size: smaller;
-        padding-left: 160px;
-        padding-bottom: 30px;
     }
 
     .photo-hover {

@@ -368,7 +368,7 @@ figcaption {
 
     .head {
         display: flex;
-        justify-content: space-between;
+        justify-content: space-around;
         text-align: left;
     }
 
@@ -392,13 +392,13 @@ figcaption {
     /*////////////////////////////ACCUEIL///////////////////////////*/
 
     a {
-        font-size: 0.5em;
+        font-size: 1.5em;
         padding: 1px;
     }
 
     nav {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         margin-left: 0px;
     }
 
@@ -417,16 +417,55 @@ figcaption {
         display: none;
     }
 
+    .wrapperMenu {
+        width: 100%;
+        margin: auto;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        font-family: var(--police-primary);
+        background: url("images/numerique.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+
+    nav {
+        display: flex;
+        justify-content: center;
+        height: max-content;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), var(--color-primary));
+        /*Faire apparaitre cet élément*/
+        animation: appear 1s;
+        transition: ease-in-out 0.5s;
+        padding-top: 185px;
+        padding-bottom: 185px;
+    }
+
+    #menu {
+        display: flex;
+        flex-direction: column;
+        line-height: 2;
+    }
+
+    #menu a {
+        color: white;
+    }
+
     .meal {
         margin-right: 20px;
         display: flex;
+    }
+
+    .home {
+        filter: invert();
     }
 
     /*//////////////////////////////////////////////////////////////////*/
 
     .accueil {
         padding-right: 0px;
-        padding-top: 20px;
+        padding-top: 120px;
         padding-bottom: 20px;
         margin-bottom: 40px;
     }

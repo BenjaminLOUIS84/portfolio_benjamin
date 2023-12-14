@@ -66,7 +66,7 @@ header {
     justify-content: center;
 }
 
-.benjamin {
+.size {
     width: 50%;
 }
 
@@ -160,18 +160,32 @@ figcaption {
     padding-bottom: 100px;
 }
 
-/* ACTU///////////////////////////////////////////////////////////////////// */
+/* OUTILS///////////////////////////////////////////////////////////////////// */
 
-.actu {
+.outils {
     background: var(--color-primary);
     color: var(--color-secondary);
     font-weight: lighter;
 }
 
-h3 {
-    padding-top: 20px;
-    padding-bottom: 20px;
-    color: var(--color-third);
+.outils p {
+    padding: 20px;
+}
+
+.sizeS {
+    width: 20%;
+}
+
+/* PORTFOLIO///////////////////////////////////////////////////////////////////// */
+
+.portfolio-section-photos {
+    background-color: var(--color-secondary);   
+}
+.portfolio-section-photos h2 {
+    color: black;
+    margin-top: 80px;
+    margin-bottom: 80px;
+    text-align: center;
 }
 
 .blocProjet {
@@ -188,8 +202,7 @@ h3 {
     /* box-shadow: 5px 10px 10px rgb(0, 0, 0); */
 }
 
-/*  Pour créer un effet d'assombrissemen
- avec informations sur les photos*/
+/*  Pour créer un effet d'assombrissement avec informations sur les photos*/
 
 .lien-conteneur-photo {
     position: relative;
@@ -227,17 +240,6 @@ h3 {
     display: flex;
 }
 
-/* PORTFOLIO///////////////////////////////////////////////////////////////////// */
-
-.portfolio-section-photos {
-    background-color: var(--color-secondary);   
-}
-.portfolio-section-photos h2 {
-    color: black;
-    margin-top: 80px;
-    margin-bottom: 80px;
-    text-align: center;
-}
  
 /* A PROPOS///////////////////////////////////////////////////////////////////// */
 
@@ -551,7 +553,7 @@ h3 {
         filter: invert();
     }
 
-    /*////////////////////////////ACTU///////////////////////////*/
+    /*////////////////////////////OUTILS///////////////////////////*/
 
     .blocPrice {
         flex-direction: column;
@@ -570,6 +572,10 @@ h3 {
         left: 0px;
         bottom: 7px;
         width: 100%;
+    }
+
+    .sizeS {
+        width: 50%;
     }
 
     /*////////////////////////////FOOTER///////////////////////////*/

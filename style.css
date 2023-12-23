@@ -202,8 +202,9 @@ figcaption {
 }
 
 .portfolio-section-photos {
-    background-color: var(--color-secondary);   
+    background-color: var(--color-secondary);
 }
+
 .portfolio-section-photos h2 {
     color: black;
     margin-top: 60px;
@@ -218,6 +219,7 @@ figcaption {
     align-items: center;
     text-align: left;
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .photo {
@@ -264,7 +266,7 @@ figcaption {
     display: flex;
 }
 
- 
+
 /* A PROPOS///////////////////////////////////////////////////////////////////// */
 
 /*Pour faire apparaitre des bordures*/

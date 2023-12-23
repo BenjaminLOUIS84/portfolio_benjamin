@@ -217,6 +217,7 @@ figcaption {
     justify-content: center;
     align-items: center;
     text-align: left;
+    margin-top: 20px;
 }
 
 .photo {

@@ -176,6 +176,28 @@ figcaption {
     width: 20%;
 }
 
+ /*////////////////////////////////////CSS CAROUSEL////*/
+
+ .container6 {
+    position: relative;
+    overflow: auto;
+    display: flex;
+    justify-content: left;
+    scroll-snap-type: x mandatory;
+    flex-direction: row;
+    padding-bottom: 90px;
+}
+
+.container6 img {
+    position: sticky;
+    width: auto;
+    height: auto;
+    object-fit: cover;
+    flex-shrink: 0;
+    scroll-snap-align: start;
+}
+
+
 /* PORTFOLIO///////////////////////////////////////////////////////////////////// */
 
 

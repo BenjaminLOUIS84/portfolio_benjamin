@@ -176,11 +176,22 @@ figcaption {
     width: 20%;
 }
 
- /*////////////////////////////////////CSS CAROUSEL////*/
+.sizeM {
+    width: 60%;
+}
 
- .container6 {
+.container5 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+/*////////////////////////////////////CSS CAROUSEL////*/
+
+.container6 {
     position: relative;
-    overflow: auto;
+    overflow: hidden;
     display: flex;
     justify-content: left;
     scroll-snap-type: x mandatory;

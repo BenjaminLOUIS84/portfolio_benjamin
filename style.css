@@ -172,10 +172,6 @@ figcaption {
     padding: 20px;
 }
 
-.sizeS {
-    width: 20%;
-}
-
 .sizeM {
     width: 70%;
 }
@@ -208,12 +204,13 @@ figcaption {
     justify-content: left;
     scroll-snap-type: x mandatory;
     flex-direction: row;
+    padding-top: 40px;
 }
 
 .container6 img {
     position: sticky;
     width: auto;
-    height: 30%;
+    height: 10%;
     object-fit: cover;
     flex-shrink: 0;
     scroll-snap-align: start;

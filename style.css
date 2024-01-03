@@ -197,7 +197,7 @@ figcaption {
     }
 
     100% {
-        transform: translateX(calc(-200px * 5));
+        transform: translateX(calc(-260px * 6));
     }
 }
 

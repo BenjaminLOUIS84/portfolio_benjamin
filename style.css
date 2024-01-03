@@ -208,6 +208,7 @@ figcaption {
     justify-content: left;
     scroll-snap-type: x mandatory;
     flex-direction: row;
+    padding-top: 20px;
     padding-bottom: 40px;
 }
 

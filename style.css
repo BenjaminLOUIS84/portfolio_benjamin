@@ -719,6 +719,12 @@ figcaption {
         width: 50%;
     }
 
+    .container6 img {
+    
+        /*Pour scroller auto*/
+        animation: scroll 10s linear infinite;
+    }
+
     /*////////////////////////////FOOTER///////////////////////////*/
 
     .reseaux {

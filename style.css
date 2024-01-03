@@ -191,19 +191,19 @@ figcaption {
 
 /* Animation Scroller les caroussels automatiquement*/
 
-/* @keyframes scroll {
+@keyframes scroll {
     0% {
         transform: translateX(0);
     }
 
     100% {
-        transform: translateX(calc(-250px * 5));
+        transform: translateX(calc(-200px * 5));
     }
-} */
+}
 
 .container6 {
     position: relative;
-    overflow: auto;
+    overflow: hidden;
     display: flex;
     justify-content: left;
     scroll-snap-type: x mandatory;
@@ -218,8 +218,9 @@ figcaption {
     object-fit: cover;
     flex-shrink: 0;
     scroll-snap-align: start;
+
     /*Pour scroller auto*/
-    /* animation: scroll 20s linear infinite; */
+    animation: scroll 20s linear infinite;
 }
 
 

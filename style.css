@@ -570,6 +570,10 @@ figcaption {
         scroll-behavior: unset;
     }
 
+    .boutonScroll {
+        display: none;
+    }
+
     /* Animation Faire apparaitre certains éléments Zoom*/
 
     @keyframes appear {

@@ -173,7 +173,7 @@ figcaption {
 }
 
 .sizeS {
-    width: 5%;
+    width: 20%;
 }
 
 .sizeM {
@@ -189,6 +189,18 @@ figcaption {
 
 /*////////////////////////////////////CSS CAROUSEL////*/
 
+/* Animation Scroller les caroussels automatiquement*/
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(calc(-250px * 5));
+    }
+}
+
 .container6 {
     position: relative;
     overflow: hidden;
@@ -196,16 +208,18 @@ figcaption {
     justify-content: left;
     scroll-snap-type: x mandatory;
     flex-direction: row;
-    padding-bottom: 90px;
+    padding-bottom: 40px;
 }
 
 .container6 img {
     position: sticky;
     width: auto;
-    height: 70%;
+    height: 50%;
     object-fit: cover;
     flex-shrink: 0;
     scroll-snap-align: start;
+    /*Pour scroller auto*/
+    animation: scroll 20s linear infinite;
 }
 
 

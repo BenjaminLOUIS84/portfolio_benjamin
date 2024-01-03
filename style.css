@@ -270,8 +270,8 @@ figcaption {
 .photo {
     width: 100%;
     filter: grayscale(0%);
-    border: 1px solid black;
-    /* box-shadow: 5px 10px 10px rgb(0, 0, 0); */
+    /* border: 1px solid black; */
+    box-shadow: 5px 10px 10px rgb(0, 0, 0);
 }
 
 /*  Pour créer un effet d'assombrissement avec informations sur les photos*/

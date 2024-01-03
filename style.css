@@ -197,7 +197,7 @@ figcaption {
     }
 
     100% {
-        transform: translateX(calc(-300px * 6));
+        transform: translateX(calc(-260px * 7));
     }
 }
 
@@ -717,12 +717,6 @@ figcaption {
 
     .sizeS {
         width: 50%;
-    }
-
-    .container6 img {
-    
-        /*Pour scroller auto*/
-        animation: scroll 10s linear infinite;
     }
 
     /*////////////////////////////FOOTER///////////////////////////*/

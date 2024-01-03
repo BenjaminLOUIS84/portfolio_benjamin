@@ -21,8 +21,9 @@ html {
     --police-primary: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-.wrapper {
+#wrapper {
     width: -webkit-fill-available;
+    /* width: 100%; */
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -31,6 +32,10 @@ html {
     position: fixed;
     /* Pour faire apparaitre la barre de navigation du haut vers le bas */
     animation: moveDown 0.6s ease-in-out 0.2s backwards;
+    /* top: -150px; */
+    transition: top 0.3s;
+    /* bottom: 150px; */
+
 }
 
 @keyframes moveDown{

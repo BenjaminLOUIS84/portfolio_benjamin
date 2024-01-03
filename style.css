@@ -682,6 +682,8 @@ figcaption {
     .meal {
         display: flex;
         cursor: pointer;
+        width: 70%;
+
     }
 
     .meal:hover {

@@ -209,14 +209,15 @@ figcaption {
 
 .container6 img {
     position: sticky;
-    width: auto;
+    width: 15%;
     height: 10%;
     object-fit: cover;
     flex-shrink: 0;
     scroll-snap-align: start;
+    padding-left: 20px;
 
     /*Pour scroller auto*/
-    animation: scroll 20s linear infinite;
+    animation: scroll 30s linear infinite;
 }
 
 

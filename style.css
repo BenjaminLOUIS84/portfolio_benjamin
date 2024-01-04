@@ -334,6 +334,7 @@ figcaption {
 
 .date {
     color: var(--color-third);
+    font-weight: bold;
 }
 
 /* A PROPOS///////////////////////////////////////////////////////////////////// */

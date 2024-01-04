@@ -332,6 +332,9 @@ figcaption {
     display: flex;
 }
 
+.date {
+    color: var(--color-third);
+}
 
 /* A PROPOS///////////////////////////////////////////////////////////////////// */
 

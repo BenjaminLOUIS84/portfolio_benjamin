@@ -38,13 +38,14 @@ html {
 
 }
 
-@keyframes moveDown{
-    0% { 
-        transform: translateY(-40px); 
+@keyframes moveDown {
+    0% {
+        transform: translateY(-40px);
         opacity: 0;
     }
-    100% { 
-        transform: translateY(0px);  
+
+    100% {
+        transform: translateY(0px);
         opacity: 1;
     }
 }
@@ -657,6 +658,18 @@ figcaption {
         margin-bottom: 40px;
     }
 
+    .illustration {
+        width: 80%;
+    }
+
+    .sizeS {
+        width: 50%;
+    }
+
+    .sizeM {
+        width: 50%;
+    }
+
     /*////////////////////////////MENU BURGER///////////////////////////*/
 
     .wrapperMenu {
@@ -733,6 +746,7 @@ figcaption {
         bottom: 7px;
         width: 100%;
     }
+
     .container6 img {
         width: 35%;
     }

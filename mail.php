@@ -2,6 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
     <title>Envoi d'un message par formulaire</title>
 </head>
 
@@ -46,7 +47,7 @@
                     echo 
                     '<section class="accueil">
                         <p>Votre message a bien été envoyé.</p><br>
-                        <a href="">Retour</a>
+                        <a href="index.html">Retour</a>
                     </section>';
             }
 

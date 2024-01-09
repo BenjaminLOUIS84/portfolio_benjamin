@@ -3,6 +3,8 @@
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Envoi d'un message par formulaire</title>
 </head>
 
@@ -46,8 +48,10 @@
                 if ($retour)
                     echo 
                     '<section class="accueil">
-                        <p>Votre message a bien été envoyé.</p><br>
-                        <a href="index.html">Retour</a>
+                        <h2>Votre message a bien été envoyé.</h2><br>
+                        <div class="button">
+                            <a href="index.html" class="ancre">Retour</a>
+                        </div>
                     </section>';
             }
 

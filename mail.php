@@ -23,11 +23,9 @@
     
             
         if (isset($_POST['message']) 
-            && strlen($nom) <= 20
+           
             && preg_match("^[A-Za-z '-]+$",$nom)
-            && strlen($message) <= 500
             && preg_match("^[A-Za-z '-]+$",$message)
-            && !empty($mail)
             && filter_var($mail, FILTER_VALIDATE_EMAIL)){
     
             $entete = 'MIME-Version:1.0' . "\r\n";

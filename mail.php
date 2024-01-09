@@ -10,7 +10,7 @@
 
         // Pour filtrer les données et ainsi sécuriser le formulaire
 
-        $message = valid_donnees($_POST["nom"]);
+        $nom = valid_donnees($_POST["nom"]);
         $mail = valid_donnees($_POST["mail"]);
         $message = valid_donnees($_POST["message"]);
 

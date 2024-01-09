@@ -23,7 +23,6 @@
     
             
         if (isset($_POST['message']) 
-           
             && preg_match("^[A-Za-z '-]+$",$nom)
             && preg_match("^[A-Za-z '-]+$",$message)
             && filter_var($mail, FILTER_VALIDATE_EMAIL)){

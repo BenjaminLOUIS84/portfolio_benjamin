@@ -13,7 +13,7 @@
 
         // Pour filtrer les données et ainsi sécuriser le formulaire
 
-        // $message = valid_donnees($_POST["nom"]);
+        // $nom = valid_donnees($_POST["nom"]);
         // $mail = valid_donnees($_POST["mail"]);
         // $message = valid_donnees($_POST["message"]);
 
@@ -45,12 +45,11 @@
             echo('Il faut un email, un nom et un message valides pour soumettre le formulaire.');
             return;
         }
-        
+
         if (isset($_POST['message'])){
     
             $entete = 'MIME-Version:1.0' . "\r\n";
             $entete .= 'Content-type: text/html; charset=utf-8' . "\r\n";
-            // $entete .= 'From: webmaster@monsite.fr' . "\r\n";
             $entete .= 'Reply-to' . $_POST['email'];
     
             $message = '<h1>Message envoyé depuis la page Contact de benjaminlouis.eu</h1>
@@ -68,11 +67,6 @@
                     </div>
                 </section>';
         }
-
-        // }else{
-        //    header("Location:index.html");
-        //    echo '<p>Un problème est survenu.</p>'; 
-        // }
     
     ?>
 </body>

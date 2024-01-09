@@ -15,15 +15,21 @@
             
         $postData = $_POST;
 
-        if (
-            !isset($postData['email'])
+        if (!isset($postData['email'])
             || !filter_var($postData['email'], FILTER_VALIDATE_EMAIL)
             || empty($postData['nom'])
             || trim($postData['nom']) === ''
             || empty($postData['message'])
-            || trim($postData['message']) === ''
-        ) {
-            echo('Il faut un email, un nom et un message valides pour soumettre le formulaire.');
+            || trim($postData['message']) === ''){
+           
+            echo
+            '<section class="accueil">
+                    <h2>Il faut un email, un nom et un message valides pour soumettre le formulaire.</h2><br>
+                    <div class="button">
+                         <a href="index.html" class="ancre">Retour</a>
+                    </div>
+                </section>';
+
             return;
         }
 
@@ -44,7 +50,7 @@
                 '<section class="accueil">
                     <h2>Votre message a bien été envoyé.</h2><br>
                     <div class="button">
-                        <a href="index.html" class="ancre">Retour</a>
+                         <a href="index.html" class="ancre">Retour</a>
                     </div>
                 </section>';
         }

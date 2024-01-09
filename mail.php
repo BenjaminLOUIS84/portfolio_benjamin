@@ -44,11 +44,11 @@
 
                 $entete = 'MIME-Version:1.0' . "\r\n";
                 $entete .= 'Content-type: text/html; charset=utf-8' . "\r\n";
-                $entete .= 'Reply-to' . $_POST['email'];
+                $entete .= 'Reply-to' . $email;
                 
                 $message = '<h1>Message envoyé depuis la page Contact de benjaminlouis.eu</h1>
-                <p><b>Email : </b>' . $_POST['email'] . '<br>
-                <b>Message : </b>' . htmlspecialchars($_POST['message']) . '</p>';
+                <p><b>Email : </b>' . $email . '<br>
+                <b>Message : </b>' . htmlspecialchars($message) . '</p>';
                 
                 $retour = mail('benlouisdevweb@gmail.com', 'Envoi depuis la page Contact', $message, $entete);
                 

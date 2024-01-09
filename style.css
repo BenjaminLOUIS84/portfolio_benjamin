@@ -7,7 +7,7 @@
 
 /* Pour rendre tous les liens scrollables*/
 html {
-    scroll-behavior: smooth;
+    scroll-behavior: unset;
 }
 
 /* VARIABLES CSS pour changer les couleurs et la police de tout le site */
@@ -337,6 +337,66 @@ figcaption {
     font-weight: bold;
 }
 
+/* CONTACT///////////////////////////////////////////////////////////////////// */
+
+#contact {
+    background: var(--color-primary);
+    padding-top: 40px;
+}
+
+#ancre {
+    margin-top: 60px;
+}
+
+.section-contact h2 {
+    color: var(--color-third);
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+/*Pour la mise en forme du formulaire*/
+form {
+    display: flex;
+    flex-direction: column;
+    max-width: 1000px;
+    margin: auto;
+    color: white;
+}
+
+.form-nom-email {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+
+}
+
+.form-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+input,
+textarea {
+    padding: 15px;
+    border-radius: 3px;
+    border: none;
+}
+
+label {
+    margin-bottom: 10px;
+}
+
+input[type='submit'] {
+    width: 200px;
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    cursor: pointer;
+}
+
+
 /* A PROPOS///////////////////////////////////////////////////////////////////// */
 
 /*Pour faire apparaitre des bordures*/
@@ -411,18 +471,6 @@ figcaption {
 
 .ico {
     width: 50%;
-}
-
-.boutonScroll {
-    width: 2%;
-    position: fixed;
-    top: 590px;
-    left: 20px;
-    transition: .5s ease-in-out;
-}
-
-.boutonScroll:hover {
-    cursor: pointer;
 }
 
 /*///////////////////////////////////////RESPONSIVE/////////////////////////////////////////*/
@@ -569,6 +617,17 @@ figcaption {
 
     #info {
         padding-bottom: 0px;
+    }
+
+    /*////////////////////////////CONTACT///////////////////////////*/
+
+    .section-contact {
+        padding: 50px 20px;
+    }
+
+    .form-nom-email {
+        flex-direction: column;
+        gap: 0;
     }
 
 }

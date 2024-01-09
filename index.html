@@ -66,6 +66,7 @@
         <br>Je suis à l'écoute des opportunités qui me permettront de mettre à votre service, mes compétences en
         matière de solutions digitales.
       </figcaption>
+      <a href="#ancre"class="ancre" >UN PROJET ? ECRIVEZ-MOI</a> 
     </section>
 
     <section class="getStart">
@@ -113,11 +114,30 @@
       </div>
     </section>
 
+    <section id="contact" class="section-contact"> <!--Pour créer un formulaire de contact-->
+      <h2 id="ancre">Parlons de votre projet</h2>
+      <form method="post" action="mail.php">
+        <div class="form-nom-email">
+          <div class="form-column">
+            <label for="nom">Votre nom</label>
+            <input type="text" name="nom" id="nom" required pattern="^[A-Za-z '-]+$" maxlength="20" title="20 caractères max">
+          </div>
+          <div class="form-column">
+            <label for="email">Votre email</label>
+            <input type="email" name="email" id="email" required pattern="^[A-Za-z0-9]+@{1}[A-Za-z]+\.{1}[A-Za-z]{2,}$">
+          </div>
+        </div>
+        <label for="mess">Votre message
+        </label><br> <textarea name="message" id="mess" rows=5 required pattern="^[A-Za-z '-]+$" maxlength="500" title="500 caractères max"></textarea>
+        <input type="submit" value="ENVOYER" class="ancre">
+      </form>
+    </section>
+
     <div id="info">
       <div class="pied">
 
         <figure>
-          <img class="size" src="images/logoBenjaminLouis.png" alt="Logo de Benjamin Louis">
+          <a href=""><img class="size" src="images/logoBenjaminLouis.png" alt="Logo de Benjamin Louis"></a>
         </figure>
 
         <div class="reseaux">

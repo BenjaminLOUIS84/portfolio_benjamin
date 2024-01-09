@@ -13,6 +13,7 @@
 
         // Pour filtrer les données et ainsi sécuriser le formulaire
             
+        
         $postData = $_POST;
 
         if (!isset($postData['email'])
@@ -24,16 +25,21 @@
            
             echo
             '<section class="accueil">
-                    <h2>Il faut un email, un nom et un message valides pour soumettre le formulaire.</h2><br>
-                    <div class="button">
-                         <a href="index.html" class="ancre">Retour</a>
-                    </div>
-                </section>';
+                <h2>Il faut un email, un nom et un message valides pour soumettre le formulaire.</h2><br>
+                <div class="button">
+                        <a href="index.html" class="ancre">Retour</a>
+                </div>
+            </section>';
 
             return;
         }
 
         if (isset($_POST['message'])){
+
+            $nom = filter_input(INPUT_POST, 'nom', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $message = filter_input(INPUT_POST, 'message', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_VALIDATE_EMAIL);
+               
     
             $entete = 'MIME-Version:1.0' . "\r\n";
             $entete .= 'Content-type: text/html; charset=utf-8' . "\r\n";

@@ -40,25 +40,37 @@
             $message = filter_input(INPUT_POST, 'message', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_VALIDATE_EMAIL);
                
-    
-            $entete = 'MIME-Version:1.0' . "\r\n";
-            $entete .= 'Content-type: text/html; charset=utf-8' . "\r\n";
-            $entete .= 'Reply-to' . $_POST['email'];
-    
-            $message = '<h1>Message envoyé depuis la page Contact de benjaminlouis.eu</h1>
-            <p><b>Email : </b>' . $_POST['email'] . '<br>
-            <b>Message : </b>' . htmlspecialchars($_POST['message']) . '</p>';
-    
-            $retour = mail('benlouisdevweb@gmail.com', 'Envoi depuis la page Contact', $message, $entete);
-            
-            if ($retour)
+            if($nom && $message && $email){
+
+                $entete = 'MIME-Version:1.0' . "\r\n";
+                $entete .= 'Content-type: text/html; charset=utf-8' . "\r\n";
+                $entete .= 'Reply-to' . $_POST['email'];
+                
+                $message = '<h1>Message envoyé depuis la page Contact de benjaminlouis.eu</h1>
+                <p><b>Email : </b>' . $_POST['email'] . '<br>
+                <b>Message : </b>' . htmlspecialchars($_POST['message']) . '</p>';
+                
+                $retour = mail('benlouisdevweb@gmail.com', 'Envoi depuis la page Contact', $message, $entete);
+                
+                if ($retour)
                 echo 
                 '<section class="accueil">
                     <h2>Votre message a bien été envoyé.</h2><br>
                     <div class="button">
-                         <a href="index.html" class="ancre">Retour</a>
+                    <a href="index.html" class="ancre">Retour</a>
                     </div>
                 </section>';
+                
+            }else{
+                echo
+                '<section class="accueil">
+                    <h2>Il faut un email, un nom et un message valides pour soumettre le formulaire.</h2><br>
+                    <div class="button">
+                            <a href="index.html" class="ancre">Retour</a>
+                    </div>
+                </section>';
+            }
+
         }
     
     ?>

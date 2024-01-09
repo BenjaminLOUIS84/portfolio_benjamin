@@ -12,25 +12,6 @@
     <?php
 
         // Pour filtrer les données et ainsi sécuriser le formulaire
-
-        // $nom = valid_donnees($_POST["nom"]);
-        // $mail = valid_donnees($_POST["mail"]);
-        // $message = valid_donnees($_POST["message"]);
-
-        // function valid_donnees($donnees){
-        //     $donnees = trim($donnees);              // Permet de supprimer les espaces inutiles
-        //     $donnees = stripslashes($donnees);      // Permet de supprimer les antislashes
-        //     $donnees = htmlspecialchars($donnees);  // Permet d'échapper les caractères spéciaux
-        //     return $donnees;
-        // }
-        
-        // if (!empty($nom)
-        //     && strlen($nom) <= 20
-        //     && preg_match("^[A-Za-z '-]+$",$nom)
-        //     && strlen($message) <= 500
-        //     && preg_match("^[A-Za-z '-]+$",$message)
-        //     && !empty($mail)
-        //     && filter_var($mail, FILTER_VALIDATE_EMAIL)){
             
         $postData = $_POST;
 

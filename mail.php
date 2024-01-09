@@ -43,7 +43,11 @@
                 $retour = mail('benlouisdevweb@gmail.com', 'Envoi depuis la page Contact', $message, $entete);
                 
                 if ($retour)
-                    echo '<p>Votre message a bien été envoyé.</p>';
+                    echo 
+                    '<section class="accueil">
+                        <p>Votre message a bien été envoyé.</p><br>
+                        <a href="">Retour</a>
+                    </section>';
             }
 
         // }else{

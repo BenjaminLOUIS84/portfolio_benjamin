@@ -739,6 +739,13 @@ input[type='submit'] {
         width: 50%;
     }
 
+    /*////////////////////////////CONTACT///////////////////////////*/
+
+    .form-nom-email {
+        flex-direction: column;
+        gap: 0;
+    }
+
     /*////////////////////////////MENU BURGER///////////////////////////*/
 
     .wrapperMenu {

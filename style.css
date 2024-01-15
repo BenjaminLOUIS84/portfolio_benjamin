@@ -136,7 +136,7 @@ figcaption {
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
+    text-align: justify;
     padding-left: 100px;
     padding-right: 100px;
     padding-bottom: 60px;

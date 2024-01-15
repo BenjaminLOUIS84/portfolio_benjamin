@@ -435,6 +435,7 @@ input[type='submit'] {
     color: var(--color-secondary);
     padding: 20px 30px;
     display: inline-block;
+    font-weight: bold;
 }
 
 /* INFO///////////////////////////////////////////////////////////////////// */

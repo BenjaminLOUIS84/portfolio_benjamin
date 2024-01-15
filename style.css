@@ -756,9 +756,9 @@ input[type='submit'] {
         display: flex;
         flex-direction: column;
         font-family: var(--police-primary);
-        background: url("images/numerique.jpg");
-        background-size: cover;
-        background-repeat: no-repeat;
+        /* background: url("images/numerique.jpg"); */
+        /* background-size: cover; */
+        /* background-repeat: no-repeat; */
     }
 
     a {
@@ -772,8 +772,8 @@ input[type='submit'] {
         height: max-content;
         background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), var(--color-primary));
         /*Faire apparaitre cet élément*/
-        animation: appear 1s;
-        transition: ease-in-out 0.5s;
+        /* animation: appear 1s; */
+        /* transition: ease-in-out 0.5s; */
         padding-top: 185px;
         padding-bottom: 185px;
     }

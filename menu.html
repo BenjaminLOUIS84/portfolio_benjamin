@@ -13,17 +13,45 @@
     d'accéder au portfolio de Benjamin Louis et de retourner à la page d'accueil. ">
 
     <title>MENU</title>
+    <script>
+        let currentLang = 'fr';
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'fr' ? 'en' : 'fr';
+            const langBtn = document.getElementById('lang-btn');
+
+            if (langBtn) {
+                langBtn.textContent = currentLang === 'fr' ? '🇬🇧 EN' : '🇫🇷 FR';
+            }
+
+            // Met à jour tous les éléments contenant data-fr et data-en
+            document.querySelectorAll('[data-fr][data-en]').forEach(el => {
+                el.textContent = el.getAttribute(`data-${currentLang}`);
+            });
+
+            // Gestion spécifique pour la valeur du bouton d'envoi du formulaire
+            const submitBtn = document.getElementById('submit-btn');
+            if (submitBtn) {
+                submitBtn.value = currentLang === 'fr' ? 'ENVOYER' : 'SEND';
+            }
+        }
+    </script>
 </head>
 
 <body>
     <div class="wrapperMenu">
+
         <nav>
             <div id="menu">
-                <a href="index.html"><img class="home" src="images/house-solid.svg" title="Retour à l'accueil"
-                        alt="Retour à la page d'accueil"></a>
-                <a href="a-propos.html">A propos</a>
-                <a href="portfolio.html">Portfolio</a>
-                <a href="mentions.html">Mentions légales</a>
+                <!-- Sélecteur de Langue -->
+                <div class="lang-switch">
+                    <button id="lang-btn" onclick="toggleLanguage()">🇬🇧 EN</button>
+                </div><br>
+
+                <br><a href="index.html" data-fr="Accueil" data-en="Home">Accueil</a>
+                <a href="a-propos.html" data-fr="À propos" data-en="About">A propos</a>
+                <a href="portfolio.html" data-fr="Portfolio" data-en="Portfolio">Portfolio</a>
+                <a href="mentions.html" data-fr="Mentions légales" data-en="Legal Notice">Mentions légales</a>
             </div>
         </nav>
     </div>

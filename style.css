@@ -891,9 +891,9 @@ input[type='submit'] {
         display: flex;
         flex-direction: column;
         font-family: var(--police-primary);
-        /* background: url("images/numerique.jpg"); */
+        background: url("images/numerique.jpg");
         /* background-size: cover; */
-        /* background-repeat: no-repeat; */
+        background-repeat: no-repeat;
     }
 
     a {

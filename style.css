@@ -115,7 +115,7 @@ body {
     }
 }
 
- 
+
 
 
 /* SECTION VEDETTE : OFFRE E-COMMERCE */
@@ -138,7 +138,7 @@ body {
     border: 2px solid var(--color-third);
     border-radius: 12px;
     padding: 40px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
 }
 
 .badge {
@@ -189,15 +189,17 @@ body {
         right: 60px;
         top: 25px;
     }
+
     .offer-card {
         padding: 20px;
     }
+
     .offer-actions {
         flex-direction: column;
     }
 }
 
- 
+
 
 /*HEADER///////////////////////////////////////////////////////////////////////////////////////////////*/
 
@@ -624,6 +626,43 @@ input[type='submit'] {
 .ico {
     width: 50%;
 }
+
+/* CORRECTIF PAGE MENU BURGER MOBILE */
+.body-menu {
+    background: var(--color-primary);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrapperMenu {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#menu-full {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    text-align: center;
+}
+
+.menu-link {
+    color: var(--color-secondary) !important;
+    font-size: 1.8em !important;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.menu-link:hover {
+    color: var(--color-third) !important;
+}
+
 
 /*///////////////////////////////////////RESPONSIVE/////////////////////////////////////////*/
 

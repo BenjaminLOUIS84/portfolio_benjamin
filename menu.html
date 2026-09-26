@@ -3,16 +3,11 @@
 
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="index.html">
-    <link rel="stylesheet" href="portfolio.html">
-    <link rel="stylesheet" href="a-propos.html">
+    <link rel="stylesheet" href="https://benjaminlouis.eu/style.css">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Menu burger permet d'accéder à la page A propos de Benjamin Louis, 
-    d'accéder au portfolio de Benjamin Louis et de retourner à la page d'accueil. ">
 
-    <title>MENU</title>
+    <title>MENU - Benjamin Louis</title>
     <script>
         let currentLang = 'fr';
 
@@ -38,51 +33,15 @@
     </script>
 </head>
 
-<body>
-    <main>
-        <div class="wrapperMenu">
-            <nav>
-                <div id="menu">
-                    <!-- Sélecteur de Langue -->
-                    <div class="lang-switch">
-                        <button id="lang-btn" onclick="toggleLanguage()">🇬🇧 EN</button>
-                    </div>
-
-                    <a href="index.html" data-fr="Accueil" data-en="Home"><strong>Accueil</strong></a>
-                    <a href="a-propos.html" data-fr="À propos" data-en="About"><strong>À propos</strong></a>
-                    <a href="portfolio.html" data-fr="Portfolio" data-en="Portfolio"><strong>Portfolio</strong></a>
-
-                </div><br><br>
-                <div class="offer-actions">
-                    <a href="https://boutique.benjaminlouis.eu" target="_blank" class="ancre demo-btn"
-                        data-fr="TESTER LA BOUTIQUE DÉMO" data-en="TEST THE DEMO STORE">TESTER LA BOUTIQUE DÉMO</a>
-                    <a href="#contact" class="ancre" data-fr="COMMANDER CETTE SOLUTION"
-                        data-en="ORDER THIS SOLUTION">COMMANDER
-                        CETTE SOLUTION</a>
-                </div>
-            </nav>
-
-
-        </div>
-
-        <br><a href="mentions.html" data-fr="Mentions légales" data-en="Legal notices"><strong>Mentions
-                légales</strong></a>
-
-        <div id="info">
-            <div class="pied">
-                <figure>
-                    <a href="index.html"><img class="size" src="images/logoBenjaminLouis.png"
-                            alt="Logo Benjamin Louis"></a>
-                </figure>
-                <div class="reseaux">
-                    <a href="https://www.linkedin.com/in/benjamin-louis-a7965519b" target="_blank"><img class="ico"
-                            src="images/linkedin.jpg" alt="LinkedIn"></a>
-                    <a href="https://www.github.com/BenjaminLOUIS84" target="_blank"><img class="ico"
-                            src="images/github.jpg" alt="GitHub"></a>
-                </div>
-            </div>
-        </div>
-    </main>
+<body class="body-menu">
+    <div class="wrapperMenu">
+        <nav id="menu-full">
+            <a href="https://benjaminlouis.eu/index.html" class="menu-link" data-fr="Accueil" data-en="Home">Accueil</a>
+            <a href="https://benjaminlouis.eu/a-propos.html" class="menu-link" data-fr="À propos" data-en="About">À propos</a>
+            <a href="https://benjaminlouis.eu/portfolio.html" class="menu-link" data-fr="Portfolio" data-en="Portfolio">Portfolio</a>
+            <a href="https://benjaminlouis.eu/mentions.html" class="menu-link" data-fr="Mentions légales" data-en="Legal notices">Mentions légales</a>
+        </nav>
+    </div>
 </body>
 
 </html>

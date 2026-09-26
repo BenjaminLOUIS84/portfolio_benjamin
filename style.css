@@ -447,7 +447,7 @@ figcaption {
 }
 
 .photoCM2C{
-        width: 60%;
+        width: 50%;
     }
 
 
@@ -1025,6 +1025,10 @@ input[type='submit'] {
 
     .container6 img {
         width: 35%;
+    }
+
+    .photoCM2C{
+        width: 100%;
     }
 
     /*////////////////////////////FOOTER///////////////////////////*/

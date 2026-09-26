@@ -2,280 +2,194 @@
 <html lang="fr">
 
 <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="menu.html">
-    <link rel="stylesheet" href="portfolio.html">
-    <link rel="stylesheet" href="a-propos.html">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="description" content="Page web de Benjamin Louis pour découvrir ses projets digitaux en développement web et web mobile,
-    les projets sont répartis suivant les langages de programmation utilisés.
-    Visualiser ou tester les projets en ligne">
+  <title>Portfolio — Benjamin Louis | Réalisations Web & E-Commerce</title>
+  <meta name="description" content="Découvrez les réalisations de Benjamin Louis : boutiques e-commerce, sites vitrines professionnels et applications web sur-mesure.">
 
-    <meta name="google-site-verification" content="DhP-qp1dWYrrcN15OUX-Bmow0aaei8QXI-bpejVEhIU" />
+  <link rel="stylesheet" href="style.css">
+  <script>
+    let currentLang = 'fr';
 
-    <title>Portfolio de Benjamin Louis Développeur Web et Web Mobile</title>
+    function toggleLanguage() {
+      currentLang = currentLang === 'fr' ? 'en' : 'fr';
+      const langBtn = document.getElementById('lang-btn');
+
+      if (langBtn) {
+        langBtn.textContent = currentLang === 'fr' ? '🇬🇧 EN' : '🇫🇷 FR';
+      }
+
+      // Met à jour tous les éléments contenant data-fr et data-en
+      document.querySelectorAll('[data-fr][data-en]').forEach(el => {
+        el.textContent = el.getAttribute(`data-${currentLang}`);
+      });
+
+      // Gestion spécifique pour la valeur du bouton d'envoi du formulaire
+      const submitBtn = document.getElementById('submit-btn');
+      if (submitBtn) {
+        submitBtn.value = currentLang === 'fr' ? 'ENVOYER' : 'SEND';
+      }
+    }
+  </script>
 </head>
 
 <body>
-    <div class="wrapperPortfolio">
+  <div class="wrapperPortfolio">
 
-        <div class="head">
-            <div class="name">
-                <figure>
-                    <img class="size" src="images/logoBenjaminLouis.png" alt="Benjamin Louis">
-                </figure>
-            </div>
+    <div class="head">
+      <div class="name">
+        <figure>
+          <img class="size" src="images/logoBenjaminLouis.png" alt="Logo Benjamin Louis">
+        </figure>
+      </div>
 
-            <!-- MENU BURGER -->
-            <div class="burger">
-                <a href="menu.html"><img src="./images/burger.png" class="meal" alt="Icône du menu burger"
-                        title="Menu"></a>
-            </div>
+      <div class="lang-switch">
+        <button id="lang-btn" onclick="toggleLanguage()">🇬🇧 EN</button>
+      </div>
 
-        </div>
-
-        <header>
-            <nav>
-                <div class="menu">
-                    <a href="index.html">Accueil</a>
-                    <a href="a-propos.html">A propos</a>
-                    <a href="portfolio.html">Portfolio</a>
-                </div>
-            </nav>
-        </header>
-
+      <div class="burger">
+        <a href="menu.html"><img src="./images/burger.png" class="meal" alt="Menu"></a>
+      </div>
     </div>
 
-
-    <main> <!-- Contenu de la Page Comment ajuster la position des images et effet dynamique zoom -->
-        <section class="accueilPortfolio">
-            <h1>Portfolio</h1>
-        </section>
-
-        <section class="portfolio-section-photos">
-            <h2>Projet Actuel</h2>
-
-            <p>Solution E-commerce clé en main</p>
-            
-            <div class="blocProjet">
-                <a href="https://boutique.benjaminlouis.eu" class="lien-conteneur-photo">
-                    <figure>
-                        <img class="photo" src="images/boutiquePro.jpg"
-                            alt="Photo du projet Html Css Boutique E-commerce Professionnel réalisé par Benjamin Louis">
-                    </figure>
-                    <div class="photo-hover">
-                        <div class="inf">
-                            <p>Tester la boutique démo</p>
-                        </div>
-                    </div>
-                </a>
-            </div><br>
-        </section>
-
-        <section class="portfolio-section-photos">
-            <h2>Projet Professionnel</h2>
-
-            <p>Site Vitrine Restaurant - Auberge de Charron</p>
-            <div class="date">Date de Création (01/02/2026-03/02/2026)</div>
-            <div class="blocProjet">
-                <a href="https://aubergedecharron.fr" class="lien-conteneur-photo">
-                    <figure>
-                        <img class="photo" src="images/photoAubergeCharron.png"
-                            alt="Photo du projet Html Css Site Vitrine Professionnel réalisé pour l'Auberge de Charron">
-                    </figure>
-                    <div class="photo-hover">
-                        <div class="inf">
-                            <p>Visiter le site web</p>
-                        </div>
-                    </div>
-                </a>
-            </div><br>
-        </section>
-
-        <h2>Projets PHP Symfony</h2>
-        <p>Page Web Répertoire Vidéos Youtube</p>
-        <div class="date">Date de Création (06/03/2024-08/12/2024)</div>
-        <div class="blocProjet">
-            <a href="https://www.benetvalsurlesroutes.benjaminlouis.eu/public/index.php/home"
-                class="lien-conteneur-photo">
-                <figure>
-                    <img class="photo" src="images/projetVideosYoutube.png"
-                        alt="Photo du projet PHP Symfony Page Web Répertoire Vidéos Youtube de la chaine Ben et Val sur les routes">
-                </figure>
-                <div class="photo-hover">
-                    <div class="inf">
-                        <p>TESTER LE PROJET</p>
-                    </div>
-                </div>
-            </a>
+    <header>
+      <nav>
+        <div class="menu">
+          <a href="index.html" data-fr="Accueil" data-en="Home">Accueil</a>
+          <a href="a-propos.html" data-fr="À propos" data-en="About">À propos</a>
+          <a href="portfolio.html" data-fr="Portfolio" data-en="Portfolio">Portfolio</a>
         </div>
-        <p>Site Web e-commerce d'un écrivain</p>
-        <div class="date">Date de Création (15/08/2023-05/12/2023)</div>
-        <div class="blocProjet">
-            <a href="https://www.projet2.benjaminlouis.eu/public/home" class="lien-conteneur-photo">
-                <figure>
-                    <img class="photo" src="images/projetDanielAaron.png"
-                        alt="Photo du projet PHP Symfony e-commerce réalisé pour Daniel Aaron">
-                </figure>
-                <div class="photo-hover">
-                    <div class="inf">
-                        <p>TESTER LE PROJET</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <p>Plateforme de gestion administrative<br>
-            d'un centre de formation</p>
-        <div class="date">Date de Création (19/07/2023-04/08/2023)</div>
-        <div class="blocProjet">
-            <a href="https://www.projet1.benjaminlouis.eu/public/index.php/home" class="lien-conteneur-photo">
-                <figure>
-                    <img class="photo" src="images/projetGestionFormation.png"
-                        alt="Photo du projet PHP Symfony Gestion Formation réalisé au centre Elan Formation à Colmar">
-                </figure>
-                <div class="photo-hover">
-                    <div class="inf">
-                        <p>TESTER LE PROJET</p>
-                    </div>
-                </div>
-            </a>
-        </div>
+      </nav>
+    </header>
 
-     
+  </div>
 
-        <h2>Projets Javascript</h2>
-        <p>Jeu des 3 portes</p>
-        <div class="date">Date de Création (15/05/2023-20/05/2023)</div>
-        <div class="blocProjet">
-            <a href="https://benjaminlouis84.github.io/Jeu-Trouver-la-Princesse/" class="lien-conteneur-photo">
-                <figure>
-                    <img class="photo" src="images/projetJeuPortes.png" alt="Photo du projet Javascript Jeu des Portes">
-                </figure>
-                <div class="photo-hover">
-                    <div class="inf">
-                        <p>TESTER LE PROJET</p>
-                    </div>
-                </div>
-            </a>
-        </div>
+  <main>
+    <section class="accueilPortfolio">
+      <h1 data-fr="Portfolio & Realisations" data-en="Portfolio & Projects">Portfolio & Réalisations</h1>
+    </section>
 
-        <p>Site Vitrine Snack - Camping de l'Isle Saint Jean</p>
-        <div class="date">Date de Création (25/04/2025-01/05/2025)</div>
-        <div class="blocProjet">
-            <a href="https://benjaminlouis84.github.io/snack/" class="lien-conteneur-photo">
-                <figure>
-                    <img class="photo" src="images/pageSnack.png"
-                        alt="Photo du projet Html Css Site Vitrine réalisé pour Snack du Camping de l'Isle Saint Jean">
-                </figure>
-                <div class="photo-hover">
-                    <div class="inf">
-                        <p>TESTER LE PROJET</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-
-        <p>Site Vitrine Relook In</p>
-        <div class="date">Date de Création (01/04/2024-04/04/2024)</div>
-        <div class="blocProjet">
-            <a href="https://www.relookin.benjaminlouis.eu/index.html" class="lien-conteneur-photo">
-                <figure>
-                    <img class="photo" src="images/projetRelookIn.png"
-                        alt="Photo du projet Html Css Site Vitrine réalisé pour Relook In">
-                </figure>
-                <div class="photo-hover">
-                    <div class="inf">
-                        <p>TESTER LE PROJET</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <p>Site Vitrine d'un écrivain</p>
-        <div class="date">Date de Création (13/07/2023-18/07/2023)</div>
-        <div class="blocProjet">
-            <a href="https://benjaminlouis84.github.io/Site-Vitrine/" class="lien-conteneur-photo">
-                <figure>
-                    <img class="photo" src="images/siteVitrine.png"
-                        alt="Photo du projet Html Css Site Vitrine réalisé pour Daniel Aaron">
-                </figure>
-                <div class="photo-hover">
-                    <div class="inf">
-                        <p>TESTER LE PROJET</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <p>Landing Page Kucra</p>
-        <div class="date">Date de Création (12/04/2023-30/04/2023)</div>
-        <div class="blocProjet">
-            <a href="https://benjaminlouis84.github.io/Landing-Page/" class="lien-conteneur-photo">
-                <figure>
-                    <img class="photo" src="images/projetLandingPage.png" alt="Photo du projet Html Css Landing Page">
-                </figure>
-                <div class="photo-hover">
-                    <div class="inf">
-                        <p>TESTER LE PROJET</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <p>Landing Page Wexim</p>
-        <div class="date">Date de Création (02/04/2023-10/04/2023)</div>
-        <div class="blocProjet">
-            <a href="https://benjaminlouis84.github.io/Wexim-Site-Web/" class="lien-conteneur-photo">
-                <figure>
-                    <img class="photo" src="images/projetWexim.png" alt="Photo du projet Html Css Wexim">
-                </figure>
-                <div class="photo-hover">
-                    <div class="inf">
-                        <p>TESTER LE PROJET</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <p>Page web d'une photographe</p>
-        <div class="date">Date de Création (15/02/2023-10/03/2023)</div>
-        <div class="blocProjet">
-            <a href="https://benjaminlouis84.github.io/Robbie-Lens-VSC/" class="lien-conteneur-photo">
-                <figure>
-                    <img class="photo" src="images/projetRobbieLens.png"
-                        alt="Photo du projet Html Css Robbie Lens réalisé sur Open Class Room">
-                </figure>
-                <div class="photo-hover">
-                    <div class="inf">
-                        <p>TESTER LE PROJET</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-        </section>
-
-        <br><a href="mentions.html">Mentions légales</a><br>
-
-        <div id="info">
-
-            <div class="pied">
-
-                <figure>
-                    <a href=""><img class="size" src="images/logoBenjaminLouis.png" alt="Logo de Benjamin Louis"></a>
-                </figure>
-
-                <div class="reseaux">
-                    <a href="https://www.linkedin.com/in/benjamin-louis-a7965519b"><img class="ico"
-                            src="images/linkedin.jpg" alt="Lien vers le profil LinkedIn de Benjamin Louis"
-                            title="LinkedIn"></a>
-                    <a href="https://www.github.com/BenjaminLOUIS84"><img class="ico" src="images/github.jpg"
-                            alt="Lien vers le profil GitHub de Benjamin Louis" title="GitHub"></a>
-                </div>
+    <!-- PRODUIT STAR -->
+    <section class="portfolio-section-photos">
+      <h2 data-fr="Offre Produit Clé en Main" data-en="Turnkey Product Offer">Offre Produit Clé en Main</h2>
+      <p><strong>Solution E-Commerce Professionnelle (Stripe & Facturation PDF)</strong></p>
+      <div class="blocProjet">
+        <a href="https://boutique.benjaminlouis.eu" target="_blank" class="lien-conteneur-photo">
+          <figure>
+            <img class="photo" src="images/boutiquePro.jpg" alt="Démo Solution E-commerce">
+          </figure>
+          <div class="photo-hover">
+            <div class="inf">
+              <p data-fr="TESTER LA BOUTIQUE DÉMO" data-en="TEST DEMO STORE">TESTER LA BOUTIQUE DÉMO</p>
             </div>
+          </div>
+        </a>
+      </div>
+    </section>
 
+    <!-- PROJETS CLIENTS & SUR-MESURE -->
+    <section class="portfolio-section-photos">
+      <h2 data-fr="Projets Client & Sur-Mesure" data-en="Client & Custom Projects">Projets Client & Sur-Mesure</h2>
+
+      <p>Site Vitrine Restaurant — Auberge de Charron</p>
+      <div class="blocProjet">
+        <a href="https://aubergedecharron.fr" target="_blank" class="lien-conteneur-photo">
+          <figure>
+            <img class="photo" src="images/photoAubergeCharron.png" alt="Auberge de Charron">
+          </figure>
+          <div class="photo-hover">
+            <div class="inf">
+              <p data-fr="VISITER LE SITE WEB" data-en="VISIT WEBSITE">VISITER LE SITE WEB</p>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <p>Site Vitrine Snack — Camping de l'Isle Saint Jean</p>
+      <div class="blocProjet">
+        <a href="https://benjaminlouis84.github.io/snack/" target="_blank" class="lien-conteneur-photo">
+          <figure>
+            <img class="photo" src="images/pageSnack.png" alt="Snack Camping">
+          </figure>
+          <div class="photo-hover">
+            <div class="inf"><p data-fr="VOIR LE SITE" data-en="VIEW SITE">VOIR LE SITE</p></div>
+          </div>
+        </a>
+      </div>
+
+      <p>Site Vitrine — Relook In</p>
+      <div class="blocProjet">
+        <a href="https://www.relookin.benjaminlouis.eu/index.html" target="_blank" class="lien-conteneur-photo">
+          <figure>
+            <img class="photo" src="images/projetRelookIn.png" alt="Relook In">
+          </figure>
+          <div class="photo-hover">
+            <div class="inf"><p data-fr="VOIR LE SITE" data-en="VIEW SITE">VOIR LE SITE</p></div>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- ARCHITECTURE SYMFONY & PHP -->
+    <section class="portfolio-section-photos">
+      <h2 data-fr="Applications Web & Symfony" data-en="Web Apps & Symfony">Applications Web & Symfony</h2>
+
+      <p>Répertoire Vidéos dynamique</p>
+      <div class="blocProjet">
+        <a href="https://www.benetvalsurlesroutes.benjaminlouis.eu/public/index.php/home" target="_blank" class="lien-conteneur-photo">
+          <figure>
+            <img class="photo" src="images/projetVideosYoutube.png" alt="Projet Vidéos">
+          </figure>
+          <div class="photo-hover">
+            <div class="inf"><p data-fr="TESTER L'APPLICATION" data-en="TEST APP">TESTER L'APPLICATION</p></div>
+          </div>
+        </a>
+      </div>
+
+      <p>Plateforme E-Commerce Édition</p>
+      <div class="blocProjet">
+        <a href="https://www.projet2.benjaminlouis.eu/public/home" target="_blank" class="lien-conteneur-photo">
+          <figure>
+            <img class="photo" src="images/projetDanielAaron.png" alt="E-commerce Écrivain">
+          </figure>
+          <div class="photo-hover">
+            <div class="inf"><p data-fr="TESTER LA DÉMO" data-en="TEST DEMO">TESTER LA DÉMO</p></div>
+          </div>
+        </a>
+      </div>
+
+      <p>Gestionnaire Administratif de Formation</p>
+      <div class="blocProjet">
+        <a href="https://www.projet1.benjaminlouis.eu/public/index.php/home" target="_blank" class="lien-conteneur-photo">
+          <figure>
+            <img class="photo" src="images/projetGestionFormation.png" alt="Gestion de Formation">
+          </figure>
+          <div class="photo-hover">
+            <div class="inf"><p data-fr="TESTER LA DÉMO" data-en="TEST DEMO">TESTER LA DÉMO</p></div>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <br><a href="mentions.html" data-fr="Mentions légales" data-en="Legal notices">Mentions légales</a><br>
+
+    <div id="info">
+      <div class="pied">
+        <figure>
+          <a href="index.html"><img class="size" src="images/logoBenjaminLouis.png" alt="Logo Benjamin Louis"></a>
+        </figure>
+        <div class="reseaux">
+          <a href="https://www.linkedin.com/in/benjamin-louis-a7965519b" target="_blank"><img class="ico" src="images/linkedin.jpg" alt="LinkedIn"></a>
+          <a href="https://www.github.com/BenjaminLOUIS84" target="_blank"><img class="ico" src="images/github.jpg" alt="GitHub"></a>
         </div>
+      </div>
+    </div>
+  </main>
 
-    </main>
-
+  <script src="js/script.js"></script>
 </body>
-
 </html>
+
+ 

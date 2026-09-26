@@ -3,23 +3,48 @@
 
 <head>
   <meta charset="utf-8">
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="menu.html">
-  <link rel="stylesheet" href="portfolio.html">
-  <link rel="stylesheet" href="a-propos.html">
-
-  <link rel="canonical" href="https://benjaminlouis.eu">
-
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta name="description" content="Page d'accueil de Benjamin Louis pour présenter ses compétences en matière de Dévelopement Web et Web mobile.
-  Consulter la liste des langages Front-end et Back-end et des Technologies utilisé par Benjamin Louis pour réaliser des projets digitaux.
-  En savoir plus à propos de Benjamin Louis, découvrir son profil et tester ses projets en ligne dans son portfolio.">
-
+  <title>Benjamin Louis — Développeur Web & Solution E-Commerce Clé en Main</title>
+  <meta name="description"
+    content="Développeur Web & E-commerce en freelance. Création de sites vitrines et boutiques en ligne performantes, sécurisées et sans abonnement mensuel.">
+  <link rel="canonical" href="https://benjaminlouis.eu">
   <meta name="google-site-verification" content="DhP-qp1dWYrrcN15OUX-Bmow0aaei8QXI-bpejVEhIU" />
 
-  <title>Page web de Benjamin LOUIS Développeur Web et Web Mobile</title>
+  <!-- Open Graph -->
+  <meta property="og:title" content="Benjamin Louis — Développeur Web & E-Commerce">
+  <meta property="og:description"
+    content="Création de boutiques en ligne clé en main et sites vitrines sur-mesure sans abonnement.">
+  <meta property="og:url" content="https://benjaminlouis.eu">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://benjaminlouis.eu/images/logoBenjaminLouis.png">
+
+  <link rel="stylesheet" href="style.css">
+  <script>
+    let currentLang = 'fr';
+
+    function toggleLanguage() {
+      currentLang = currentLang === 'fr' ? 'en' : 'fr';
+      const langBtn = document.getElementById('lang-btn');
+
+      if (langBtn) {
+        langBtn.textContent = currentLang === 'fr' ? '🇬🇧 EN' : '🇫🇷 FR';
+      }
+
+      // Met à jour tous les éléments contenant data-fr et data-en
+      document.querySelectorAll('[data-fr][data-en]').forEach(el => {
+        el.textContent = el.getAttribute(`data-${currentLang}`);
+      });
+
+      // Gestion spécifique pour la valeur du bouton d'envoi du formulaire
+      const submitBtn = document.getElementById('submit-btn');
+      if (submitBtn) {
+        submitBtn.value = currentLang === 'fr' ? 'ENVOYER' : 'SEND';
+      }
+    }
+  </script>
+
 </head>
 
 <body>
@@ -28,134 +53,162 @@
     <div class="head">
       <div class="name">
         <figure>
-          <img class="size" src="images/logoBenjaminLouis.png" alt="Logo de Benjamin Louis">
+          <img class="size" src="images/logoBenjaminLouis.png" alt="Logo Benjamin Louis Développeur Web">
         </figure>
+      </div>
+
+      <!-- Sélecteur de Langue -->
+      <div class="lang-switch">
+        <button id="lang-btn" onclick="toggleLanguage()">🇬🇧 EN</button>
       </div>
 
       <!-- MENU BURGER -->
       <div class="burger">
-        <a href="menu.html"><img src="./images/burger.png" class="meal" alt="Icône du menu burger" title="Menu"></a>
+        <a href="menu.html"><img src="./images/burger.png" class="meal" alt="Menu" title="Menu"></a>
       </div>
-
     </div>
 
     <header>
       <nav>
         <div class="menu">
-          <a href="">Accueil</a>
-          <a href="a-propos.html">A propos</a>
-          <a href="portfolio.html">Portfolio</a>
+          <a href="index.html" data-fr="Accueil" data-en="Home">Accueil</a>
+          <a href="a-propos.html" data-fr="À propos" data-en="About">À propos</a>
+          <a href="portfolio.html" data-fr="Portfolio" data-en="Portfolio">Portfolio</a>
         </div>
       </nav>
     </header>
 
   </div>
 
-  <!--COEUR DE LA PAGE Le main contient toutes les sections de la page  -->
   <main>
 
+    <!-- ACCUEIL -->
     <section class="accueil">
       <figure>
-        <img class="illustration" src="images/photoBenjaminLouis.png" alt="Photo portrait de Benjamin Louis">
+        <img class="illustration" src="images/photoBenjaminLouis.png" alt="Portrait de Benjamin Louis">
       </figure>
-      <h1>Développeur Web & Web Mobile</h1>
+      <h1 data-fr="Développeur Web & Créateur E-Commerce" data-en="Web Developer & E-Commerce Specialist">Développeur
+        Web & Créateur E-Commerce</h1>
 
-      <figcaption>
-        Tout comme en cuisine, où il est question de concevoir un bon plat à partir d'une recette et de quelques
-        ingrédients,<br>
-        j'ai toujours cultivé mon goût pour l'informatique et j'ai décidé de me reconvertir.<br>
-        <br>Mon choix de carrière s'est porté sur le métier de Développeur Web et Web Mobile<br>
-        afin de de créer des sites web visant à répondre de manière efficace aux besoins.<br>
-        <br>Je suis à l'écoute des opportunités qui me permettront de mettre à votre service, mes compétences en
-        matière de solutions digitales.
+      <figcaption
+        data-fr="Développeur web indépendant, je conçois des solutions numériques sur-mesure pour développer la visibilité et les ventes des entreprises et artisans. De la création graphique jusqu'à l'hébergement, je vous accompagne dans tous vos projets web."
+        data-en="Independent web developer, I design custom digital solutions to boost business visibility and sales. From design to hosting, I support your web projects end-to-end.">
+        Développeur web indépendant, je conçois des solutions numériques sur-mesure pour développer la visibilité et les
+        ventes des entreprises et artisans. De la création graphique jusqu'à l'hébergement, je vous accompagne dans tous
+        vos projets web.
       </figcaption>
-      <a href="#ancre" class="ancre">UN PROJET ? ECRIVEZ-MOI</a>
+
+      <a href="#contact" class="ancre" data-fr="DISCUTER DE VOTRE PROJET" data-en="TALK ABOUT YOUR PROJECT">DISCUTER DE
+        VOTRE PROJET</a>
     </section>
 
+    <!-- SECTION VEDETTE : OFFRE E-COMMERCE -->
+    <section class="featured-offer">
+      <h2 data-fr="SOLUTION STAR : E-COMMERCE CLÉ EN MAIN" data-en="STAR OFFER: TURNKEY E-COMMERCE">SOLUTION STAR :
+        E-COMMERCE CLÉ EN MAIN</h2>
+      <div class="offer-card">
+        <div class="offer-details">
+          <span class="badge" data-fr="Sans abonnement mensuel" data-en="No monthly subscription">Sans abonnement
+            mensuel</span>
+          <h3 data-fr="Votre Boutique en Ligne Prête à Vendre" data-en="Your Online Store Ready to Sell">Votre Boutique
+            en Ligne Prête à Vendre</h3>
+          <p data-fr="Une solution complète, ultra-rapide et autonome pour vendre vos produits en ligne sans contraintes techniques."
+            data-en="A complete, ultra-fast, and autonomous solution to sell your products online effortlessly.">
+            Une solution complète, ultra-rapide et autonome pour vendre vos produits en ligne sans contraintes
+            techniques.
+          </p>
+          <ul>
+            <li data-fr="✔ Paiement sécurisé par carte bancaire (Stripe)"
+              data-en="✔ Secure credit card payment (Stripe)">✔ Paiement sécurisé par carte bancaire (Stripe)</li>
+            <li data-fr="✔ Espace administration autonome (Produits, Commandes, Stocks)"
+              data-en="✔ Independent admin panel (Products, Orders, Stock)">✔ Espace administration autonome (Produits,
+              Commandes, Stocks)</li>
+            <li data-fr="✔ Génération automatique des factures et reçus PDF"
+              data-en="✔ Automatic PDF invoices and receipts generation">✔ Génération automatique des factures et reçus
+              PDF</li>
+            <li data-fr="✔ Zéro frais récurrents de plateforme" data-en="✔ Zero recurring platform fees">✔ Zéro frais
+              récurrents de plateforme</li>
+          </ul>
+          <div class="offer-actions">
+            <a href="https://boutique.benjaminlouis.eu" target="_blank" class="ancre demo-btn"
+              data-fr="TESTER LA BOUTIQUE DÉMO" data-en="TEST THE DEMO STORE">TESTER LA BOUTIQUE DÉMO</a>
+            <a href="#contact" class="ancre" data-fr="COMMANDER CETTE SOLUTION" data-en="ORDER THIS SOLUTION">COMMANDER
+              CETTE SOLUTION</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TECHNOLOGIES -->
     <section class="getStart">
-      <h2>LANGAGES & TECHNOLOGIES</h2>
+      <h2 data-fr="COMPÉTENCES & STACK TECHNIQUE" data-en="SKILLS & TECHNICAL STACK">COMPÉTENCES & STACK TECHNIQUE</h2>
     </section>
 
     <section class="outils">
-      <p>Langages & Framework</p>
+      <p data-fr="Langages & Frameworks" data-en="Languages & Frameworks">Langages & Frameworks</p>
       <div class="container6">
-        <img src="images/html5.png" alt="Logo de HTML5">
-        <img src="images/css3.png" alt="Logo de CSS3">
-        <img src="images/javascript.png" alt="Logo de Javascript">
-        <img src="images/php.png" alt="Logo de PHP">
-        <img src="images/mysql.png" alt="Logo de MySQL">
-        <img src="images/symfony1.png" alt="Logo de Symfony">
-        <img src="images/bootstrap.png" alt="Logo de Bootstrap">
+        <img src="images/html5.png" alt="HTML5">
+        <img src="images/css3.png" alt="CSS3">
+        <img src="images/javascript.png" alt="Javascript">
+        <img src="images/php.png" alt="PHP">
+        <img src="images/mysql.png" alt="MySQL">
+        <img src="images/symfony1.png" alt="Symfony">
+        <img src="images/bootstrap.png" alt="Bootstrap">
       </div>
 
-      <p>Technologies</p>
+      <p data-fr="Outils & Environnement" data-en="Tools & Environment">Outils & Environnement</p>
       <div class="container6">
-        <img src="images/vscode.png" alt="Logo de Visual Studio Code">
-        <img src="images/laragon.png" alt="Logo de Laragon">
-        <img src="images/teams.png" alt="Logo de Teams">
-        <img src="images/trello.png" alt="Logo de Trello">
-        <img src="images/figma.png" alt="Logo de Figma">
-        <img src="images/merise1.png" alt="Logo de merise">
-        <img src="images/git.png" alt="Logo de Git">
-        <img src="images/github1.png" alt="Logo de Github">
-        <img src="images/o2switch.png" alt="Logo de o2switch">
+        <img src="images/vscode.png" alt="VS Code">
+        <img src="images/laragon.png" alt="Laragon">
+        <img src="images/teams.png" alt="Teams">
+        <img src="images/trello.png" alt="Trello">
+        <img src="images/figma.png" alt="Figma">
+        <img src="images/merise1.png" alt="Merise">
+        <img src="images/git.png" alt="Git">
+        <img src="images/github1.png" alt="Github">
+        <img src="images/o2switch.png" alt="o2switch">
       </div>
     </section>
 
-    <section id="contact" class="section-contact"> <!--Pour créer un formulaire de contact-->
-      <h2 id="ancre">Parlons de votre projet</h2>
+    <!-- FORMULAIRE DE CONTACT -->
+    <section id="contact" class="section-contact">
+      <h2 data-fr="Parlons de votre projet" data-en="Let's discuss your project">Parlons de votre projet</h2>
       <form method="post" action="mail.php">
         <div class="form-nom-email">
           <div class="form-column">
-            <label for="nom">Votre nom</label>
-            <input type="text" name="nom" id="nom" required pattern="^[A-Za-z '-]+$" maxlength="20"
-              title="20 caractères max">
+            <label for="nom" data-fr="Votre nom" data-en="Your name">Votre nom</label>
+            <input type="text" name="nom" id="nom" required maxlength="50">
           </div>
           <div class="form-column">
-            <label for="email">Votre email</label>
-            <input type="email" name="email" id="email" required pattern="^[A-Za-z0-9]+@{1}[A-Za-z]+\.{1}[A-Za-z]{2,}$">
+            <label for="email" data-fr="Votre email" data-en="Your email">Votre email</label>
+            <input type="email" name="email" id="email" required>
           </div>
         </div>
-        <label for="mess">Votre message
-        </label><br> <textarea name="message" id="mess" rows=5 required pattern="^[A-Za-z '-]+$" maxlength="500"
-          title="500 caractères max"></textarea>
-        <input type="submit" value="ENVOYER" class="ancre">
+        <label for="mess" data-fr="Votre message" data-en="Your message">Votre message</label><br>
+        <textarea name="message" id="mess" rows="5" required maxlength="1000"></textarea>
+        <input type="submit" value="ENVOYER" class="ancre" id="submit-btn">
       </form>
     </section>
 
-    <br><a href="mentions.html">Mentions légales</a><br>
+    <br><a href="mentions.html" data-fr="Mentions légales" data-en="Legal notices">Mentions légales</a><br>
+
     <div id="info">
-
       <div class="pied">
-
         <figure>
-          <a href=""><img class="size" src="images/logoBenjaminLouis.png" alt="Logo de Benjamin Louis"></a>
-        </figure><br>
-
+          <a href="index.html"><img class="size" src="images/logoBenjaminLouis.png" alt="Logo Benjamin Louis"></a>
+        </figure>
         <div class="reseaux">
-          <a href="https://www.linkedin.com/in/benjamin-louis-a7965519b"><img class="ico" src="images/linkedin.jpg"
-              alt="Lien vers le profil LinkedIn de Benjamin Louis" title="LinkedIn"></a>
-          <a href="https://www.github.com/BenjaminLOUIS84"><img class="ico" src="images/github.jpg"
-              alt="Lien vers le profil GitHub de Benjamin Louis" title="GitHub"></a>
+          <a href="https://www.linkedin.com/in/benjamin-louis-a7965519b" target="_blank"><img class="ico"
+              src="images/linkedin.jpg" alt="LinkedIn"></a>
+          <a href="https://www.github.com/BenjaminLOUIS84" target="_blank"><img class="ico" src="images/github.jpg"
+              alt="GitHub"></a>
         </div>
       </div>
-
     </div>
 
   </main>
 
   <script src="js/script.js"></script>
-
-</body>
-</div>
-</div>
-
-</div>
-
-</main>
-
-<script src="js/script.js"></script>
-
 </body>
 
 </html>

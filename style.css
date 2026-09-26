@@ -62,6 +62,140 @@ body {
     flex-direction: column;
 }
 
+/* SÉLECTEUR DE LANGUE (Version Flexbox alignée) */
+.head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    height: 100px;
+    position: relative;
+}
+
+.lang-switch {
+    margin-left: auto;
+    margin-right: 15px;
+}
+
+#lang-btn {
+    background: var(--color-primary);
+    color: white;
+    border: 1px solid var(--color-third);
+    padding: 6px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.8em;
+    transition: 0.3s;
+    white-space: nowrap;
+}
+
+#lang-btn:hover {
+    background: var(--color-third);
+    color: var(--color-primary);
+}
+
+/* AJUSTEMENT SPÉCIFIQUE MOBILE */
+@media (max-width: 768px) {
+    .head {
+        padding: 0 10px;
+    }
+
+    .lang-switch {
+        margin-left: auto;
+        margin-right: 10px;
+    }
+
+    #lang-btn {
+        padding: 4px 8px;
+        font-size: 0.75em;
+    }
+}
+
+ 
+
+
+/* SECTION VEDETTE : OFFRE E-COMMERCE */
+.featured-offer {
+    background: #0f0c1b;
+    color: white;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.featured-offer h2 {
+    color: var(--color-third);
+    margin-bottom: 30px;
+}
+
+.offer-card {
+    max-width: 800px;
+    margin: 0 auto;
+    background: var(--color-primary);
+    border: 2px solid var(--color-third);
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+
+.badge {
+    background: #22c55e;
+    color: black;
+    font-weight: bold;
+    padding: 5px 15px;
+    border-radius: 15px;
+    font-size: 0.85em;
+    text-transform: uppercase;
+}
+
+.offer-details h3 {
+    font-size: 1.8em;
+    margin: 20px 0;
+}
+
+.offer-details p {
+    color: #cbd5e1;
+    margin-bottom: 20px;
+}
+
+.offer-details ul {
+    list-style: none;
+    text-align: left;
+    max-width: 500px;
+    margin: 0 auto 30px auto;
+}
+
+.offer-details li {
+    padding: 8px 0;
+    font-size: 1.05em;
+}
+
+.offer-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.demo-btn {
+    background: linear-gradient(#3b82f6, #1d4ed8) !important;
+}
+
+@media (max-width: 768px) {
+    .lang-switch {
+        right: 60px;
+        top: 25px;
+    }
+    .offer-card {
+        padding: 20px;
+    }
+    .offer-actions {
+        flex-direction: column;
+    }
+}
+
+ 
+
 /*HEADER///////////////////////////////////////////////////////////////////////////////////////////////*/
 
 header {

@@ -3,19 +3,36 @@
 
 <head>
   <meta charset="utf-8">
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="menu.html">
-  <link rel="stylesheet" href="portfolio.html">
-  <link rel="stylesheet" href="a-propos.html">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta name="description" content="A propos de Benjamin Louis permet de lire une présentation,
-  de visualiser une desciption de ses services et d'accéder à son portfolio">
+  <title>À propos — Benjamin Louis | Développeur Web Freelance</title>
+  <meta name="description" content="Découvrez le parcours et les services de Benjamin Louis, créateur de sites internet et boutiques e-commerce clé en main.">
 
-  <meta name="google-site-verification" content="DhP-qp1dWYrrcN15OUX-Bmow0aaei8QXI-bpejVEhIU" />
+  <link rel="stylesheet" href="style.css">
+  <script>
+    let currentLang = 'fr';
 
-  <title>A propos de Benjamin Louis Développeur Web et Web Mobile</title>
+    function toggleLanguage() {
+      currentLang = currentLang === 'fr' ? 'en' : 'fr';
+      const langBtn = document.getElementById('lang-btn');
+
+      if (langBtn) {
+        langBtn.textContent = currentLang === 'fr' ? '🇬🇧 EN' : '🇫🇷 FR';
+      }
+
+      // Met à jour tous les éléments contenant data-fr et data-en
+      document.querySelectorAll('[data-fr][data-en]').forEach(el => {
+        el.textContent = el.getAttribute(`data-${currentLang}`);
+      });
+
+      // Gestion spécifique pour la valeur du bouton d'envoi du formulaire
+      const submitBtn = document.getElementById('submit-btn');
+      if (submitBtn) {
+        submitBtn.value = currentLang === 'fr' ? 'ENVOYER' : 'SEND';
+      }
+    }
+  </script>
 </head>
 
 <body>
@@ -28,19 +45,21 @@
         </figure>
       </div>
 
-      <!-- MENU BURGER -->
-      <div class="burger">
-        <a href="menu.html"><img src="./images/burger.png" class="meal" alt="Icône du menu burger" title="Menu"></a>
+      <div class="lang-switch">
+        <button id="lang-btn" onclick="toggleLanguage()">🇬🇧 EN</button>
       </div>
 
+      <div class="burger">
+        <a href="menu.html"><img src="./images/burger.png" class="meal" alt="Menu"></a>
+      </div>
     </div>
 
     <header>
       <nav>
         <div class="menu">
-          <a href="index.html">Accueil</a>
-          <a href="a-propos.html">A propos</a>
-          <a href="portfolio.html">Portfolio</a>
+          <a href="index.html" data-fr="Accueil" data-en="Home">Accueil</a>
+          <a href="a-propos.html" data-fr="À propos" data-en="About">À propos</a>
+          <a href="portfolio.html" data-fr="Portfolio" data-en="Portfolio">Portfolio</a>
         </div>
       </nav>
     </header>
@@ -49,67 +68,49 @@
 
   <main>
     <section class="accueil">
-      <h1>A propos</h1>
+      <h1 data-fr="À propos de Benjamin Louis" data-en="About Benjamin Louis">À propos de Benjamin Louis</h1>
       <div class="border">
 
-        <p>Je suis Benjamin Louis, un développeur web et web mobile passionné, spécialisé dans la création de sites
-          internet et d'applications mobiles. Avec une expertise approfondie en HTML, CSS, JavaScript, PHP, et MySQL,
-          je m'engage à offrir des solutions numériques innovantes et personnalisées pour répondre aux besoins uniques
-          de chaque client.</p>
-
-        <br>Créativité, qualité, et sérénité pour vous !<br>
-        Je gère tout, depuis la création, la réalisation du projet jusqu’à la mise en ligne.<br>
+        <p data-fr="Spécialisé dans le développement d'applications web et de boutiques en ligne performantes (HTML, CSS, JavaScript, PHP, MySQL, Symfony), je conçois des solutions digitales clés en main, pensées pour être simples d'utilisation, sécurisées et immédiatement rentables."
+           data-en="Specialized in web development and high-performance online stores (HTML, CSS, JavaScript, PHP, MySQL, Symfony), I create turnkey digital solutions designed to be easy to use, secure, and cost-effective.">
+          Spécialisé dans le développement d'applications web et de boutiques en ligne performantes (HTML, CSS, JavaScript, PHP, MySQL, Symfony), je conçois des solutions digitales clés en main, pensées pour être simples d'utilisation, sécurisées et immédiatement rentables.
         </p>
 
         <br>
-        <h2>Services</h2>
-        <br>Mes prérogatives sont de permettre aux particuliers comme aux entreprises :<br>
-
+        <h2 data-fr="Mes Engagements" data-en="My Commitments">Mes Engagements</h2>
         <br>
-
-        <br>d'avoir une présence sur le web</br>
-        <br>de mettre en valeur leurs activités</br>
-        <br>d'être référencé et bien sécurisé</br>
-
+        <p data-fr="• Prise en charge intégrale : De la conception à la mise en ligne." data-en="• Full Management: From design to deployment.">• Prise en charge intégrale : De la conception à la mise en ligne.</p>
+        <p data-fr="• Zéro abonnement caché sur les solutions e-commerce." data-en="• Zero hidden subscriptions on e-commerce packages.">• Zéro abonnement caché sur les solutions e-commerce.</p>
+        <p data-fr="• Référencement (SEO) et sécurité optimisés." data-en="• Optimized SEO & Security.">• Référencement (SEO) et sécurité optimisés.</p>
 
       </div>
+
       <div class="button">
-        <a href="pdf/cvBenjaminLouis.pdf" download="pg-cvBenjaminLouis" class="ancre">TELECHARGER MON CV</a>
+        <a href="pdf/cvBenjaminLouis.pdf" download="CV-Benjamin-Louis" class="ancre" data-fr="TÉLÉCHARGER MON CV" data-en="DOWNLOAD MY RESUME">TÉLÉCHARGER MON CV</a>
       </div>
     </section>
 
-    <!--Pour créer un bouton qui renvoie vers une autre page-->
-
     <div class="button">
-      <a class="ancre" href="portfolio.html">VOIR MON PORTFOLIO</a>
+      <a class="ancre" href="portfolio.html" data-fr="DECOUVRIR LE PORTFOLIO" data-en="DISCOVER THE PORTFOLIO">DÉCOUVRIR LE PORTFOLIO</a>
     </div>
 
-    <br><a href="mentions.html">Mentions légales</a><br>
+    <br><a href="mentions.html" data-fr="Mentions légales" data-en="Legal notices">Mentions légales</a><br>
 
     <div id="info">
-
       <div class="pied">
-
         <figure>
-          <a href=""><img class="size" src="images/logoBenjaminLouis.png" alt="Logo de Benjamin Louis"></a>
+          <a href="index.html"><img class="size" src="images/logoBenjaminLouis.png" alt="Logo Benjamin Louis"></a>
         </figure>
-
-
-        <br>
         <div class="reseaux">
-          <a href="https://www.linkedin.com/in/benjamin-louis-a7965519b"><img class="ico" src="images/linkedin.jpg"
-              alt="Lien vers le profil LinkedIn de Benjamin Louis" title="LinkedIn"></a>
-          <a href="https://www.github.com/BenjaminLOUIS84"><img class="ico" src="images/github.jpg"
-              alt="Lien vers le profil GitHub de Benjamin Louis" title="GitHub"></a>
+          <a href="https://www.linkedin.com/in/benjamin-louis-a7965519b" target="_blank"><img class="ico" src="images/linkedin.jpg" alt="LinkedIn"></a>
+          <a href="https://www.github.com/BenjaminLOUIS84" target="_blank"><img class="ico" src="images/github.jpg" alt="GitHub"></a>
         </div>
       </div>
-
     </div>
-
   </main>
 
   <script src="js/script.js"></script>
-
 </body>
-
 </html>
+
+ 

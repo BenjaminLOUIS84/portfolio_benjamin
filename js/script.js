@@ -1,16 +1,22 @@
-// Masquage intelligent du header au scroll
-window.onscroll = function() { scrollFunction() };
+// Détection du scroll pour masquer/afficher le header
+let lastScrollTop = 0;
 
-function scrollFunction() {
-  const wrapper = document.getElementById("wrapper");
+window.addEventListener("scroll", function() {
+  let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+  // Cible #wrapper OU .wrapperPortfolio selon la page
+  let wrapper = document.getElementById("wrapper") || document.querySelector(".wrapperPortfolio");
+
   if (wrapper) {
-    if (document.body.scrollTop > 1160 || document.documentElement.scrollTop > 1160) {
+    if (scrollTop > 80 && scrollTop > lastScrollTop) {
+      // Défilement vers le bas : on masque le menu
       wrapper.style.top = "-150px";
     } else {
+      // Défilement vers le haut ou haut de page : on réaffiche
       wrapper.style.top = "0";
     }
   }
-}
+  lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+}, false);
 
 // Commutateur Bilingue (Français / Anglais)
 let currentLang = 'fr';
@@ -23,12 +29,10 @@ function toggleLanguage() {
     langBtn.textContent = currentLang === 'fr' ? '🇬🇧 EN' : '🇫🇷 FR';
   }
 
-  // Met à jour tous les éléments contenant data-fr et data-en
   document.querySelectorAll('[data-fr][data-en]').forEach(el => {
     el.textContent = el.getAttribute(`data-${currentLang}`);
   });
 
-  // Gestion spécifique pour la valeur du bouton d'envoi du formulaire
   const submitBtn = document.getElementById('submit-btn');
   if (submitBtn) {
     submitBtn.value = currentLang === 'fr' ? 'ENVOYER' : 'SEND';

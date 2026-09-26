@@ -909,14 +909,14 @@ input[type='submit'] {
         /*Faire apparaitre cet élément*/
         /* animation: appear 1s; */
         /* transition: ease-in-out 0.5s; */
-        padding-top: 285px;
+        /* padding-top: 285px; */
         padding-bottom: 285px;
     }
 
     #menu {
         display: flex;
         flex-direction: column;
-        line-height: 2;
+        line-height: 4;
     }
 
     #menu a {

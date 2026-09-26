@@ -7,28 +7,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mentions Légales</title>
     <script>
-    let currentLang = 'fr';
+        let currentLang = 'fr';
 
-    function toggleLanguage() {
-      currentLang = currentLang === 'fr' ? 'en' : 'fr';
-      const langBtn = document.getElementById('lang-btn');
+        function toggleLanguage() {
+            currentLang = currentLang === 'fr' ? 'en' : 'fr';
+            const langBtn = document.getElementById('lang-btn');
 
-      if (langBtn) {
-        langBtn.textContent = currentLang === 'fr' ? '🇬🇧 EN' : '🇫🇷 FR';
-      }
+            if (langBtn) {
+                langBtn.textContent = currentLang === 'fr' ? '🇬🇧 EN' : '🇫🇷 FR';
+            }
 
-      // Met à jour tous les éléments contenant data-fr et data-en
-      document.querySelectorAll('[data-fr][data-en]').forEach(el => {
-        el.textContent = el.getAttribute(`data-${currentLang}`);
-      });
+            // Met à jour tous les éléments contenant data-fr et data-en
+            document.querySelectorAll('[data-fr][data-en]').forEach(el => {
+                el.textContent = el.getAttribute(`data-${currentLang}`);
+            });
 
-      // Gestion spécifique pour la valeur du bouton d'envoi du formulaire
-      const submitBtn = document.getElementById('submit-btn');
-      if (submitBtn) {
-        submitBtn.value = currentLang === 'fr' ? 'ENVOYER' : 'SEND';
-      }
-    }
-  </script>
+            // Gestion spécifique pour la valeur du bouton d'envoi du formulaire
+            const submitBtn = document.getElementById('submit-btn');
+            if (submitBtn) {
+                submitBtn.value = currentLang === 'fr' ? 'ENVOYER' : 'SEND';
+            }
+        }
+    </script>
 </head>
 
 <body>
@@ -89,7 +89,7 @@
                 déposés.
             </p>
 
-             <h3>6. Loi applicable et juridiction</h3>
+            <h3>6. Loi applicable et juridiction</h3>
 
             Les présentes Mentions Légales sont régies par la loi française.
             En cas de différend et à défaut d’accord amiable, le litige sera
@@ -97,8 +97,9 @@
             de compétence en vigueur.<br>
 
             <figure>
-                <img class="photo" src="images/cm2c.jpg" alt="Logo de la CM2C" title="Logo de la CM2C">
+                <a href="https://www.cm2c.com/" target="_blank" rel="noopener noreferrer"><img class="photo" src="images/cm2c.jpg" alt="Logo de la CM2C" title="Logo de la CM2C"></a>
             </figure>
+
 
         </section>
     </main>

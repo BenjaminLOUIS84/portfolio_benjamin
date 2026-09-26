@@ -430,6 +430,13 @@ figcaption {
     box-shadow: 5px 10px 10px rgb(0, 0, 0);
 }
 
+.photo1 {
+    width: 50%;
+    filter: grayscale(0%);
+    /* border: 1px solid black; */
+    box-shadow: 5px 10px 10px rgb(0, 0, 0);
+}
+
 /*  Pour créer un effet d'assombrissement avec informations sur les photos*/
 
 .lien-conteneur-photo {
@@ -437,6 +444,24 @@ figcaption {
 }
 
 .photo-hover {
+    position: absolute;
+    top: 10px;
+    bottom: 13px;
+    right: 0px;
+    left: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    font-size: small;
+    color: white;
+    background: black;
+    opacity: 90%;
+    display: none;
+    transition: .5s ease-in-out;
+    width: 98%;
+    text-align: justify;
+}
+.photo1-hover {
     position: absolute;
     top: 10px;
     bottom: 13px;

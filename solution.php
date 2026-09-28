@@ -36,14 +36,15 @@ require_once __DIR__ . '/config.php';
 
     <!-- En-tête -->
     <header style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #e2e8f0;">
-        <div>
-            <a href="menu.html">
-                <img src="./images/burger.png" alt="Menu" style="width: 30px; height: auto; display: block;">
-            </a>
+        
+        <div class="lang-switch">
+            <button id="lang-btn" onclick="toggleLanguage()">🇬🇧 EN</button>
         </div>
+        
         <nav>
-            <a href="index.html" style="color: #2b6cb0; text-decoration: none; font-weight: bold; margin-right: 15px;">Accueil</a>
-            <a href="https://benjaminlouis.eu/a-propos.html" style="color: #2b6cb0; text-decoration: none; font-weight: bold;">À propos</a>
+            <a href="index.html" style="color: #2b6cb0; text-decoration: none; font-weight: bold; margin-right: 15px;" data-fr="Accueil" data-en="Home">Accueil</a>
+            <a href="https://benjaminlouis.eu/a-propos.html" style="color: #2b6cb0; text-decoration: none; font-weight: bold; margin-right: 15px;"  data-fr="Accueil" data-en="About">À propos</a>
+            <a href="https://benjaminlouis.eu/portfolio.html" style="color: #2b6cb0; text-decoration: none; font-weight: bold; margin-right: 15px;" data-fr="Portfolio" data-en="Portfolio">Portfolio</a>
         </nav>
     </header>
 

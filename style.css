@@ -668,6 +668,125 @@ input[type='submit'] {
     color: var(--color-third) !important;
 }
 
+/* --- Correctifs Page d'Accueil & Mobile --- */
+.burger-img {
+  width: 32px !important;
+  height: auto !important;
+  max-width: 32px !important;
+  display: block;
+}
+
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+}
+
+.boutique-intro {
+  text-align: center;
+  margin: 30px 15px 20px;
+}
+
+.boutique-intro h1 {
+  font-size: 1.8rem;
+  color: #2b3a4a;
+  margin-bottom: 10px;
+}
+
+.boutique-intro .subtitle {
+  font-size: 1.1rem;
+  color: #4a5568;
+}
+
+/* Carte du formulaire */
+.commande-card {
+  max-width: 500px;
+  margin: 0 auto 40px;
+  padding: 25px;
+  background: #ffffff !important;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+.commande-card h2 {
+  color: #1a202c !important;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.4rem;
+}
+
+.commande-form .form-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.commande-form label {
+  display: block;
+  color: #2d3748 !important;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+}
+
+.commande-form input[type="text"],
+.commande-form input[type="email"] {
+  width: 100% !important;
+  padding: 10px 12px !important;
+  background-color: #f8fafc !important;
+  border: 1px solid #cbd5e1 !important;
+  color: #0f172a !important;
+  border-radius: 6px !important;
+  font-size: 0.95rem !important;
+  box-sizing: border-box !important;
+}
+
+.commande-form input::placeholder {
+  color: #94a3b8 !important;
+}
+
+.checkbox-label {
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 10px !important;
+  color: #334155 !important;
+  font-size: 0.85rem !important;
+  line-height: 1.4 !important;
+}
+
+.checkbox-label input[type="checkbox"] {
+  margin-top: 2px !important;
+  width: 16px !important;
+  height: 16px !important;
+  flex-shrink: 0;
+}
+
+.btn-submit {
+  width: 100% !important;
+  padding: 12px !important;
+  background-color: #2563eb !important;
+  color: #ffffff !important;
+  border: none !important;
+  border-radius: 6px !important;
+  font-weight: bold !important;
+  font-size: 1rem !important;
+  cursor: pointer !important;
+  margin-top: 15px !important;
+}
+
+.btn-submit:hover {
+  background-color: #1d4ed8 !important;
+}
+
+@media (max-width: 600px) {
+  .commande-card {
+    margin: 0 15px 30px;
+    padding: 20px 15px;
+  }
+}
+
+
 
 /*///////////////////////////////////////RESPONSIVE/////////////////////////////////////////*/
 

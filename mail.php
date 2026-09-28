@@ -48,7 +48,9 @@
                 
                 $message = '<h1>Message envoyé depuis la page Contact de benjaminlouis.eu</h1>
                 <p><b>Email : </b>' . $email . '<br>
-                <b>Message : </b>' . htmlspecialchars($message) . '</p>';
+                <b>Nom : </b>' .$nom . '<br>
+                <b>Message : </b>' . html_entity_decode($message) . '
+                </p>';
                 
                 $retour = mail('benlouisdevweb@gmail.com', 'Envoi depuis la page Contact', $message, $entete);
                 

@@ -177,7 +177,7 @@
         <div class="form-nom-email">
           <div class="form-column">
             <label for="nom" data-fr="Votre nom" data-en="Your name">Votre nom</label>
-            <input type="text" name="nom" id="nom" required maxlength="50">
+            <input type="text" name="nom" id="nom" required pattern="^[A-Za-z '-]+$" required maxlength="30">
           </div>
           <div class="form-column">
             <label for="email" data-fr="Votre email" data-en="Your email">Votre email</label>

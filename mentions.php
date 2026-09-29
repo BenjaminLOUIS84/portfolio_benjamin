@@ -140,11 +140,12 @@
 
             <h3 id="art3-title" data-fr="ARTICLE 3 - Collecte de données et RGPD" data-en="ARTICLE 3 - Data Collection & GDPR">ARTICLE 3 - Collecte de données et RGPD</h3><br>
             <p id="art3-content"
-               data-fr="Le site recueille des données nécessaires à la gestion des commandes. Conformément au RGPD et à la loi Informatique et Libertés, vous disposez d'un droit d'accès, de rectification et de suppression en écrivant à : <?= CONTACT_EMAIL ?>."
-               data-en="The site collects data necessary for order management. In accordance with GDPR, you have the right to access, rectify, and delete your data by writing to: <?= CONTACT_EMAIL ?>.">
-                Le site web de <strong><?= COMPANY_NAME ?></strong> est une boutique en ligne permettant de commander des produits. De ce fait, le site recueille des données nécessaires à la gestion des commandes et à la relation client.<br><br>
-                Conformément au Règlement général sur la protection des données (RGPD) et à la loi « Informatique et Libertés », vous disposez d’un droit d’accès, de rectification et de suppression des données vous concernant par email : <a href="mailto:<?= CONTACT_EMAIL ?>"><?= CONTACT_EMAIL ?></a>.
+               data-fr="Le site recueille des données nécessaires à la gestion des commandes, à la configuration personnalisée du site (nom de domaine, langue d'affichage et choix d'options multilingues) ainsi qu'à la relation client. Conformément au RGPD et à la loi Informatique et Libertés, vous disposez d'un droit d'accès, de rectification et de suppression en écrivant à : <?= CONTACT_EMAIL ?>."
+               data-en="The site collects data required for order management, customized website configuration (domain name, display language, and multilingual option choices), and customer support. In accordance with GDPR, you have the right to access, rectify, and delete your data by writing to: <?= CONTACT_EMAIL ?>.">
+                Le site web de <strong><?= COMPANY_NAME ?></strong> est une boutique en ligne permettant de commander des prestations et produits e-commerce. De ce fait, le site recueille des données nécessaires à la gestion des commandes, à la configuration technique personnalisée (nom de domaine souhaité, langues d'affichage et choix des modules de traduction) ainsi qu'à la relation client.<br><br>
+                Conformément au Règlement Général sur la Protection des Données (RGPD) et à la loi « Informatique et Libertés », vous disposez d’un droit d’accès, de rectification et de suppression des données vous concernant par email : <a href="mailto:<?= CONTACT_EMAIL ?>"><?= CONTACT_EMAIL ?></a>.
             </p><br>
+
 
             <h3 id="art4-title" data-fr="ARTICLE 4 - Politique de cookies" data-en="ARTICLE 4 - Cookie Policy">ARTICLE 4 - Politique de cookies</h3><br>
             <p id="art4-content"

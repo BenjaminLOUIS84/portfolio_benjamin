@@ -19,12 +19,21 @@ if (!empty($session_id)) {
             $paiement_valide = true;
             $customer_email = $session->customer_details->email ?? $session->metadata->client_email ?? '';
             $client_nom     = $session->metadata->client_nom ?? 'Client';
+
+            // Mise à jour du statut en BDD
+            try {
+                $stmt = $pdo->prepare("UPDATE commandes SET statut = 'paye' WHERE client_email = :email AND statut = 'en_attente' ORDER BY id DESC LIMIT 1");
+                $stmt->execute([':email' => $customer_email]);
+            } catch (\PDOException $e) {
+                error_log('Erreur BDD update succes : ' . $e->getMessage());
+            }
         }
     } catch (\Exception $e) {
         error_log('Erreur verification session Stripe : ' . $e->getMessage());
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="fr" style="height: auto !important; overflow-y: auto !important; background-color: #f4f6f9 !important;">
 <head>

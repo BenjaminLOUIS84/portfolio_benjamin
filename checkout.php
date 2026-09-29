@@ -17,10 +17,30 @@ $client_email    = filter_var(trim($_POST['client_email'] ?? ''), FILTER_VALIDAT
 $domaine_souhaite = trim($_POST['domaine_souhaite'] ?? '');
 $cgv_acceptees   = isset($_POST['cgv_acceptees']);
 
-// 3. Contrôle des données obligatoires
+// 3.1 Contrôle des données obligatoires
 if (empty($client_nom) || !$client_email || !$cgv_acceptees) {
     die('Erreur : Veuillez remplir tous les champs obligatoires et accepter les CGV.');
 }
+
+//3.2 Enregistrement de la commande en BDD avant la redirection Stripe
+try {
+    $stmt = $pdo->prepare("INSERT INTO commandes (client_nom, client_email, domaine_souhaite, montant_ht, statut, date_creation) VALUES (:nom, :email, :domaine, 990.00, 'en_attente', NOW())");
+    $stmt->execute([
+        ':nom'     => $client_nom,
+        ':email'   => $client_email,
+        ':domaine' => $domaine_souhaite
+    ]);
+    $commande_id = $pdo->lastInsertId();
+} catch (\PDOException $e) {
+    error_log('Erreur BDD checkout : ' . $e->getMessage());
+}
+
+// 5. Configuration de Stripe
+Stripe::setApiKey(STRIPE_SECRET_KEY);
+
+ 
+
+
 
 // 4. Configuration de Stripe
 Stripe::setApiKey(STRIPE_SECRET_KEY);

@@ -167,17 +167,13 @@
             </a>
             <br>
 
-            <br><a href="https://benjaminlouis.eu/index.html" data-fr="Retour à l'accueil" data-en="Back to Home" class="badge"><strong>Retour à
-                    l'accueil</strong></a><br>
-
-            <br><p id="update-date" data-fr="Dernière mise à jour : <?= date('d/m/Y') ?>" data-en="Last update: <?= date('d/m/Y') ?>">Dernière mise à jour : <?= date('d/m/Y') ?></p><br>
-
+            
             <footer class="site-footer">
                 <div class="footer-container">
-
                     <div class="footer-links">
-                        <a href="https://benjaminlouis.eu/mentions.php" class="mentions" data-fr="Mentions Légales" data-en="Legal Notices">Mentions Légales</a>
-                        <a href="https://benjaminlouis.eu/cgv.php" class="mentions" data-fr="  Conditions Générales de Vente" data-en="  General Terms and Conditions">  Conditions Générales de Vente</a>
+                        <br><a href="https://benjaminlouis.eu/index.html" data-fr="Retour à l'accueil" data-en="Back to Home" class="badge"><strong>Retour à
+                        l'accueil</strong></a><br>
+                        <br><p id="update-date" data-fr="Dernière mise à jour : <?= date('d/m/Y') ?>" data-en="Last update: <?= date('d/m/Y') ?>">Dernière mise à jour : <?= date('d/m/Y') ?></p>   
                     </div>
                 </div>
             </footer>

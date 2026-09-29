@@ -20,7 +20,7 @@ require_once __DIR__ . '/config.php';
       "provider": {
         "@type": "Organization",
         "name": "<?= SITE_NAME ?>",
-        "url": "https://benjaminlouis.eu"
+        "url": "https://benjaminlouis.eu/solution.php"
       },
       "offers": {
         "@type": "Offer",
@@ -51,46 +51,47 @@ require_once __DIR__ . '/config.php';
     <!-- Titre -->
     <main style="padding: 20px 0;">
         <section style="text-align: center; margin-bottom: 30px;">
-            <h1 style="color: #1a202c !important; font-size: 1.8rem; margin-bottom: 10px;">Votre Boutique E-commerce Clé en Main</h1>
-            <p style="color: #4a5568 !important; font-size: 1.1rem; margin: 0;">
+            <h1 data-fr="Votre Boutique E-commerce Clé en Main" data-en="Your turnkey e-commerce store" style="color: #1a202c !important; font-size: 1.8rem; margin-bottom: 10px;">Votre Boutique E-commerce Clé en Main</h1>
+            <p data-fr="Une solution complète et prête à vendre pour" data-en="A complete, ready-to-sell solution for" style="color: #4a5568 !important; font-size: 1.1rem; margin: 0;">
                 Une solution complète et prête à vendre pour <strong>990 € HT</strong>.
             </p>
         </section>
 
         <!-- Formulaire isolé -->
         <section style="max-width: 500px; margin: 0 auto; background: #ffffff !important; padding: 25px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border: 1px solid #e2e8f0;">
-            <h2 style="color: #1a202c !important; text-align: center; margin-top: 0; margin-bottom: 20px; font-size: 1.3rem;">Commander votre solution</h2>
+            <h2 data-fr="Commander votre solution" data-en="Order your solution" style="color: #1a202c !important; text-align: center; margin-top: 0; margin-bottom: 20px; font-size: 1.3rem;">Commander votre solution</h2>
            
             <form action="checkout.php" method="POST" style="display: flex; flex-direction: column; gap: 15px;">
                 <div>
-                    <label for="client_nom" style="display: block; color: #2d3748 !important; font-weight: 600; font-size: 0.9rem; margin-bottom: 5px;">Nom complet ou Société *</label>
+                    <label data-fr="Nom complet ou Société *" data-en="Full Name or Company *" for="client_nom" style="display: block; color: #2d3748 !important; font-weight: 600; font-size: 0.9rem; margin-bottom: 5px;">Nom complet ou Société *</label>
                     <input type="text" id="client_nom" name="client_nom" required placeholder="Ex: Jean Dupont" style="width: 100%; padding: 10px; background: #fff !important; color: #000 !important; border: 1px solid #cbd5e1; border-radius: 5px; box-sizing: border-box; font-size: 0.95rem;">
                 </div>
 
                 <div>
-                    <label for="client_email" style="display: block; color: #2d3748 !important; font-weight: 600; font-size: 0.9rem; margin-bottom: 5px;">Adresse E-mail *</label>
+                    <label data-fr="Adresse E-mail *" data-en="Email Address *" for="client_email" style="display: block; color: #2d3748 !important; font-weight: 600; font-size: 0.9rem; margin-bottom: 5px;">Adresse E-mail *</label>
                     <input type="email" id="client_email" name="client_email" required placeholder="jean@exemple.fr" style="width: 100%; padding: 10px; background: #fff !important; color: #000 !important; border: 1px solid #cbd5e1; border-radius: 5px; box-sizing: border-box; font-size: 0.95rem;">
                 </div>
 
                 <div>
-                    <label for="domaine_souhaite" style="display: block; color: #2d3748 !important; font-weight: 600; font-size: 0.9rem; margin-bottom: 5px;">Nom de domaine souhaité</label>
+                    <label data-fr="Nom de domaine souhaité" data-en="Desired Domain Name *" for="domaine_souhaite" style="display: block; color: #2d3748 !important; font-weight: 600; font-size: 0.9rem; margin-bottom: 5px;">Nom de domaine souhaité</label>
                     <input type="text" id="domaine_souhaite" name="domaine_souhaite" placeholder="maboutique.com" style="width: 100%; padding: 10px; background: #fff !important; color: #000 !important; border: 1px solid #cbd5e1; border-radius: 5px; box-sizing: border-box; font-size: 0.95rem;">
                 </div>
 
                 <div style="margin-top: 5px;">
                     <label style="display: flex; align-items: flex-start; gap: 10px; color: #4a5568 !important; font-size: 0.85rem; line-height: 1.4; cursor: pointer;">
                         <input type="checkbox" name="cgv_acceptees" value="1" required style="margin-top: 3px; width: 16px; height: 16px;">
-                        <span>
-                            J'accepte les <a href="cgv.php" target="_blank" style="color: #3182ce;">Conditions Générales de Vente</a> et je demande l'exécution immédiate du service, renonçant expressément à mon droit de rétractation.
+                        <span data-fr="J'accepte les et je demande l'exécution immédiate du service, renonçant expressément à mon droit de rétractation." data-en="I accept the terms and conditions and request immediate performance of the service, expressly waiving my right of withdrawal.">
+                            J'accepte les <a href="cgv.php" data-fr="Conditions Générales de Vente" data-en="General Terms and Conditions" target="_blank" style="color: #3182ce;">Conditions Générales de Vente</a> et je demande l'exécution immédiate du service, renonçant expressément à mon droit de rétractation.
                         </span>
                     </label>
                 </div>
 
-                <button type="submit" style="width: 100%; padding: 12px; background: #3182ce; color: #ffffff; font-weight: bold; font-size: 1rem; border: none; border-radius: 5px; cursor: pointer; margin-top: 10px;">
+                <button type="submit" data-fr="Procéder au paiement" data-en="Proceed with payment" style="width: 100%; padding: 12px; background: #3182ce; color: #ffffff; font-weight: bold; font-size: 1rem; border: none; border-radius: 5px; cursor: pointer; margin-top: 10px;">
                     Procéder au paiement (990 € HT)
                 </button>
             </form>
         </section>
+        <br><a href="https://benjaminlouis.eu/index.html" data-fr="Retour" data-en="Back" class="badge"><strong>Retour</strong></a><br>
     </main>
 
     <!-- Pied de page -->

@@ -61,14 +61,14 @@
         </div>
 
         <header>
-        <nav>
-            <div class="menu">
-            <a href="https://benjaminlouis.eu/index.html" data-fr="Accueil" data-en="Home">Accueil</a>
-            <a href="https://benjaminlouis.eu/a-propos.html" data-fr="À propos" data-en="About">À propos</a>
-            <a href="https://benjaminlouis.eu/portfolio.html" data-fr="Portfolio" data-en="Portfolio">Portfolio</a>
-            <a href="https://benjaminlouis.eu/solution.php" data-fr="Boutique" data-en="Shop">Boutique</a>
-            </div>
-        </nav>
+            <nav>
+                <div class="menu">
+                <a href="https://benjaminlouis.eu/index.html" data-fr="Accueil" data-en="Home">Accueil</a>
+                <a href="https://benjaminlouis.eu/a-propos.html" data-fr="À propos" data-en="About">À propos</a>
+                <a href="https://benjaminlouis.eu/portfolio.html" data-fr="Portfolio" data-en="Portfolio">Portfolio</a>
+                <a href="https://benjaminlouis.eu/solution.php" data-fr="Boutique" data-en="Shop">Boutique</a>
+                </div>
+            </nav>
         </header>
 
     </div>

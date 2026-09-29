@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://benjaminlouis.eu/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <meta name="robots" content="index, follow">
 
@@ -13,32 +13,63 @@
     <meta name="description" content="Conditions Générales de Vente — <?= SITE_NAME ?>">
 
     <title>Conditions Générales de Vente — <?= SITE_NAME ?></title>
+
+    <script>
+        let currentLang = 'fr';
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'fr' ? 'en' : 'fr';
+            const langBtn = document.getElementById('lang-btn');
+
+            if (langBtn) {
+                langBtn.textContent = currentLang === 'fr' ? '🇬🇧 EN' : '🇫🇷 FR';
+            }
+
+            // Met à jour tous les éléments contenant data-fr et data-en
+            document.querySelectorAll('[data-fr][data-en]').forEach(el => {
+                el.textContent = el.getAttribute(`data-${currentLang}`);
+            });
+
+            // Gestion spécifique pour la valeur du bouton d'envoi du formulaire
+            const submitBtn = document.getElementById('submit-btn');
+            if (submitBtn) {
+                submitBtn.value = currentLang === 'fr' ? 'ENVOYER' : 'SEND';
+            }
+        }
+    </script>
 </head>
 
 <body>
-    <div class="wrapperPortfolio">
+    <div class="wrapper">
 
         <div class="head">
-            <!-- SELECTION DE LA LANGUE FR OU EN -->
-            <select aria-label="Sélection de la langue" id="language-selector">
-                <option value="fr">FR</option>
-                <option value="en">EN</option>
-            </select>
-
-            <!-- MENU BURGER -->
-            <div class="burger">
-                <a href="menu.html"><img src="./images/burger.png" class="meal" alt="Icône du menu burger" title="Menu"></a>
-            </div>
+            <div class="name">
+                <figure>
+                <img class="size" src="images/logoBenjaminLouis.png" alt="Logo Benjamin Louis Développeur Web">
+                </figure>
         </div>
+
+    
+        <!-- SELECTION DE LA LANGUE FR OU EN -->
+        <select aria-label="Sélection de la langue" id="language-selector">
+            <option value="fr">FR</option>
+            <option value="en">EN</option>
+        </select>
+
+        <!-- MENU BURGER -->
+        <div class="burger">
+            <a href="https://benjaminlouis.eu/menu.html"><img src="./images/burger.png" class="meal" alt="Icône du menu burger" title="Menu"></a>
+        </div>
+    
 
         <header>
             <nav>
                 <div class="menu">
-                    <a href="index.php" id="title" data-fr="Accueil" data-en="Welcome">Accueil</a>
-                    <a href="boutique.php" id="title4" data-fr="Boutique" data-en="Shop">Boutique</a><br>
-
-                    <!-- Afficher la Date et l'Heure -->
-                    <div id="horloge"></div><br>
+                    <a href="https://benjaminlouis.eu/index.html" data-fr="Accueil" data-en="Home">Accueil</a>
+                    <a href="https://benjaminlouis.eu/a-propos.html" data-fr="À propos" data-en="About">À propos</a>
+                    <a href="https://benjaminlouis.eu/portfolio.html" data-fr="Portfolio" data-en="Portfolio">Portfolio</a>
+                    <a href="https://benjaminlouis.eu/solution.php" data-fr="Boutique" data-en="Shop">Boutique</a>
+                
                 </div>
             </nav>
         </header>

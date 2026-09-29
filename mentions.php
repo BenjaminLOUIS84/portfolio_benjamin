@@ -40,23 +40,35 @@
 </head>
 
 <body>
-    <div class="wrapperPortfolio">
+    <div id="wrapper">
 
-            <!-- Sélecteur de Langue -->
-            <div class="lang-switch">
-                <button id="lang-btn" onclick="toggleLanguage()">🇬🇧 EN</button>
-            </div>
+        <div class="head">
+            <div class="name">
+                <figure>
+                <img class="size" src="images/logoBenjaminLouis.png" alt="Logo Benjamin Louis Développeur Web">
+                </figure>
+        </div>
+
+        <!-- Sélecteur de Langue -->
+        <div class="lang-switch">
+            <button id="lang-btn" onclick="toggleLanguage()">🇬🇧 EN</button>
+        </div>
+
+        <!-- MENU BURGER -->
+        <div class="burger">
+            <a href="https://benjaminlouis.eu/menu.html"><img src="./images/burger.png" class="meal" alt="Menu" title="Menu"></a>
+        </div>
         </div>
 
         <header>
-            <nav>
-                <div class="menu">
-                    <a href="https://benjaminlouis.eu/index.html" data-fr="Accueil" data-en="Welcome">Accueil</a>
-                    <a href="https://benjaminlouis.eu/a-propos.html" data-fr="A propos" data-en="About">A propos</a><br>
-                    <a href="https://benjaminlouis.eu/portfolio.html" data-fr="Portfolio" data-en="Portfolio">Portfolio</a><br>
-                    <a href="https://benjaminlouis.eu/solution.php" data-fr="Boutique" data-en="Shop">Boutique</a><br>
-                </div>
-            </nav>
+        <nav>
+            <div class="menu">
+            <a href="https://benjaminlouis.eu/index.html" data-fr="Accueil" data-en="Home">Accueil</a>
+            <a href="https://benjaminlouis.eu/a-propos.html" data-fr="À propos" data-en="About">À propos</a>
+            <a href="https://benjaminlouis.eu/portfolio.html" data-fr="Portfolio" data-en="Portfolio">Portfolio</a>
+            <a href="https://benjaminlouis.eu/solution.php" data-fr="Boutique" data-en="Shop">Boutique</a>
+            </div>
+        </nav>
         </header>
 
     </div>
@@ -76,21 +88,12 @@
                     <figure>
                         <img class="photoGlace" src="images/logo.png" alt="Logo de <?= COMPANY_NAME ?>">
                     </figure>
-                    <div class="photoGlace-hover">
-                        <div class="infG">
-                            <p id="title6" data-fr="<?= COMPANY_NAME ?>" data-en="<?= COMPANY_NAME ?>"><?= COMPANY_NAME ?></p><br>
-                            <p id="title7" data-fr="SIRET : <?= COMPANY_SIRET ?> — <?= COMPANY_RCS ?>" data-en="SIRET : <?= COMPANY_SIRET ?> — <?= COMPANY_RCS ?>">SIRET : <?= COMPANY_SIRET ?> — <?= COMPANY_RCS ?></p><br>
-                            <p id="title8" data-fr="Adresse : <?= COMPANY_ADDRESS ?>" data-en="Address : <?= COMPANY_ADDRESS ?>">Adresse : <?= COMPANY_ADDRESS ?></p>
-                            <p id="title8.6" data-fr="Téléphone : <?= CONTACT_PHONE ?>" data-en="Phone : <?= CONTACT_PHONE ?>">Téléphone : <?= CONTACT_PHONE ?></p>
-                            <p id="title8.7" data-fr="Email : <?= CONTACT_EMAIL ?>" data-en="Email : <?= CONTACT_EMAIL ?>">Email : <?= CONTACT_EMAIL ?></p>
-                        </div>
-                    </div>
                 </div>
             </div>
 
             <h2 id="title14" data-fr="Le Site Web" data-en="The Web Site">Le Site Web</h2>
 
-            <a href="<?= DEV_SITE ?>" target="_blank" rel="noopener"><img class="icoDS" src="images/photoBen.png" alt="Lien vers le site de <?= DEV_NAME ?>" title="Site Web de <?= DEV_NAME ?>"></a>
+            <a href="<?= DEV_SITE ?>" target="_blank" rel="noopener"><img class="icoDS" src="images/photoBenjaminLouis.png" alt="Lien vers le site de <?= DEV_NAME ?>" title="Site Web de <?= DEV_NAME ?>"></a>
             <p id="title5.4" data-fr="Ce Site Web a été réalisé par <?= DEV_NAME ?> (<?= DEV_COMPANY ?>) et est hébergé par <?= HOST_NAME ?>." data-en="This website was created by <?= DEV_NAME ?> (<?= DEV_COMPANY ?>) and is hosted by <?= HOST_NAME ?>.">
                 Ce Site Web a été réalisé par <?= DEV_NAME ?> (<?= DEV_COMPANY ?>) et est hébergé par <?= HOST_NAME ?>.
             </p>
@@ -158,7 +161,7 @@
             </p><br>
 
             <figure>
-                <a href="https://www.cm2c.net"><img class="icoDS" src="images/cm2c.jpg" alt="Logo de la CM2C" title="Logo de la CM2C">
+                <a href="https://www.cm2c.net"><img class="photoGlace" src="images/cm2c.jpg" alt="Logo de la CM2C" title="Logo de la CM2C">
             </figure>
 
             <p id="update-date" data-fr="Dernière mise à jour : <?= date('d/m/Y') ?>" data-en="Last update: <?= date('d/m/Y') ?>">Dernière mise à jour : <?= date('d/m/Y') ?></p><br>

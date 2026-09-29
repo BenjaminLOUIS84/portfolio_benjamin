@@ -205,8 +205,8 @@ body {
 
 header {
     background: var(--color-secondary);
-    height: 60px;
-    align-items: center;
+    height: 5%;
+    align-items: end;
     display: flex;
     justify-content: space-around;
 }

@@ -42,8 +42,8 @@ require_once __DIR__ . '/config.php';
         </div>
         
         <nav>
-            <a href="index.html" style="color: #2b6cb0; text-decoration: none; font-weight: bold; margin-right: 15px;" data-fr="Accueil" data-en="Home">Accueil</a>
-            <a href="https://benjaminlouis.eu/a-propos.html" style="color: #2b6cb0; text-decoration: none; font-weight: bold; margin-right: 15px;"  data-fr="Accueil" data-en="About">À propos</a>
+            <a href="https://benjaminlouis.eu/index.html" style="color: #2b6cb0; text-decoration: none; font-weight: bold; margin-right: 15px;" data-fr="Accueil" data-en="Home">Accueil</a>
+            <a href="https://benjaminlouis.eu/a-propos.html" style="color: #2b6cb0; text-decoration: none; font-weight: bold; margin-right: 15px;"  data-fr="A propos" data-en="About">À propos</a>
             <a href="https://benjaminlouis.eu/portfolio.html" style="color: #2b6cb0; text-decoration: none; font-weight: bold; margin-right: 15px;" data-fr="Portfolio" data-en="Portfolio">Portfolio</a>
         </nav>
     </header>
@@ -100,8 +100,8 @@ require_once __DIR__ . '/config.php';
             <a href="#" style="color: #4a5568; margin: 0 5px;"><i class="fab fa-youtube"></i></a>
         </div>-->
         <div>
-            <a href="mentions.php" style="color: #4a5568; text-decoration: none; margin: 0 10px;">Mentions Légales</a> |
-            <a href="cgv.php" style="color: #4a5568; text-decoration: none; margin: 0 10px;">Conditions Générales de Vente</a>
+            <a href="https://benjaminlouis.eu/mentions.php" style="color: #4a5568; text-decoration: none; margin: 0 10px;">Mentions Légales</a> |
+            <a href="https://benjaminlouis.eu/cgv.php" style="color: #4a5568; text-decoration: none; margin: 0 10px;">Conditions Générales de Vente</a>
         </div>
     </footer>
 

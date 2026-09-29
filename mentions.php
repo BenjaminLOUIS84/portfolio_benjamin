@@ -160,17 +160,17 @@
                 En cas de litige non résolu de manière amiable, le consommateur peut recourir gratuitement au service de médiation auquel adhère l'entreprise : <strong><?= MEDIATOR_NAME ?></strong> (<a href="<?= MEDIATOR_URL ?>" target="_blank" rel="noopener"><?= MEDIATOR_URL ?></a>).
             </p><br>
 
-            <div class="blocProjet">
-                <div class="lien-conteneur-photoGlace">
-                    <figure>
-                        <a href="https://www.cm2c.net"><img class="photoGlace" src="images/cm2c.jpg" alt="Logo de la CM2C" title="Logo de la CM2C">
-                    </figure>
-               </div>
-            </div>
+            <a href="https://www.cm2c.net/" target="_blank" class="lien-conteneur-photo" rel="noopener noreferrer">
+                <figure>
+                    <img class="photoCM2C" src="images/cm2c.jpg" alt="Démo Solution E-commerce">
+                </figure>
+            </a>
+            <br>
 
-            <p id="update-date" data-fr="Dernière mise à jour : <?= date('d/m/Y') ?>" data-en="Last update: <?= date('d/m/Y') ?>">Dernière mise à jour : <?= date('d/m/Y') ?></p><br>
+            <br><a href="https://benjaminlouis.eu/index.html" data-fr="Retour à l'accueil" data-en="Back to Home" class="badge"><strong>Retour à
+                    l'accueil</strong></a><br>
 
-            <a href="https://benjaminlouis.eu/index.html" class="btn-principal" data-fr="Retour" data-en="Back">Retour</a>
+            <br><p id="update-date" data-fr="Dernière mise à jour : <?= date('d/m/Y') ?>" data-en="Last update: <?= date('d/m/Y') ?>">Dernière mise à jour : <?= date('d/m/Y') ?></p><br>
 
             <footer class="site-footer">
                 <div class="footer-container">

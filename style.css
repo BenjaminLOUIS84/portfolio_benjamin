@@ -786,13 +786,6 @@ input[type='submit'] {
   }
 }
 
-.footMenu {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-
 
 /*///////////////////////////////////////RESPONSIVE/////////////////////////////////////////*/
 

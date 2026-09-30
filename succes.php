@@ -32,6 +32,24 @@ if (!empty($session_id)) {
                     error_log('Erreur BDD update succes : ' . $e->getMessage());
                 }
             }
+            // --- ENVOI DU MAIL DE CONFIRMATION ---
+            if (!empty($customer_email)) {
+                $entete  = 'MIME-Version: 1.0' . "\r\n";
+                $entete .= 'Content-type: text/html; charset=utf-8' . "\r\n";
+                $entete .= 'From: benjaminlouis.eu <benlouisdevweb@gmail.com>' . "\r\n";
+                $entete .= 'Reply-To: benlouisdevweb@gmail.com' . "\r\n";
+
+                $sujet = 'Confirmation de votre commande — benjaminlouis.eu';
+
+                $message = '
+                <h2>Merci pour votre commande, ' . htmlspecialchars($client_nom) . ' !</h2>
+                <p>Votre paiement pour la <strong>Solution E-commerce Clé en Main</strong> a bien été validé.</p>
+                <p>Je prends contact avec vous sous 24h ouvrées pour faire le point sur votre projet et démarrer la configuration.</p>
+                <br>
+                <p>Cordialement,<br>Benjamin Louis</p>';
+
+                @mail($customer_email, $sujet, $message, $entete);
+            } 
         }
     } catch (\Exception $e) {
         error_log('Erreur verification session Stripe : ' . $e->getMessage());

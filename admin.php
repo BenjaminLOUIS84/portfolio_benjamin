@@ -214,7 +214,6 @@ if (isset($bdd)) {
                                     <?php endif; ?>
                                 </td>
                                 <td><?= date('d/m/Y H:i', strtotime($cmd['date_commande'])) ?></td>
-                                <td><?= date('d/m/Y H:i', strtotime($cmd['date_commande'])) ?></td>
                                 <td>
                                     <a href="facture.php?id=<?= $cmd['id'] ?>" target="_blank" style="background-color: #2b6cb0; color: white; padding: 4px 8px; border-radius: 4px; text-decoration: none; font-size: 12px;">
                                         📄 Facture PDF

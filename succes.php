@@ -63,8 +63,21 @@ if (!empty($session_id)) {
                 $mail = new PHPMailer(true);
 
                 try {
+
+                    // Configuration SMTP sécurisée via les constantes de config.php
+                    $mail->isSMTP();
+                    $mail->Host       = SMTP_HOST;
+                    $mail->SMTPAuth   = true;
+                    $mail->Username   = SMTP_USER;
+                    $mail->Password   = SMTP_PASS;
+                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+                    $mail->Port       = SMTP_PORT;
+
+                    // Informations d'expédition
                     $mail->CharSet = 'UTF-8';
-                    $mail->setFrom('benlouisdevweb@gmail.com', 'SARL Louis');
+                    // On utilise l'adresse pro créer sur O2Swich
+                    $mail->setFrom('SMTP_USER', 'SARL Louis');
+                    $mail->addReplyTo('benlouisdevweb@gmail.com', 'SARL Louis'); // Les réponses arriveront toujours sur ton Gmail
                     $mail->addAddress($customer_email, $client_nom);
                     $mail->addReplyTo('benlouisdevweb@gmail.com', 'SARL Louis');
 
@@ -81,9 +94,9 @@ if (!empty($session_id)) {
                         $dompdf->setPaper('A4', 'portrait');
                         $dompdf->render();
 
-                        $pdf_content = $dompdf->output();
-                        $num_fac = 'FAC-' . str_pad($commande['id'], 5, '0', STR_PAD_LEFT);
-                        $lien_facture = "https://benjaminlouis.eu/facture.php?id=" . $commande['id'];
+                        // $pdf_content = $dompdf->output();
+                        // $num_fac = 'FAC-' . str_pad($commande['id'], 5, '0', STR_PAD_LEFT);
+                        // $lien_facture = "https://benjaminlouis.eu/facture.php?id=" . $commande['id'];
 
                         // Pièce jointe PDF
                         $mail->addStringAttachment($pdf_content, "Facture_{$num_fac}.pdf", 'base64', 'application/pdf');
@@ -97,8 +110,8 @@ if (!empty($session_id)) {
 
                     if (!empty($lien_facture)) {
                         $body .= '<p>Votre facture acquittée est disponible en <strong>pièce jointe</strong> à cet e-mail.</p>';
-                        $body .= '<p>Vous pouvez également la télécharger à tout moment via ce lien :<br>';
-                        $body .= '<a href="' . $lien_facture . '" target="_blank">' . $lien_facture . '</a></p>';
+                        // $body .= '<p>Vous pouvez également la télécharger à tout moment via ce lien :<br>';
+                        // $body .= '<a href="' . $lien_facture . '" target="_blank">' . $lien_facture . '</a></p>';
                     }
 
                     $body .= '<p>Je prends contact avec vous sous 24h ouvrées pour faire le point sur votre projet et démarrer la configuration.</p>';

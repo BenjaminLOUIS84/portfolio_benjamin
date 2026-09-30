@@ -79,9 +79,12 @@ require_once __DIR__ . '/config.php';
 
                 <!-- Option Multilingue (Upsell) -->
                 <div style="background: #f7fafc; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 20px;">
-                    <label data-fr="Ajouter l'option Pack International (Boutique multilingue FR/EN)" data-en="Add the International Pack option (Multilingual store FR/EN)" style="display: flex; align-items: center; flex-start cursor: pointer; font-weight: bold; color: #2d3748;">
+                    <label style="display: flex; align-items: center; flex-start cursor: pointer; font-weight: bold; color: #2d3748;">
                         <input type="checkbox" id="opt_multilingue" name="opt_multilingue" value="1" onchange="updateTotal()" style="margin-right: 10px; transform: scale(1.2);">
-                        Ajouter l'option Pack International (Boutique multilingue FR/EN)
+                        <span data-fr="Ajouter l'option Pack International (Boutique multilingue FR/EN)" data-en="Add the International Pack option (Multilingual store FR/EN)">
+                            Ajouter l'option Pack International (Boutique multilingue FR/EN)
+                            
+                        </span>
                     </label>
                     <p data-fr="Configuration complète d'une seconde langue pour toucher des clients à l'international (+290 € HT)." data-en="Full setup of a second language to reach international clients (+€290 excl. tax)." style="margin: 5px 0 0 28px; font-size: 0.88rem; color: #718096;">
                         Configuration complète d'une seconde langue pour toucher des clients à l'international (+290 € HT).

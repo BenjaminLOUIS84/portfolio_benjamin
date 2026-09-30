@@ -1,5 +1,6 @@
 <?php
-ini_set('display_errors', 0);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 require_once __DIR__ . '/config.php';
@@ -64,19 +65,19 @@ if (!empty($session_id)) {
 
                 try {
 
-                    // Configuration SMTP sécurisée via les constantes de config.php
+                    // Configuration SMTP
                     $mail->isSMTP();
-                    $mail->Host       = SMTP_HOST;
+                    $mail->Host       = defined('SMTP_HOST') ? SMTP_HOST : 'mail.benjaminlouis.eu';
                     $mail->SMTPAuth   = true;
-                    $mail->Username   = SMTP_USER;
-                    $mail->Password   = SMTP_PASS;
-                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-                    $mail->Port       = SMTP_PORT;
-
+                    $mail->Username   = defined('SMTP_USER') ? SMTP_USER : 'contact@benjaminlouis.eu';
+                    $mail->Password   = defined('SMTP_PASS') ? SMTP_PASS : 'TON_MOT_DE_PASSE';
+                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; // ou ENCRYPTION_STARTTLS
+                    $mail->Port       = defined('SMTP_PORT') ? SMTP_PORT : 465; // ou 587
+                    
                     // Informations d'expédition
                     $mail->CharSet = 'UTF-8';
                     // On utilise l'adresse pro créer sur O2Swich
-                    $mail->setFrom('SMTP_USER', 'SARL Louis');
+                    $mail->setFrom('contact@benjaminlouis.eu', 'SARL Louis');
                     $mail->addReplyTo('benlouisdevweb@gmail.com', 'SARL Louis'); // Les réponses arriveront toujours sur ton Gmail
                     $mail->addAddress($customer_email, $client_nom);
                     $mail->addReplyTo('benlouisdevweb@gmail.com', 'SARL Louis');
@@ -118,10 +119,17 @@ if (!empty($session_id)) {
                     $body .= '<br><p>Cordialement,<br><strong>SARL Louis</strong><br>Benjamin Louis</p>';
 
                     $mail->Body = $body;
+                    
+                    // Activer le débogage SMTP (Affiche tout à l'écran)
+                    $mail->SMTPDebug = 2;
+
                     $mail->send();
 
-                } catch (Exception $e) {
-                    error_log("Erreur d'envoi PHPMailer : " . $mail->ErrorInfo);
+                } catch (\Exception $e) {
+                    echo "<div style='background:#fee2e2;color:#b91c1c;padding:15px;margin:20px;'>";
+                    echo "<strong>Erreur d'envoi mail :</strong> " . htmlspecialchars($mail->ErrorInfo) . "<br>";
+                    echo "<strong>Exception :</strong> " . htmlspecialchars($e->getMessage());
+                    echo "</div>";
                 }
             }
         }

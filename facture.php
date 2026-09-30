@@ -15,9 +15,14 @@ function genererHtmlFacture(array $commande): string {
     $client_email = htmlspecialchars($commande['client_email'] ?? '');
 
     // Calculs HT / TVA 20% / TTC
-    $montant_ttc = $commande['montant_ht'] ?? 0;
-    $montant_ht = $montant_ttc / 1.20;
-    $tva = $montant_ttc - $montant_ht;
+    // $montant_ttc = $commande['montant_ht'] ?? 0;
+    // $montant_ht = $montant_ttc / 1.20;
+    // $tva = $montant_ttc - $montant_ht;
+
+    // Si la valeur en BDD (1 280,00 €) est le montant HT :
+    $montant_ht = (float)($commande['montant_ht'] ?? 0);
+    $tva = $montant_ht * 0.20;
+    $montant_ttc = $montant_ht + $tva;
 
     $str_ht = number_format($montant_ht, 2, ',', ' ');
     $str_tva = number_format($tva, 2, ',', ' ');

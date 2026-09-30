@@ -20,7 +20,7 @@ if (empty($client_nom) || empty($client_email) || empty($domaine_souhaite)) {
     die('Veuillez remplir tous les champs obligatoires.');
 }
 
-// 2. Calcul du tarif HT dynamique
+// 2. Calcul des montants HT et TTC
 $prix_base_ht   = 990.00;
 $prix_option_ht = $opt_multilingue ? 290.00 : 0.00;
 $total_ht       = $prix_base_ht + $prix_option_ht;
@@ -44,32 +44,34 @@ if (isset($pdo)) {
     }
 }
 
-// 4. Configuration Stripe Checkout
+// 4. Configuration Stripe Checkout avec montants TTC (1 188 € TTC de base / 348 € TTC option)
 Stripe::setApiKey(STRIPE_SECRET_KEY);
 
+// 990 € HT + 20% TVA = 1 188 € TTC (soit 118800 centimes)
 $line_items = [
     [
         'price_data' => [
             'currency'     => 'eur',
             'product_data' => [
-                'name'        => 'Solution E-commerce Clé en Main',
+                'name'        => 'Solution E-commerce Clé en Main (TVA incluse)',
                 'description' => 'Domaine : ' . $domaine_souhaite,
             ],
-            'unit_amount'  => 99000, // 990,00 € HT
+            'unit_amount'  => 118800, // 1 188,00 € TTC
         ],
         'quantity'   => 1,
     ]
 ];
 
+// 290 € HT + 20% TVA = 348 € TTC (soit 34800 centimes)
 if ($opt_multilingue) {
     $line_items[] = [
         'price_data' => [
             'currency'     => 'eur',
             'product_data' => [
-                'name'        => 'Option Pack International (FR/EN)',
+                'name'        => 'Option Pack International FR/EN (TVA incluse)',
                 'description' => 'Configuration multilingue complète',
             ],
-            'unit_amount'  => 29000, // 290,00 € HT
+            'unit_amount'  => 34800, // 348,00 € TTC
         ],
         'quantity'   => 1,
     ];
@@ -81,8 +83,6 @@ try {
         'customer_email'             => $client_email,
         'line_items'                 => $line_items,
         'mode'                       => 'payment',
-        'automatic_tax'              => ['enabled' => true],
-        'billing_address_collection' => 'required', // Requis pour calcul automatique de la TVA par pays
         'success_url'                => 'https://benjaminlouis.eu/merci.php?session_id={CHECKOUT_SESSION_ID}',
         'cancel_url'                 => 'https://benjaminlouis.eu/solution.php',
         'metadata'                   => [

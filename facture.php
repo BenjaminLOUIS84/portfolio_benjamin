@@ -116,11 +116,11 @@ function genererHtmlFacture(array $commande): string {
 if (basename(__FILE__) == basename($_SERVER['SCRIPT_FILENAME'])) {
     $commande_id = $_GET['id'] ?? null;
 
-    if (!$commande_id || !isset($pdo)) {
+    if (!$commande_id || !isset($bdd)) {
         die('Accès refusé ou commande introuvable.');
     }
 
-    $stmt = $pdo->prepare("SELECT * FROM commandes WHERE id = :id");
+    $stmt = $bdd->prepare("SELECT * FROM commandes WHERE id = :id");
     $stmt->execute([':id' => $commande_id]);
     $commande = $stmt->fetch(PDO::FETCH_ASSOC);
 

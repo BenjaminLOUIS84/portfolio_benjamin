@@ -66,34 +66,24 @@ function toggleLanguage() {
 function updateTotal() {
     const basePriceHT = 990;
     const optionPriceHT = 290;
-    const tvaRate = 1.20; // TVA à 20%
+    const tvaRate = 1.20; // 20% TVA
 
     const checkbox = document.getElementById('opt_multilingue');
-    const hasOption = checkbox ? checkbox.checked : false;
+    const hasOption = (checkbox && checkbox.checked);
 
-    // Calculs HT et TTC
+    // Calculs
     const totalHT = hasOption ? (basePriceHT + optionPriceHT) : basePriceHT;
     const totalTTC = Math.round(totalHT * tvaRate);
 
-    // Récupération du bouton de paiement
+    // Ciblage du bouton
     const submitBtn = document.getElementById('submit-btn') || document.querySelector('button[type="submit"]');
 
     if (submitBtn) {
-        const isEn = (typeof currentLang !== 'undefined' && currentLang === 'en');
-       
-        if (isEn) {
-            submitBtn.innerHTML = `Proceed with payment (${totalHT} € HT / ${totalTTC} € TTC)`;
-        } else {
-            submitBtn.innerHTML = `Procéder au paiement (${totalHT} € HT / ${totalTTC} € TTC)`;
-        }
+        submitBtn.innerHTML = `Procéder au paiement (${totalHT} € HT / ${totalTTC} € TTC)`;
     }
 }
 
-// Initialisation au chargement de la page
-document.addEventListener('DOMContentLoaded', () => {
-    const checkbox = document.getElementById('opt_multilingue');
-    if (checkbox) {
-        updateTotal();
-        checkbox.addEventListener('change', updateTotal);
-    }
-});
+// Sécurité au chargement
+document.addEventListener('DOMContentLoaded', updateTotal);
+
+ 

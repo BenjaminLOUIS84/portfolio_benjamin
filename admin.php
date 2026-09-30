@@ -55,46 +55,6 @@ if (!isset($_SESSION['admin_logged']) || $_SESSION['admin_logged'] !== true):
         button { width: 100%; padding: 12px; background: #3182ce; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; }
         button:hover { background: #2b6cb0; }
         .err { background: #fed7d7; color: #9b2c2c; padding: 10px; border-radius: 6px; font-size: 14px; margin-bottom: 15px; text-align: center; }
-    
-        /* --- Correctifs Responsive Mobile --- */
-
-/* 1. En-tête : passage en colonne sur mobile */
-.admin-header,
-header,
-.header-container {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-    padding: 15px;
-}
-
-.user-info,
-.admin-user-block {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    width: 100%;
-    justify-content: space-between;
-}
-
-/* 2. Tableau : défilement horizontal fluide sur petit écran */
-.table-responsive {
-    width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    margin-top: 15px;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    white-space: nowrap; /* Évite que le texte casse bizarrement */
-}
-
-th, td {
-    padding: 10px 12px;
-}
 
     </style>
 </head>
@@ -149,20 +109,77 @@ if (isset($bdd)) {
         .badge-payee { background: #dcfce7; color: #166534; }
         .badge-attente { background: #fef3c7; color: #92400e; }
     
+        /* --- Correctifs Responsive Mobile --- */
+
+        /* 1. En-tête : passage en colonne sur mobile */
+        .admin-header,
+        header,
+        .header-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 15px;
+        }
+
+        .user-info,
+        .admin-user-block {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            justify-content: space-between;
+        }
+
+        /* 2. Tableau : défilement horizontal fluide sur petit écran */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin-top: 15px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            white-space: nowrap; /* Évite que le texte casse bizarrement */
+        }
+
+        th, td {
+            padding: 10px 12px;
+        }
+
+        /* Adaptation pour écrans mobiles */
+        @media (max-width: 768px) {
+            .top {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                gap: 12px !important;
+            }
+        
+            .top > div {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+        }
 
     </style>
 </head>
 <body>
     <div class="container">
+
+        <div class="top">
+            <h1>Commandes benjaminlouis.eu</h1>
+            <div>
+                <span style="margin-right: 15px; font-size: 14px; color: #64748b;">Connecté : <strong><?= htmlspecialchars($_SESSION['admin_user']) ?></strong></span>
+                <a href="admin.php?action=logout" class="btn-out">Déconnexion 🚪</a>
+            </div>
+        </div>
         
         <div class="table-responsive">
-            <div class="top">
-                <h1>Commandes benjaminlouis.eu</h1>
-                <div>
-                    <span style="margin-right: 15px; font-size: 14px; color: #64748b;">Connecté : <strong><?= htmlspecialchars($_SESSION['admin_user']) ?></strong></span>
-                    <a href="admin.php?action=logout" class="btn-out">Déconnexion 🚪</a>
-                </div>
-            </div>
+
             <table>
                 <thead>
                     <tr>

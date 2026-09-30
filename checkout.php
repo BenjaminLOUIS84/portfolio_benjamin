@@ -26,9 +26,9 @@ $prix_option_ht = $opt_multilingue ? 290.00 : 0.00;
 $total_ht       = $prix_base_ht + $prix_option_ht;
 
 // 3. Insertion en Base de Données
-if (isset($pdo)) {
+if (isset($bdd)) {
     try {
-        $stmt = $pdo->prepare("INSERT INTO commandes
+        $stmt = $bdd->prepare("INSERT INTO commandes
             (client_nom, client_email, domaine_souhaite, option_multilingue, montant_ht, statut, date_commande)
             VALUES (:nom, :email, :domaine, :opt, :montant, 'en_attente', NOW())");
        

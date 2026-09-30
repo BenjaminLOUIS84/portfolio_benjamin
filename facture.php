@@ -139,3 +139,44 @@ if (basename(__FILE__) == basename($_SERVER['SCRIPT_FILENAME'])) {
     $num_fac = 'FAC-' . str_pad($commande['id'], 5, '0', STR_PAD_LEFT);
     $dompdf->stream("Facture_{$num_fac}.pdf", ["Attachment" => false]);
 }
+
+// Traitement lors de l'accès direct via l'URL (facture.php?id=X)
+if (basename(__FILE__) === basename($_SERVER['SCRIPT_FILENAME'])) {
+    $commande_id = $_GET['id'] ?? null;
+
+    if (!$commande_id) {
+        die('ID de commande manquant.');
+    }
+
+    // Inclusions nécessaires si elles ne sont pas déjà faites en haut du fichier
+    require_once __DIR__ . '/config.php';
+
+    // On identifie la variable de connexion PDO (gère $pdo, $db ou $bdd)
+    $connexion = $pdo ?? $db ?? $bdd ?? null;
+
+    if (!$connexion) {
+        die('Erreur : Connexion à la base de données introuvable.');
+    }
+
+    $stmt = $connexion->prepare("SELECT * FROM commandes WHERE id = :id");
+    $stmt->execute([':id' => $commande_id]);
+    $commande = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if (!$commande) {
+        die('Commande introuvable en base de données.');
+    }
+
+    // Génération du PDF
+    $options = new Options();
+    $options->set('isRemoteEnabled', true);
+    $dompdf = new Dompdf($options);
+
+    $dompdf->loadHtml(genererHtmlFacture($commande));
+    $dompdf->setPaper('A4', 'portrait');
+    $dompdf->render();
+
+    $num_fac = 'FAC-' . str_pad($commande['id'], 5, '0', STR_PAD_LEFT);
+    $dompdf->stream("Facture_{$num_fac}.pdf", ["Attachment" => false]);
+}
+
+ 

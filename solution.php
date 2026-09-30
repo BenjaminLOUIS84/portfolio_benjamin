@@ -80,7 +80,7 @@ require_once __DIR__ . '/config.php';
                 <!-- Option Multilingue (Upsell) -->
                 <div style="background: #f7fafc; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 20px;">
                     <label style="display: flex; align-items: center; flex-start cursor: pointer; font-weight: bold; color: #2d3748;">
-                        <input type="checkbox" id="opt_multilingue" name="opt_multilingue" value="1" onchange="updateTotal()" style="margin-right: 10px; transform: scale(1.2);">
+                        <input type="checkbox" id="opt_multilingue" name="opt_multilingue" value="1" onchange="opt_multilingue" style="margin-right: 10px; transform: scale(1.2);">
                         <span data-fr="Ajouter l'option Pack International (Boutique multilingue FR/EN)" data-en="Add the International Pack option (Multilingual store FR/EN)">
                             Ajouter l'option Pack International (Boutique multilingue FR/EN)
                             

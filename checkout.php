@@ -31,6 +31,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
+    // Récupération des données du formulaire
+    $opt_multilingue = isset($_POST['opt_multilingue']) && $_POST['opt_multilingue'] == '1';
+
+    // Calcul du tarif côté serveur (sécurité)
+    $prix_base_ht = 990;
+    $prix_option_ht = $opt_multilingue ? 290 : 0;
+    $total_ht = $prix_base_ht + $prix_option_ht;
+
+    // Montant total TTC en centimes pour Stripe
+    $total_ttc_cents = round($total_ht * 1.20 * 100);
+
+    // Description pour la facture Stripe
+    $description = "Solution E-commerce Clé en Main" . ($opt_multilingue ? " + Option Multilingue (FR/EN)" : "");
+
+    // Enregistrement dans les métadonnées Stripe et la BDD
+    // (Permet d'activer automatiquement l'option lors du déploiement)
+
     // 2. Création de la session Stripe Checkout
     try {
         Stripe::setApiKey(STRIPE_SECRET_KEY);

@@ -77,6 +77,17 @@ require_once __DIR__ . '/config.php';
                     <input type="text" id="domaine_souhaite" name="domaine_souhaite" placeholder="maboutique.com" style="width: 100%; padding: 10px; background: #fff !important; color: #000 !important; border: 1px solid #cbd5e1; border-radius: 5px; box-sizing: border-box; font-size: 0.95rem;">
                 </div>
 
+                <!-- Option Multilingue (Upsell) -->
+                <div style="background: #f7fafc; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 20px;">
+                    <label style="display: flex; align-items: center; cursor: pointer; font-weight: bold; color: #2d3748;">
+                        <input type="checkbox" id="opt_multilingue" name="opt_multilingue" value="1" onchange="updateTotal()" style="margin-right: 10px; transform: scale(1.2);">
+                        Ajouter l'option Pack International (Boutique multilingue FR/EN)
+                    </label>
+                    <p data-fr="Configuration complète d'une seconde langue pour toucher des clients à l'international (+290 € HT)." data-en="Full setup of a second language to reach international clients (+€290 excl. tax)." style="margin: 5px 0 0 28px; font-size: 0.88rem; color: #718096;">
+                        Configuration complète d'une seconde langue pour toucher des clients à l'international (+290 € HT).
+                    </p>
+                </div>
+
                 <div style="margin-top: 5px;">
                     <label style="display: flex; align-items: flex-start; gap: 10px; color: #4a5568 !important; font-size: 0.85rem; line-height: 1.4; cursor: pointer;">
                         <input type="checkbox" name="cgv_acceptees" value="1" required style="margin-top: 3px; width: 16px; height: 16px;">

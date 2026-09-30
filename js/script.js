@@ -39,4 +39,23 @@ function toggleLanguage() {
   }
 }
 
+function updateTotal() {
+    const basePriceHT = 990;
+    const optionPriceHT = 290;
+    const tvaRate = 1.20; // 20% TVA
+
+    const hasOption = document.getElementById('opt_multilingue').checked;
+   
+    // Calcul HT et TTC
+    const totalHT = hasOption ? (basePriceHT + optionPriceHT) : basePriceHT;
+    const totalTTC = (totalHT * tvaRate).toFixed(2);
+
+    // Mise à jour du texte du bouton
+    const submitBtn = document.getElementById('submit-btn');
+    if (submitBtn) {
+        submitBtn.value = `Procéder au paiement (${totalHT} € HT)`;
+    }
+}
+
+
  

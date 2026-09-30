@@ -3,7 +3,7 @@ require_once 'config.php';
 
 // Défins tes identifiants d'administration ici
 $username = 'admin';
-$password = 'ChangerCeMotDePasse2026!'; // <--- Ton mot de passe sécurisé
+$password = '84MasterBV71$'; // <--- Ton mot de passe sécurisé
 
 $hash = password_hash($password, PASSWORD_BCRYPT);
 

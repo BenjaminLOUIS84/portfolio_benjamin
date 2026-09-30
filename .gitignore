@@ -1,3 +1,7 @@
 db_config.php
 vendor/
 config.php
+create_admin.php
+
+#Dossier des factures client
+factures/

@@ -52,12 +52,11 @@ function genererHtmlFacture(array $commande): string {
             <div class='company'>
                 <h2>SARL Louis</h2>
                 <p>
-                    <strong>Benjamin Louis</strong><br>
-                    123 Rue de votre Adresse<br>
-                    75000 Paris<br>
+                    4 rue de la Mairie<br>
+                    23700 CHARRON<br>
                     E-mail : benlouisdevweb@gmail.com<br>
-                    SIRET : 000 000 000 00000<br>
-                    N° TVA Intracommunautaire : FR 00 000000000
+                    SIRET : 942 856 147 00023<br>
+                    N° TVA Intracommunautaire : FR 50 942856147
                 </p>
             </div>
             <div class='invoice-details'>
@@ -105,7 +104,7 @@ function genererHtmlFacture(array $commande): string {
         <div class='clear'></div>
 
         <div class='footer'>
-            SARL Louis — Capital social de X XXX € — SIRET 000 000 000 00000 — RCS Paris<br>
+            SARL Louis — Capital social de 1000 € — SIRET 942 856 147 00023 — RCS Guéret<br>
             Facture payée en totalité. Merci pour votre confiance !
         </div>
     </body>

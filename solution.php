@@ -80,7 +80,7 @@ require_once __DIR__ . '/config.php';
                 <!-- Option Multilingue (Upsell) -->
                 <div style="background: #f7fafc; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 20px;">
                     <label style="display: flex; align-items: center; flex-start cursor: pointer; font-weight: bold; color: #2d3748;">
-                        <input type="checkbox" id="opt_multilingue" name="opt_multilingue" value="1" onchange="opt_multilingue" style="margin-right: 10px; transform: scale(1.2);">
+                        <input type="checkbox" id="opt_multilingue" name="opt_multilingue" value="1" onchange="updateTotal()" value="1" style="margin-right: 10px; transform: scale(1.2);">
                         <span data-fr="Ajouter l'option Pack International (Boutique multilingue FR/EN)" data-en="Add the International Pack option (Multilingual store FR/EN)">
                             Ajouter l'option Pack International (Boutique multilingue FR/EN)
                             
@@ -100,8 +100,8 @@ require_once __DIR__ . '/config.php';
                     </label>
                 </div>
 
-                <button type="submit" id="submit-btn" data-fr="Procéder au paiement" data-en="Proceed with payment" style="width: 100%; padding: 12px; background: #3182ce; color: #ffffff; font-weight: bold; font-size: 1rem; border: none; border-radius: 5px; cursor: pointer; margin-top: 10px;">
-                    Procéder au paiement (990 € HT)
+                <button type="submit" id="submit-btn" data-fr="Procéder au paiement (990 € HT / 1188 € TTC)" data-en="Proceed with payment (990 € HT / 1188 € TTC)" style="width: 100%; padding: 12px; background: #3182ce; color: #ffffff; font-weight: bold; font-size: 1rem; border: none; border-radius: 5px; cursor: pointer; margin-top: 10px;">
+                    Procéder au paiement (990 € HT / 1188 € TTC)
                 </button>
             </form>
         </section>
@@ -124,5 +124,23 @@ require_once __DIR__ . '/config.php';
 </div>
 
 <script src="js/script.js"></script>
+<script>
+    function updateTotal() {
+        var chk = document.getElementById('opt_multilingue');
+        var btn = document.getElementById('submit-btn');
+    
+        if (!btn) return;
+
+        if (chk && chk.checked) {
+            btn.innerHTML = 'Procéder au paiement (1280 € HT / 1536 € TTC)';
+        } else {
+            btn.innerHTML = 'Procéder au paiement (990 € HT / 1188 € TTC)';
+        }
+    }
+
+    // Lancer au chargement pour synchroniser
+    document.addEventListener('DOMContentLoaded', updateTotal);
+</script>
+
 </body>
 </html>

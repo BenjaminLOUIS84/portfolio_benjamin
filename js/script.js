@@ -53,7 +53,7 @@ function updateTotal() {
   // Mise à jour du texte du bouton
   const submitBtn = document.getElementById('submit-btn') || document.querySelector('button[type="submit"');
   if (submitBtn) {
-    submitBtn.value = `Procéder au paiement (${totalHT} € HT)`;
+    submitBtn.innerHTML = `Procéder au paiement (${totalHT} € HT)`;
   }
 };
 

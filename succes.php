@@ -52,8 +52,17 @@ if (!empty($session_id)) {
             if ($connexion && !empty($customer_email)) {
                 try {
                     // 1. Mise à jour du statut en BDD
-                    $stmt_update = $connexion->prepare("UPDATE commandes SET statut = 'paye' WHERE client_email = :email AND statut = 'en_attente' ORDER BY id DESC LIMIT 1");
-                    $stmt_update->execute([':email' => $customer_email]);
+
+                    // ////////////////////////////////////////////////////////////////////////////énération d'un token/slug unique
+                    $slug = bin2hex(random_bytes(16)); // Ex: 8f3d9a1b2c4e5f6a7b8c9d0e1f2a3b4c
+
+                    // Lors de l'INSERT ou UPDATE en BDD
+                    $stmt_update = $connexion->prepare("UPDATE commandes SET slug = :slug, statut = 'paye' WHERE client_email = :email AND statut = 'en_attente' ORDER BY id DESC LIMIT 1");
+                    $stmt_update->execute([
+                        ':slug'  => $slug,
+                        ':email' => $customer_email
+                    ]);
+                    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
                     // 2. Récupération des données de la commande
                     $stmt_get = $connexion->prepare("SELECT * FROM commandes WHERE client_email = :email ORDER BY id DESC LIMIT 1");
@@ -176,7 +185,7 @@ if (!empty($session_id)) {
 
             <?php if ($commande): ?>
                 <div style="margin-bottom: 25px;">
-                    <a href="facture.php?id=<?= $commande['id'] ?>" target="_blank" style="display: inline-block; padding: 10px 20px; background: #38a169; color: #ffffff; text-decoration: none; font-weight: bold; border-radius: 6px; font-size: 0.95rem;">
+                    <a href="facture.php?slug=<?= $commande['slug'] ?>" target="_blank" style="display: inline-block; padding: 10px 20px; background: #38a169; color: #ffffff; text-decoration: none; font-weight: bold; border-radius: 6px; font-size: 0.95rem;">
                         📄 Télécharger votre facture PDF
                     </a>
                 </div>

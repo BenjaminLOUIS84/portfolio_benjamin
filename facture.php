@@ -115,17 +115,19 @@ function genererHtmlFacture(array $commande): string {
     </body>
     </html>";
 }
+    // Récupérer le slug
+    // $slug = $_GET['slug'] ?? '';
 
 // Téléchargement / Affichage direct via URL (espace Admin)
 if (basename(__FILE__) == basename($_SERVER['SCRIPT_FILENAME'])) {
-    $commande_id = $_GET['id'] ?? null;
+    $slug = $_GET['slug'] ?? null;
 
-    if (!$commande_id || !isset($bdd)) {
+    if (!$slug || !isset($bdd)) {
         die('Accès refusé ou commande introuvable.');
     }
 
-    $stmt = $bdd->prepare("SELECT * FROM commandes WHERE id = :id");
-    $stmt->execute([':id' => $commande_id]);
+    $stmt = $bdd->prepare("SELECT * FROM commandes WHERE slug = :slug LIMIT 1");
+    $stmt->execute([':slug' => $slug]);
     $commande = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if (!$commande) {

@@ -1,12 +1,10 @@
 <?php
-ini_set('display_errors', 0);
-error_reporting(E_ALL);
-
-require_once __DIR__ . '/config.php';
-require_once __DIR__ . '/vendor/autoload.php';
+require_once 'config.php';
+// Vérifie que l'autoloader composer ou l'accès au SDK Stripe est bien chargé
+require_once 'vendor/autoload.php';
 
 use Stripe\Stripe;
-use Stripe\Checkout\Session;
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $client_nom = trim($_POST['client_nom'] ?? '');
@@ -30,11 +28,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             error_log('Erreur BDD checkout : ' . $e->getMessage());
         }
     }
+}
 
-    // Récupération des données du formulaire
-    $opt_multilingue = isset($_POST['opt_multilingue']) && $_POST['opt_multilingue'] == '1';
+// Récupère l'option (vaut true si la case est cochée)
+$opt_multilingue = isset($_POST['opt_multilingue']) && $_POST['opt_multilingue'] == '1';
+\Stripe\Stripe::setApiKey(STRIPE_SECRET_KEY);
 
-    // Calcul du tarif côté serveur (sécurité)
+// 1. Récupération des champs POST du formulaire
+$nom_client      = $_POST['nom_client'] ?? '';
+$email_client    = $_POST['email'] ?? '';
+$domaine         = $_POST['domaine'] ?? '';
+
+// Calcul du tarif côté serveur (sécurité)
     $prix_base_ht = 990;
     $prix_option_ht = $opt_multilingue ? 290 : 0;
     $total_ht = $prix_base_ht + $prix_option_ht;
@@ -48,45 +53,61 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Enregistrement dans les métadonnées Stripe et la BDD
     // (Permet d'activer automatiquement l'option lors du déploiement)
 
-    // 2. Création de la session Stripe Checkout
-    try {
-        Stripe::setApiKey(STRIPE_SECRET_KEY);
-
-        $checkout_session = Session::create([
-            'payment_method_types' => ['card'],
-            'line_items' => [[
-                'price_data' => [
-                    'currency' => 'eur',
-                    'product_data' => [
-                        'name' => 'Solution E-commerce Clé en Main',
-                        'description' => 'Domaine : ' . $domaine_souhaite,
-                    ],
-                    'unit_amount' => 118800, // 990 € HT + 20% TVA = 1188 € TTC (en centimes)
-                ],
-                'quantity' => 1,
-            ]],
-            'mode' => 'payment',
-            'customer_email' => $client_email,
-            'metadata' => [
-                'client_nom' => $client_nom,
-                'client_email' => $client_email,
-                'domaine_souhaite' => $domaine_souhaite,
+    
+    
+    
+// 2. Définition des articles de la commande (Prix HT en centimes)
+$line_items = [
+    [
+        'price_data' => [
+            'currency' => 'eur',
+            'product_data' => [
+                'name' => 'Solution E-commerce Clé en Main',
+                'description' => 'Domaine : ' . $domaine,
             ],
-            'success_url' => 'https://benjaminlouis.eu/succes.php?session_id={CHECKOUT_SESSION_ID}',
-            'cancel_url' => 'https://benjaminlouis.eu/solution.php',
-        ]);
+            'unit_amount' => 99000, // 990,00 € HT
+        ],
+        'quantity' => 1,
+    ]
+];
 
-        header("HTTP/1.1 303 See Other");
-        header("Location: " . $checkout_session->url);
-        exit();
-
-    } catch (\Exception $e) {
-        error_log('Erreur Stripe Checkout : ' . $e->getMessage());
-        echo "Une erreur s'est produite lors de la redirection vers le paiement : " . htmlspecialchars($e->getMessage());
-    }
-} else {
-    header('Location: solution.php');
-    exit();
+// 3. Ajout dynamique de l'option multilingue si cochée
+if ($opt_multilingue) {
+    $line_items[] = [
+        'price_data' => [
+            'currency' => 'eur',
+            'product_data' => [
+                'name' => 'Option Pack International (FR/EN)',
+                'description' => 'Configuration multilingue complète',
+            ],
+            'unit_amount' => 29000, // 290,00 € HT
+        ],
+        'quantity' => 1,
+    ];
 }
 
- 
+// 4. Création de la session Stripe Checkout
+try {
+    $session = \Stripe\Checkout\Session::create([
+        'payment_method_types' => ['card'],
+        'customer_email'       => $client_email,
+        'line_items'           => $line_items,
+        'mode'                 => 'payment',
+        'automatic_tax'        => ['enabled' => true], // Calcule les 20% de TVA
+        'success_url'          => 'https://benjaminlouis.eu/merci.php?session_id={CHECKOUT_SESSION_ID}',
+        'cancel_url'           => 'https://benjaminlouis.eu/solution.php',
+        'metadata'             => [
+            'client_nom'       => $client_nom,
+            'client_email'       => $client_email,
+            'domaine_souhaite'          => $domaine_souhaite,
+            'opt_multilingue'  => $opt_multilingue ? 'Oui' : 'Non'
+        ]
+    ]);
+
+    header("HTTP/1.1 303 See Other");
+    header("Location: " . $session->url);
+    exit;
+
+} catch (\Exception $e) {
+    echo "Erreur lors de l'initialisation du paiement : " . $e->getMessage();
+}

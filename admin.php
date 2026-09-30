@@ -105,6 +105,48 @@ if (isset($bdd)) {
         .badge { display: inline-block; padding: 3px 8px; border-radius: 12px; font-weight: 600; font-size: 12px; }
         .badge-payee { background: #dcfce7; color: #166534; }
         .badge-attente { background: #fef3c7; color: #92400e; }
+    
+
+        /* --- Correctifs Responsive Mobile --- */
+
+/* 1. En-tête : passage en colonne sur mobile */
+.admin-header,
+header,
+.header-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 15px;
+}
+
+.user-info,
+.admin-user-block {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    justify-content: space-between;
+}
+
+/* 2. Tableau : défilement horizontal fluide sur petit écran */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-top: 15px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    white-space: nowrap; /* Évite que le texte casse bizarrement */
+}
+
+th, td {
+    padding: 10px 12px;
+}
+
     </style>
 </head>
 <body>

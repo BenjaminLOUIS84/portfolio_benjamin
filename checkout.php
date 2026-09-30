@@ -83,7 +83,7 @@ try {
         'customer_email'             => $client_email,
         'line_items'                 => $line_items,
         'mode'                       => 'payment',
-        'success_url'                => 'https://benjaminlouis.eu/solution.php?session_id={CHECKOUT_SESSION_ID}',
+        'success_url'                => 'https://benjaminlouis.eu/succes.php?session_id={CHECKOUT_SESSION_ID}',
         'cancel_url'                 => 'https://benjaminlouis.eu/solution.php',
         'metadata'                   => [
             'client_nom'       => $client_nom,

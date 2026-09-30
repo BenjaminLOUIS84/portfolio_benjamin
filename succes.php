@@ -121,8 +121,8 @@ if (!empty($session_id)) {
 
                     $mail->Body = $body;
                     
-                    // Activer le débogage SMTP (Affiche tout à l'écran)
-                    $mail->SMTPDebug = 2;
+                    // Activer ou Désactiver le débogage SMTP (Affiche tout à l'écran)
+                    // $mail->SMTPDebug = 2;
 
                     $mail->send();
 

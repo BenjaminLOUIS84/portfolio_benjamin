@@ -55,58 +55,7 @@ if (!isset($_SESSION['admin_logged']) || $_SESSION['admin_logged'] !== true):
         button { width: 100%; padding: 12px; background: #3182ce; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; }
         button:hover { background: #2b6cb0; }
         .err { background: #fed7d7; color: #9b2c2c; padding: 10px; border-radius: 6px; font-size: 14px; margin-bottom: 15px; text-align: center; }
-    </style>
-</head>
-<body>
-    <div class="card">
-        <h2>Administration</h2>
-        <?php if ($error): ?><div class="err"><?= htmlspecialchars($error) ?></div><?php endif; ?>
-        <form method="POST">
-            <div class="field">
-                <label for="username">Identifiant</label>
-                <input type="text" id="username" name="username" required>
-            </div>
-            <div class="field">
-                <label for="password">Mot de passe</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <button type="submit" name="login">Se connecter</button>
-        </form>
-    </div>
-</body>
-</html>
-<?php
-exit;
-endif;
-
-// --- ZONE CONNECTÉE : Tableau de bord ---
-$commandes = [];
-if (isset($bdd)) {
-    $stmt = $bdd->query("SELECT * FROM commandes ORDER BY date_commande DESC");
-    $commandes = $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
-?>
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Espace Admin - Commandes</title>
-    <style>
-        body { font-family: system-ui, -apple-system, sans-serif; background: #f8fafc; color: #1e293b; margin: 0; padding: 20px; }
-        .container { max-width: 1100px; margin: 0 auto; }
-        .top { display: flex; justify-content: space-between; align-items: center; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 20px; }
-        h1 { margin: 0; font-size: 20px; }
-        .btn-out { color: #ef4444; text-decoration: none; padding: 8px 14px; border: 1px solid #ef4444; border-radius: 6px; font-size: 14px; font-weight: 600; }
-        .btn-out:hover { background: #ef4444; color: white; }
-        table { width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-        th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid #e2e8f0; font-size: 14px; }
-        th { background: #f1f5f9; color: #475569; }
-        .badge { display: inline-block; padding: 3px 8px; border-radius: 12px; font-weight: 600; font-size: 12px; }
-        .badge-payee { background: #dcfce7; color: #166534; }
-        .badge-attente { background: #fef3c7; color: #92400e; }
     
-
         /* --- Correctifs Responsive Mobile --- */
 
 /* 1. En-tête : passage en colonne sur mobile */
@@ -150,53 +99,109 @@ th, td {
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="top">
-            <h1>Commandes benjaminlouis.eu</h1>
-            <div>
-                <span style="margin-right: 15px; font-size: 14px; color: #64748b;">Connecté : <strong><?= htmlspecialchars($_SESSION['admin_user']) ?></strong></span>
-                <a href="admin.php?action=logout" class="btn-out">Déconnexion 🚪</a>
+   
+    <div class="card">
+        <h2>Administration</h2>
+        <?php if ($error): ?><div class="err"><?= htmlspecialchars($error) ?></div><?php endif; ?>
+        <form method="POST">
+            <div class="field">
+                <label for="username">Identifiant</label>
+                <input type="text" id="username" name="username" required>
             </div>
-        </div>
+            <div class="field">
+                <label for="password">Mot de passe</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit" name="login">Se connecter</button>
+        </form>
+    </div>
 
-        <table>
-            <thead>
-                <tr>
-                    <th>#ID</th>
-                    <th>Nom / Client</th>
-                    <th>E-mail</th>
-                    <th>Domaine</th>
-                    <th>Option Int.</th>
-                    <th>Montant HT</th>
-                    <th>Statut</th>
-                    <th>Date</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php if (empty($commandes)): ?>
-                    <tr><td colspan="8" style="text-align:center; padding: 30px; color: #64748b;">Aucune commande pour le moment.</td></tr>
-                <?php else: ?>
-                    <?php foreach ($commandes as $cmd): ?>
-                        <tr>
-                            <td><strong>#<?= $cmd['id'] ?></strong></td>
-                            <td><?= htmlspecialchars($cmd['client_nom']) ?></td>
-                            <td><a href="mailto:<?= htmlspecialchars($cmd['client_email']) ?>"><?= htmlspecialchars($cmd['client_email']) ?></a></td>
-                            <td><code><?= htmlspecialchars($cmd['domaine_souhaite']) ?></code></td>
-                            <td><?= $cmd['option_multilingue'] ? '✅ Oui' : '❌ Non' ?></td>
-                            <td><strong><?= number_format($cmd['montant_ht'], 2, ',', ' ') ?> €</strong></td>
-                            <td>
-                                <?php if ($cmd['statut'] === 'payee'): ?>
-                                    <span class="badge badge-payee">Payée</span>
-                                <?php else: ?>
-                                    <span class="badge badge-attente">En attente</span>
-                                <?php endif; ?>
-                            </td>
-                            <td><?= date('d/m/Y H:i', strtotime($cmd['date_commande'])) ?></td>
-                        </tr>
-                    <?php endforeach; ?>
-                <?php endif; ?>
-            </tbody>
-        </table>
+</body>
+</html>
+<?php
+exit;
+endif;
+
+// --- ZONE CONNECTÉE : Tableau de bord ---
+$commandes = [];
+if (isset($bdd)) {
+    $stmt = $bdd->query("SELECT * FROM commandes ORDER BY date_commande DESC");
+    $commandes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+?>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espace Admin - Commandes</title>
+    <style>
+        body { font-family: system-ui, -apple-system, sans-serif; background: #f8fafc; color: #1e293b; margin: 0; padding: 20px; }
+        .container { max-width: 1100px; margin: 0 auto; }
+        .top { display: flex; justify-content: space-between; align-items: center; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        h1 { margin: 0; font-size: 20px; }
+        .btn-out { color: #ef4444; text-decoration: none; padding: 8px 14px; border: 1px solid #ef4444; border-radius: 6px; font-size: 14px; font-weight: 600; }
+        .btn-out:hover { background: #ef4444; color: white; }
+        table { width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid #e2e8f0; font-size: 14px; }
+        th { background: #f1f5f9; color: #475569; }
+        .badge { display: inline-block; padding: 3px 8px; border-radius: 12px; font-weight: 600; font-size: 12px; }
+        .badge-payee { background: #dcfce7; color: #166534; }
+        .badge-attente { background: #fef3c7; color: #92400e; }
+    
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <div class="table-responsive">
+            <div class="top">
+                <h1>Commandes benjaminlouis.eu</h1>
+                <div>
+                    <span style="margin-right: 15px; font-size: 14px; color: #64748b;">Connecté : <strong><?= htmlspecialchars($_SESSION['admin_user']) ?></strong></span>
+                    <a href="admin.php?action=logout" class="btn-out">Déconnexion 🚪</a>
+                </div>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>#ID</th>
+                        <th>Nom / Client</th>
+                        <th>E-mail</th>
+                        <th>Domaine</th>
+                        <th>Option Int.</th>
+                        <th>Montant HT</th>
+                        <th>Statut</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if (empty($commandes)): ?>
+                        <tr><td colspan="8" style="text-align:center; padding: 30px; color: #64748b;">Aucune commande pour le moment.</td></tr>
+                    <?php else: ?>
+                        <?php foreach ($commandes as $cmd): ?>
+                            <tr>
+                                <td><strong>#<?= $cmd['id'] ?></strong></td>
+                                <td><?= htmlspecialchars($cmd['client_nom']) ?></td>
+                                <td><a href="mailto:<?= htmlspecialchars($cmd['client_email']) ?>"><?= htmlspecialchars($cmd['client_email']) ?></a></td>
+                                <td><code><?= htmlspecialchars($cmd['domaine_souhaite']) ?></code></td>
+                                <td><?= $cmd['option_multilingue'] ? '✅ Oui' : '❌ Non' ?></td>
+                                <td><strong><?= number_format($cmd['montant_ht'], 2, ',', ' ') ?> €</strong></td>
+                                <td>
+                                    <?php if ($cmd['statut'] === 'payee'): ?>
+                                        <span class="badge badge-payee">Payée</span>
+                                    <?php else: ?>
+                                        <span class="badge badge-attente">En attente</span>
+                                    <?php endif; ?>
+                                </td>
+                                <td><?= date('d/m/Y H:i', strtotime($cmd['date_commande'])) ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+        </div>
     </div>
 </body>
 </html>

@@ -98,3 +98,78 @@ $t = $texts[$lang];
 
 </body>
 </html>
+
+<!--///////////////////////////////////////-->
+
+<?php
+require_once __DIR__ . '/config.php';
+require_once __DIR__ . '/db_config.php';
+require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/facture.php'; // Charge la fonction genererHtmlFacture()
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+use Dompdf\Dompdf;
+use Dompdf\Options;
+
+// ... [Code de vérification Stripe / Récupération de la session] ...
+
+if ($session->payment_status === 'paid') {
+    $customer_email = $session->customer_details->email ?? '';
+   
+    // 1. Récupération de la commande mise à jour en BDD
+    $connexion = $bdd ?? $pdo ?? $db;
+   
+    // Mise à jour du statut
+    $stmt_update = $connexion->prepare("UPDATE commandes SET statut = 'paye' WHERE client_email = :email AND statut = 'en_attente' ORDER BY id DESC LIMIT 1");
+    $stmt_update->execute([':email' => $customer_email]);
+
+    // Récupération des données de la commande
+    $stmt_get = $connexion->prepare("SELECT * FROM commandes WHERE client_email = :email ORDER BY id DESC LIMIT 1");
+    $stmt_get->execute([':email' => $customer_email]);
+    $commande = $stmt_get->fetch(PDO::FETCH_ASSOC);
+
+    if ($commande) {
+        // 2. Génération du PDF en mémoire (sans sauvegarde physique)
+        $options = new Options();
+        $options->set('isRemoteEnabled', true);
+        $dompdf = new Dompdf($options);
+       
+        $dompdf->loadHtml(genererHtmlFacture($commande));
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+        $pdf_content = $dompdf->output(); // Contenu binaire du PDF
+
+        $num_fac = 'FAC-' . str_pad($commande['id'], 5, '0', STR_PAD_LEFT);
+        $lien_facture = "https://benjaminlouis.eu/facture.php?id=" . $commande['id'];
+
+        // 3. Envoi de l'e-mail avec PHPMailer
+        $mail = new PHPMailer(true);
+        try {
+            $mail->CharSet = 'UTF-8';
+            $mail->setFrom('benlouisdevweb@gmail.com', 'SARL Louis');
+            $mail->addAddress($commande['client_email'], $commande['client_nom']);
+            $mail->addReplyTo('benlouisdevweb@gmail.com', 'SARL Louis');
+
+            // Joindre le fichier PDF généré
+            $mail->addStringAttachment($pdf_content, "Facture_{$num_fac}.pdf", 'base64', 'application/pdf');
+
+            $mail->isHTML(true);
+            $mail->Subject = "Confirmation de commande et votre facture {$num_fac}";
+            $mail->Body    = "
+                <h2>Merci pour votre commande, " . htmlspecialchars($commande['client_nom']) . " !</h2>
+                <p>Nous vous confirmons le bon règlement de votre commande pour le domaine : <strong>" . htmlspecialchars($commande['domaine_souhaite']) . "</strong>.</p>
+                <p>Votre facture acquittée <strong>{$num_fac}</strong> est disponible en pièce jointe à cet e-mail.</p>
+                <p>Vous pouvez également la consulter ou la télécharger à tout moment via ce lien :<br>
+                <a href='{$lien_facture}' target='_blank'>{$lien_facture}</a></p>
+                <br>
+                <p>Cordialement,<br><strong>SARL Louis</strong><br>Benjamin Louis</p>";
+
+            $mail->send();
+        } catch (Exception $e) {
+            error_log("Erreur d'envoi PHPMailer : " . $mail->ErrorInfo);
+        }
+    }
+}
+
+ 

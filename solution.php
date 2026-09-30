@@ -100,7 +100,7 @@ require_once __DIR__ . '/config.php';
                     </label>
                 </div>
 
-                <button type="submit" data-fr="Procéder au paiement" data-en="Proceed with payment" style="width: 100%; padding: 12px; background: #3182ce; color: #ffffff; font-weight: bold; font-size: 1rem; border: none; border-radius: 5px; cursor: pointer; margin-top: 10px;">
+                <button type="submit" id="submit-btn" data-fr="Procéder au paiement" data-en="Proceed with payment" style="width: 100%; padding: 12px; background: #3182ce; color: #ffffff; font-weight: bold; font-size: 1rem; border: none; border-radius: 5px; cursor: pointer; margin-top: 10px;">
                     Procéder au paiement (990 € HT)
                 </button>
             </form>

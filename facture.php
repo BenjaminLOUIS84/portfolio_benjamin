@@ -15,7 +15,7 @@ function genererHtmlFacture(array $commande): string {
     $client_email = htmlspecialchars($commande['client_email'] ?? '');
 
     // Calculs HT / TVA 20% / TTC
-    $montant_ttc = $commande['montant'] ?? 0;
+    $montant_ttc = $commande['montant_ht'] ?? 0;
     $montant_ht = $montant_ttc / 1.20;
     $tva = $montant_ttc - $montant_ht;
 

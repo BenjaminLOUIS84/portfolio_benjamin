@@ -73,7 +73,7 @@ if (!empty($session_id)) {
                     $mail->Password   = defined('SMTP_PASS') ? SMTP_PASS : 'TON_MOT_DE_PASSE';
                     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; // ou ENCRYPTION_STARTTLS
                     $mail->Port       = defined('SMTP_PORT') ? SMTP_PORT : 465; // ou 587
-                    
+
                     // Informations d'expédition
                     $mail->CharSet = 'UTF-8';
                     // On utilise l'adresse pro créer sur O2Swich
@@ -95,8 +95,9 @@ if (!empty($session_id)) {
                         $dompdf->setPaper('A4', 'portrait');
                         $dompdf->render();
 
-                        // $pdf_content = $dompdf->output();
-                        // $num_fac = 'FAC-' . str_pad($commande['id'], 5, '0', STR_PAD_LEFT);
+                        $pdf_content = $dompdf->output();
+                        $num_fac = 'FAC-' . str_pad($commande['id'], 5, '0', STR_PAD_LEFT);
+
                         // $lien_facture = "https://benjaminlouis.eu/facture.php?id=" . $commande['id'];
 
                         // Pièce jointe PDF

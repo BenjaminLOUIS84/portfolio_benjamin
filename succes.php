@@ -1,6 +1,6 @@
 <?php
 ini_set('display_errors', 0);
-error_reporting(E_ALL);
+error_reporting(0);
 
 //Activer ou désactiver le mode DEBUG
 // ini_set('display_errors', 1);

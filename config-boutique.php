@@ -21,6 +21,17 @@ if (empty($token)) {
     die("Jeton de configuration manquant ou invalide.");
 }
 
+// Récupération automatique de la commande liée à ce token
+$stmtToken = $bdd->prepare("SELECT id FROM commandes WHERE config_token = ?");
+$stmtToken->execute([$token]);
+$commande = $stmtToken->fetch();
+
+if (!$commande) {
+    die("Jeton invalide ou commande introuvable.");
+}
+
+$commande_id = (int)$commande['id'];
+
 // 3. Traitement du formulaire à la soumission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Nettoyage et désinfection des entrées (Anti-XSS & Injection)
@@ -106,8 +117,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php endif; ?>
 
         <form method="POST">
-            <input type="hidden" name="commande_id" value="1">
-
+            <!--<input type="hidden" name="commande_id" value="1">-->
+            <input type="hidden" name="commande_id" value="<?= $commande_id ?>">
+            
             <div class="form-group">
                 <label for="nom_entreprise">Nom de l'entreprise *</label>
                 <input type="text" id="nom_entreprise" name="nom_entreprise" value="<?= htmlspecialchars($_POST['nom_entreprise'] ?? '') ?>" required placeholder="Ex: Ma Société SAS">

@@ -114,22 +114,59 @@ if (isset($_GET['action']) && $_GET['action'] === 'supprimer' && isset($_GET['id
 $search = trim($_GET['search_commande'] ?? '');
 $commandes = [];
 
+// if (isset($bdd)) {
+//     $sql = "SELECT * FROM commandes WHERE 1=1";
+//     $params = [];
+
+//     if (!empty($search)) {
+//         $sql .= " AND (client_nom LIKE :search OR client_email LIKE :search OR domaine_souhaite LIKE :search OR id = :id_exact)";
+//         $params[':search'] = '%' . $search . '%';
+//         $params[':id_exact'] = is_numeric($search) ? (int)$search : 0;
+//     }
+
+//     $sql .= " ORDER BY date_commande DESC";
+
+//     $stmt = $bdd->prepare($sql);
+//     $stmt->execute($params);
+//     $commandes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+// }
+/////////////////////////////////////////////////////////////////////////////////
+
 if (isset($bdd)) {
-    $sql = "SELECT * FROM commandes WHERE 1=1";
+    // Requête avec jointure pour récupérer le statut de déploiement
+    $sql = "SELECT c.*, p.statut_deploiement, p.id AS config_id
+            FROM commandes c
+            LEFT JOIN prospects_configurations p ON c.id = p.commande_id
+            WHERE 1=1";
     $params = [];
 
     if (!empty($search)) {
-        $sql .= " AND (client_nom LIKE :search OR client_email LIKE :search OR domaine_souhaite LIKE :search OR id = :id_exact)";
+        $sql .= " AND (c.client_nom LIKE :search OR c.client_email LIKE :search OR c.domaine_souhaite LIKE :search OR c.id = :id_exact)";
         $params[':search'] = '%' . $search . '%';
         $params[':id_exact'] = is_numeric($search) ? (int)$search : 0;
     }
 
-    $sql .= " ORDER BY date_commande DESC";
+    $sql .= " ORDER BY c.date_commande DESC";
 
     $stmt = $bdd->prepare($sql);
     $stmt->execute($params);
     $commandes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /////////////////////////////////////////////////////////////////////////////////
 ?> 
 
@@ -280,6 +317,23 @@ if (isset($bdd)) {
                                     <a href="facture.php?slug=<?= $cmd['slug'] ?>" target="_blank" style="background-color: #2b6cb0; color: white; padding: 4px 8px; border-radius: 4px; text-decoration: none; font-size: 12px;">
                                         📄 Facture PDF
                                     </a>
+                                    <!-- 2. Bouton / Statut de Déploiement -->
+                                    <?php if (!empty($cmd['config_id'])): ?>
+                                        <?php if ($cmd['statut_deploiement'] === 'en_attente'): ?>
+                                            <a href="deployer.php?commande_id=<?= $cmd['id'] ?>" onclick="return confirm('Lancer le déploiement de cette boutique ?');" style="padding: 4px 8px; background-color: #38a169; color: white; text-decoration: none; border-radius: 4px; font-size: 0.85rem; font-weight: bold;">
+                                                🚀 Déployer
+                                            </a>
+                                        <?php else: ?>
+                                            <span style="padding: 4px 8px; background-color: #c6f6d5; color: #22543d; border-radius: 4px; font-size: 0.85rem; font-weight: bold;">
+                                                ✅ Déployé
+                                            </span>
+                                        <?php endif; ?>
+                                        <?php else: ?>
+                                            <span style="padding: 4px 8px; background-color: #edf2f7; color: #718096; border-radius: 4px; font-size: 0.85rem;" title="En attente des infos du client">
+                                                ⏳ Attente config
+                                            </span>
+                                    <?php endif; ?> 
+
                                     <td style="display: flex; gap: 5px; align-items: center;">
 
                                     <!-- Bouton Archiver (si la commande n'est pas déjà archivée) -->

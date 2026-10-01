@@ -112,7 +112,16 @@ if (!empty($session_id)) {
                         $pdf_content = $dompdf->output();
                         $num_fac = 'FAC-' . str_pad($commande['id'], 5, '0', STR_PAD_LEFT);
 
-                        // $lien_facture = "https://benjaminlouis.eu/facture.php?id=" . $commande['id'];
+                       // 1. Génération du token unique
+                        $token = bin2hex(random_bytes(32));
+
+                        // 2. Lien de configuration envoyé au client
+                        $lienConfig = "https://benjaminlouis.eu/config-boutique.php?token=" . $token;
+
+                        // 3. Ajout du lien dans le corps du mail
+                        $body .= '<p><a href="' . $lienConfig . '" style="padding: 10px 15px; 
+                        background-color: #2563eb; color: white; text-decoration: none; border-radius: 5px; 
+                        font-weight: bold;">Configurer ma boutique</a></p>';
 
                         // Pièce jointe PDF
                         $mail->addStringAttachment($pdf_content, "Facture_{$num_fac}.pdf", 'base64', 'application/pdf');
@@ -126,8 +135,8 @@ if (!empty($session_id)) {
 
                     if (!empty($lien_facture)) {
                         $body .= '<p>Votre facture acquittée est disponible en <strong>pièce jointe</strong> à cet e-mail.</p>';
-                        // $body .= '<p>Vous pouvez également la télécharger à tout moment via ce lien :<br>';
-                        // $body .= '<a href="' . $lien_facture . '" target="_blank">' . $lien_facture . '</a></p>';
+                        $body .= '<p>Vous pouvez commencer à configurer votre boutique via ce lien :<br>';
+                        $body .= '<a href="' . $lienConfig . '" target="_blank">' . $lienConfig . '</a></p>';
                     }
 
                     $body .= '<p>Je prends contact avec vous sous 24h ouvrées pour faire le point sur votre projet et démarrer la configuration.</p>';
@@ -135,6 +144,7 @@ if (!empty($session_id)) {
 
                     $mail->Body = $body;
                     
+                
                     // Activer ou Désactiver le débogage SMTP (Affiche tout à l'écran)
                     // $mail->SMTPDebug = 2;
 

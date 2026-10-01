@@ -1,5 +1,8 @@
 <?php
 // 1. Connexion à la base de données
+require_once __DIR__ . '/db_config.php';
+require_once __DIR__ . '/config.php';
+
 try {
     $bdd = new PDO('mysql:host=localhost;dbname=' . $dbname . ';charset=utf8mb4', $username, $password, [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,

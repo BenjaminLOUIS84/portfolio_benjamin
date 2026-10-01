@@ -83,12 +83,56 @@ exit;
 endif;
 
 // --- ZONE CONNECTÉE : Tableau de bord ---
+
+// Traitement de l'archivage
+if (isset($_GET['action']) && $_GET['action'] === 'archiver' && isset($_GET['id'])) {
+    $id = (int)$_GET['id'];
+    $stmt = $bdd->prepare("UPDATE commandes SET statut = 'Archivée' WHERE id = ?");
+    $stmt->execute([$id]);
+    header('Location: admin.php#section-commandes');
+    exit;
+}
+
+// Traitement de la suppression
+if (isset($_GET['action']) && $_GET['action'] === 'supprimer' && isset($_GET['id'])) {
+    $id = (int)$_GET['id'];
+    $stmt = $bdd->prepare("DELETE FROM commandes WHERE id = ?");
+    $stmt->execute([$id]);
+    header('Location: admin.php#section-commandes');
+    exit;
+}
+
+//////////////////////////////////////////////////////////////ORIGINE//////Récupération des commandes sans filtre de recherche
+// $commandes = [];
+// if (isset($bdd)) {
+//     $stmt = $bdd->query("SELECT * FROM commandes ORDER BY date_commande DESC");
+//     $commandes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+// }
+///////////////////////////////////////////////////////////////////////////
+
+// 2. ///OPTION////Récupération des commandes avec filtre de recherche
+$search = trim($_GET['search_commande'] ?? '');
 $commandes = [];
+
 if (isset($bdd)) {
-    $stmt = $bdd->query("SELECT * FROM commandes ORDER BY date_commande DESC");
+    $sql = "SELECT * FROM commandes WHERE 1=1";
+    $params = [];
+
+    if (!empty($search)) {
+        $sql .= " AND (nom_client LIKE :search OR email_client LIKE :search OR domaine LIKE :search OR id = :id_exact)";
+        $params[':search'] = '%' . $search . '%';
+        $params[':id_exact'] = is_numeric($search) ? (int)$search : 0;
+    }
+
+    $sql .= " ORDER BY date_commande DESC";
+
+    $stmt = $bdd->prepare($sql);
+    $stmt->execute($params);
     $commandes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
-?>
+////////////////////////////////////////////////////////////////////////////////
+?> 
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -180,6 +224,24 @@ if (isset($bdd)) {
         
         <div class="table-responsive">
 
+            <div style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+                <form method="GET" action="admin.php#section-commandes" style="display: flex; gap: 10px; align-items: center;">
+                    <input type="text" name="search_commande" placeholder="Rechercher par nom, email, domaine..."
+                        value="<?= htmlspecialchars($_GET['search_commande'] ?? '') ?>"
+                        style="padding: 8px 12px; width: 300px; border: 1px solid #ccc; border-radius: 4px;">
+                
+                    <button type="submit" style="padding: 8px 15px; background-color: #3182ce; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">
+                        🔍 Rechercher
+                    </button>
+                
+                    <?php if (!empty($_GET['search_commande'])): ?>
+                        <a href="admin.php#section-commandes" style="padding: 8px 12px; background-color: #e2e8f0; color: #2d3748; text-decoration: none; border-radius: 4px; font-size: 0.9rem;">
+                            ✖ Réinitialiser
+                        </a>
+                    <?php endif; ?>
+                </form>
+            </div>
+
             <table>
                 <thead>
                     <tr>
@@ -218,6 +280,21 @@ if (isset($bdd)) {
                                     <a href="facture.php?slug=<?= $cmd['slug'] ?>" target="_blank" style="background-color: #2b6cb0; color: white; padding: 4px 8px; border-radius: 4px; text-decoration: none; font-size: 12px;">
                                         📄 Facture PDF
                                     </a>
+                                    <td style="display: flex; gap: 5px; align-items: center;">
+
+                                    <!-- Bouton Archiver (si la commande n'est pas déjà archivée) -->
+                                    <?php if (($row['statut'] ?? '') !== 'Archivée'): ?>
+                                        <a href="admin.php?action=archiver&id=<?= $row['id'] ?>" onclick="return confirm('Archiver la commande #<?= $row['id'] ?> ?');" style="padding: 4px 8px; background-color: #718096; color: white; text-decoration: none; border-radius: 4px; font-size: 0.85rem;" title="Archiver">
+                                            📦
+                                        </a>
+                                    <?php endif; ?>
+
+                                    <!-- Bouton Supprimer -->
+                                    <a href="admin.php?action=supprimer&id=<?= $row['id'] ?>" onclick="return confirm('Supprimer définitivement la commande #<?= $row['id'] ?> ?');" style="padding: 4px 8px; background-color: #e53e3e; color: white; text-decoration: none; border-radius: 4px; font-size: 0.85rem;" title="Supprimer">
+                                        🗑️
+                                    </a>
+                                </td>
+
                                 </td>
                             </tr>
                         <?php endforeach; ?>

@@ -1,10 +1,26 @@
 <?php
 session_start();
 
+require_once __DIR__ . '/config.php';
+
+if (file_exists(__DIR__ . '/db_config.php')) {
+    require_once __DIR__ . '/db_config.php';
+}
+
+if (file_exists(__DIR__ . '/vendor/autoload.php')) {
+    require_once __DIR__ . '/vendor/autoload.php';
+}
+
+if (file_exists(__DIR__ . '/facture.php')) {
+    require_once __DIR__ . '/facture.php';
+}
+
+
 // Connexion BDD
 try {
     $bdd = new PDO('mysql:host=localhost;dbname=' . $dbname . ';charset=utf8mb4', $username, $password, [
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
     ]);
 } catch (Exception $e) {
     die('Erreur BDD : ' . $e->getMessage());
@@ -41,7 +57,8 @@ $update->execute([$commande_id]);
 
 // 4. Envoi du mail d'accès au client
 $to = $config['email_admin'];
-$subject = "Votre boutique est prête ! 🚀";
+$charset = 'UTF-8';
+$subject = mb_encode_mimeheader("Votre boutique est prête ! 🚀", $charset);
 $message = "Bonjour " . htmlspecialchars($config['nom_entreprise']) . ",\n\n";
 $message .= "Votre boutique en ligne a été déployée avec succès !\n\n";
 $message .= "Accès Espace Administration :\n";

@@ -119,7 +119,7 @@ if (isset($bdd)) {
     $params = [];
 
     if (!empty($search)) {
-        $sql .= " AND (nom_client LIKE :search OR email_client LIKE :search OR domaine LIKE :search OR id = :id_exact)";
+        $sql .= " AND (client_nom LIKE :search OR client_email LIKE :search OR domaine_souhaite LIKE :search OR id = :id_exact)";
         $params[':search'] = '%' . $search . '%';
         $params[':id_exact'] = is_numeric($search) ? (int)$search : 0;
     }

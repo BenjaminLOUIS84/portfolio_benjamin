@@ -133,14 +133,18 @@ if (!empty($session_id)) {
                     $body = '<h2>Merci pour votre commande, ' . htmlspecialchars($client_nom) . ' !</h2>';
                     $body .= '<p>Votre paiement pour la <strong>Solution E-commerce Clé en Main</strong> a bien été validé avec succès.</p>';
 
-                    if (!empty($lien_facture)) {
+                    if (!empty($lienConfig)) {
                         $body .= '<p>Votre facture acquittée est disponible en <strong>pièce jointe</strong> à cet e-mail.</p>';
-                        $body .= '<p>Vous pouvez commencer à configurer votre boutique via ce lien :<br>';
-                        $body .= '<a href="' . $lienConfig . '" target="_blank">' . $lienConfig . '</a></p>';
+                        //$body .= '<p>Vous pouvez commencer à configurer votre boutique via ce lien :<br>';
+                        // --- BLOC À AJOUTER : Le bouton de configuration ---
+                        $body .= '<p>Pour démarrer la création de votre boutique, veuillez cliquer sur le bouton ci-dessous pour configurer vos accès et vos informations d\'entreprise :</p>';
+                        $body .= '<p style="margin: 25px 0;"><a href="' . $lienConfig . '" style="background-color: #2563eb; color: #ffffff; padding: 12px 20px; text-decoration: none; border-radius: 6px; font-weight: bold; display: inline-block;">🚀 Configurer ma boutique</a></p>';
+                        //$body .= '<p style="font-size: 0.85rem; color: #666;">Si le bouton ne fonctionne pas, copiez ce lien dans votre navigateur : <br><a href="' . $lienConfig . '">' . $lienConfig . '</a></p>';
+                        // ---------------------------------------------------
                     }
 
-                    $body .= '<p>Je prends contact avec vous sous 24h ouvrées pour faire le point sur votre projet et démarrer la configuration.</p>';
-                    $body .= '<br><p>Cordialement,<br><strong>SARL Louis</strong><br>Benjamin Louis</p>';
+                    $body .= '<p>Je prends contact avec vous sous 24h ouvrées pour faire le point avec vous sur votre projet.</p>';
+                    $body .= '<br><p>Cordialement,<br><strong>SARL Louis</strong><br>Benjamin Louis.</p>';
 
                     $mail->Body = $body;
                     

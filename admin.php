@@ -283,14 +283,14 @@ if (isset($bdd)) {
                                     <td style="display: flex; gap: 5px; align-items: center;">
 
                                     <!-- Bouton Archiver (si la commande n'est pas déjà archivée) -->
-                                    <?php if (($row['statut'] ?? '') !== 'Archivée'): ?>
-                                        <a href="admin.php?action=archiver&id=<?= $row['id'] ?>" onclick="return confirm('Archiver la commande #<?= $row['id'] ?> ?');" style="padding: 4px 8px; background-color: #718096; color: white; text-decoration: none; border-radius: 4px; font-size: 0.85rem;" title="Archiver">
+                                    <?php if (($cmd['statut'] ?? '') !== 'Archivée'): ?>
+                                        <a href="admin.php?action=archiver&id=<?= $cmd['id'] ?>" onclick="return confirm('Archiver la commande #<?= $cmd['id'] ?> ?');" style="padding: 4px 8px; background-color: #718096; color: white; text-decoration: none; border-radius: 4px; font-size: 0.85rem;" title="Archiver">
                                             📦
                                         </a>
                                     <?php endif; ?>
 
                                     <!-- Bouton Supprimer -->
-                                    <a href="admin.php?action=supprimer&id=<?= $row['id'] ?>" onclick="return confirm('Supprimer définitivement la commande #<?= $row['id'] ?> ?');" style="padding: 4px 8px; background-color: #e53e3e; color: white; text-decoration: none; border-radius: 4px; font-size: 0.85rem;" title="Supprimer">
+                                    <a href="admin.php?action=supprimer&id=<?= $cmd['id'] ?>" onclick="return confirm('Supprimer définitivement la commande #<?= $cmd['id'] ?> ?');" style="padding: 4px 8px; background-color: #e53e3e; color: white; text-decoration: none; border-radius: 4px; font-size: 0.85rem;" title="Supprimer">
                                         🗑️
                                     </a>
                                 </td>

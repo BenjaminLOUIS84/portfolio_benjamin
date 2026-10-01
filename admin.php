@@ -269,8 +269,8 @@ if (isset($bdd)) {
                                 <td><?= $cmd['option_multilingue'] ? '✅ Oui' : '❌ Non' ?></td>
                                 <td><strong><?= number_format($cmd['montant_ht'], 2, ',', ' ') ?> €</strong></td>
                                 <td>
-                                    <?php if ($cmd['statut'] === 'payee'): ?>
-                                        <span class="badge badge-payee">Payée</span>
+                                    <?php if ($cmd['statut'] === 'paye'): ?>
+                                        <span class="badge badge-paye">Payée</span>
                                     <?php else: ?>
                                         <span class="badge badge-attente">En attente</span>
                                     <?php endif; ?>

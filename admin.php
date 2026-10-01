@@ -225,7 +225,7 @@ if (isset($bdd)) {
         <div class="table-responsive">
 
             <div style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
-                <form method="GET" action="admin.php#section-commandes" style="display: flex; gap: 10px; align-items: center;">
+                <form method="GET" action="admin.php" style="display: flex; gap: 10px; align-items: center;">
                     <input type="text" name="search_commande" placeholder="Rechercher par nom, email, domaine..."
                         value="<?= htmlspecialchars($_GET['search_commande'] ?? '') ?>"
                         style="padding: 8px 12px; width: 300px; border: 1px solid #ccc; border-radius: 4px;">
@@ -235,7 +235,7 @@ if (isset($bdd)) {
                     </button>
                 
                     <?php if (!empty($_GET['search_commande'])): ?>
-                        <a href="admin.php#section-commandes" style="padding: 8px 12px; background-color: #e2e8f0; color: #2d3748; text-decoration: none; border-radius: 4px; font-size: 0.9rem;">
+                        <a href="admin.php" style="padding: 8px 12px; background-color: #e2e8f0; color: #2d3748; text-decoration: none; border-radius: 4px; font-size: 0.9rem;">
                             ✖ Réinitialiser
                         </a>
                     <?php endif; ?>

@@ -115,6 +115,10 @@ if (!empty($session_id)) {
                        // 1. Génération du token unique
                         $token = bin2hex(random_bytes(32));
 
+                        // 2. IMPORTANT : Sauvegarde du token pour CETTE commande précise
+                        $stmtSaveToken = $bdd->prepare("UPDATE commandes SET config_token = ? WHERE id = ?");
+                        $stmtSaveToken->execute([$token, $commande['id']]); // $commande_id doit être l'ID de la commande venant de Stripe / de la session
+
                         // 2. Lien de configuration envoyé au client
                         $lienConfig = "https://benjaminlouis.eu/config-boutique.php?token=" . $token;
 

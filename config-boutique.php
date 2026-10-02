@@ -52,9 +52,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $erreur = "Le numéro SIRET doit contenir exactement 14 chiffres.";
     } elseif ($pass !== $pass_confirm) {
         $erreur = "Les mots de passe ne correspondent pas.";
-    } elseif (strlen($pass) < 10) {
-        $erreur = "Le mot de passe doit faire au moins 10 caractères pour des raisons de sécurité.";
-    } else {
+
+
+    // } elseif (strlen($pass) < 10) {
+    //     $erreur = "Le mot de passe doit faire au moins 10 caractères pour des raisons de sécurité.";
+    // } 
+    
+    } elseif (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/', $pass)) {
+        $erreur = "Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial (@$!%*?&).";
+    }
+    
+    else {
         // Hashage sécurisé du mot de passe
         $pass_hash = password_hash($pass, PASSWORD_BCRYPT);
 
@@ -119,7 +127,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <form method="POST">
             <!--<input type="hidden" name="commande_id" value="1">-->
             <input type="hidden" name="commande_id" value="<?= $commande_id ?>">
-            
+
             <div class="form-group">
                 <label for="nom_entreprise">Nom de l'entreprise *</label>
                 <input type="text" id="nom_entreprise" name="nom_entreprise" value="<?= htmlspecialchars($_POST['nom_entreprise'] ?? '') ?>" required placeholder="Ex: Ma Société SAS">
@@ -145,12 +153,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <div class="form-group">
                 <label for="mot_de_passe">Mot de passe (10 caractères min.) *</label>
-                <input type="password" id="mot_de_passe" name="mot_de_passe" required placeholder="••••••••••">
+                <input type="password" id="mot_de_passe" name="mot_de_passe" required placeholder="••••••••••" required
+                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&]).{10,}"
+                title="Au moins 10 caractères, 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial.">
             </div>
 
             <div class="form-group">
                 <label for="mot_de_passe_confirm">Confirmer le mot de passe *</label>
-                <input type="password" id="mot_de_passe_confirm" name="mot_de_passe_confirm" required placeholder="••••••••••">
+                <input type="password" id="mot_de_passe_confirm" name="mot_de_passe_confirm" required placeholder="••••••••••" required
+                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&]).{10,}"
+                title="Au moins 10 caractères, 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial.">
             </div>
 
             <button type="submit">Valider et enregistrer</button>

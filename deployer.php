@@ -59,35 +59,26 @@ $update->execute([$commande_id]);
 /////////////////////////////////////////////////////
 $to = $config['email_admin'];
 
+// Génération de l'URL dédiée au client (basée sur son sous-domaine / nom d'entreprise)
+$url_admin_client = get_client_admin_url($config['nom_entreprise']);
+
 $charset = 'UTF-8';
 $subject = mb_encode_mimeheader("Votre boutique est prête ! 🚀", $charset);
 
 $message = "Bonjour " . htmlspecialchars($config['nom_entreprise']) . ",\n\n";
 $message .= "Votre boutique en ligne a été déployée avec succès !\n\n";
-$message .= "Accès Espace Administration :\n";
-$message .= "E-mail : " . $config['email_admin'] . "\n\n";
-$message .= "Merci pour votre confiance.\nBenjamin Louis";
 
+$message .= "👉 Cliquez sur le lien ci-dessous pour accéder directement à votre espace d'administration :\n";
+$message .= $url_admin_client . "\n\n";
+$message .= "----------------------------------------\n";
+$message .= "Rappel de vos identifiants de connexion :\n";
+$message .= "• Identifiant (E-mail) : " . $config['email_admin'] . "\n";
+$message .= "• Mot de passe : (celui défini lors de votre configuration)\n";
+$message .= "----------------------------------------\n\n";
+$message .= "Merci pour votre confiance.\nBenjamin Louis";
 $headers = "From: boutique@benjaminlouis.eu\r\nContent-Type: text/plain; charset=UTF-8";
 mail($to, $subject, $message, $headers);
 //////////////////////////////////////////////////////
-
-// Génération de l'URL dédiée au client (basée sur son sous-domaine / nom d'entreprise)
-// $url_admin_client = get_client_admin_url($config['nom_entreprise']);
-
-// $subject = mb_encode_mimeheader("Votre boutique est prête ! 🚀", $charset);
-
-// $message  = "Bonjour " . htmlspecialchars($config['nom_entreprise']) . ",\n\n";
-// $message .= "Votre boutique en ligne a été déployée avec succès !\n\n";
-// $message .= "Accès Espace Administration :\n" . $url_admin_client . "\n\n";
-// $message .= "Vos identifiants de connexion :\n";
-// $message .= "- E-mail : " . $config['email_admin'] . "\n";
-// $message .= "Merci pour votre confiance.\nBenjamin Louis";
-
-// $headers  = "From: boutique@benjaminlouis.eu\r\n";
-// $headers .= "Content-Type: text/plain; charset=UTF-8";
-
-// mail($to, $subject, $message, $headers);
 
 
 // Redirection vers l'admin avec confirmation

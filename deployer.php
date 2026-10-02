@@ -55,16 +55,35 @@ try {
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
     ]);
 
-    // Insertion du compte client s'il n'existe pas déjà
-    $stmt_user = $bdd_boutique->prepare("
-        INSERT INTO admin_users (username, password_hash)
-        VALUES (?, ?)
-        ON DUPLICATE KEY UPDATE password_hash = VALUES(password_hash)
-    ");
-    $stmt_user->execute([
-        $config['email_admin'],
-        $config['mot_de_passe_hash']
-    ]);
+    // // Insertion du compte client s'il n'existe pas déjà
+    // $stmt_user = $bdd_boutique->prepare("
+    //     INSERT INTO admin_users (username, password_hash)
+    //     VALUES (?, ?)
+    //     ON DUPLICATE KEY UPDATE password_hash = VALUES(password_hash)
+    // ");
+    // $stmt_user->execute([
+    //     $config['email_admin'],
+    //     $config['mot_de_passe_hash']
+    // ]);
+
+    // On extrait le sous-domaine à partir du nom d'entreprise
+    $subdomain = strtolower(preg_replace('/[^a-zA-Z0-9]/', '', $config['nom_entreprise']));
+
+    // Insertion / Mise à jour de l'utilisateur avec son sous-domaine
+    $check_stmt = $bdd_boutique->prepare("SELECT id FROM admin_users WHERE username = ?");
+    $check_stmt->execute([$config['email_admin']]);
+
+    $user_exists = $check_stmt->fetch();
+    if ($user_exists) {
+        $stmt = $bdd_boutique->prepare("UPDATE admin_users SET password_hash = ?, subdomain = ? WHERE username = ?");
+        $stmt->execute([$config['mot_de_passe_hash'], $subdomain, $config['email_admin']]);
+    } else {
+        $stmt = $bdd_boutique->prepare("INSERT INTO admin_users (username, password_hash, subdomain) VALUES (?, ?, ?)");
+        $stmt->execute([$config['email_admin'], $config['mot_de_passe_hash'], $subdomain]);
+    } 
+
+
+
 } catch (Exception $e) {
     die('Erreur lors de la création du compte boutique : ' . $e->getMessage());
 }

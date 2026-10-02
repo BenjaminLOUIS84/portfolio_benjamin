@@ -6,6 +6,7 @@ require_once 'config.php';
 if (isset($_GET['action']) && $_GET['action'] === 'logout') {
     unset($_SESSION['admin_logged']);
     unset($_SESSION['admin_user']);
+    unset($_SESSION['admin_subdomain']);
     session_destroy();
     header('Location: admin.php');
     exit;
@@ -24,8 +25,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
 
         // Vérification sécurisée du mot de passe haché
         if ($user && password_verify($password, $user['password_hash'])) {
-            $_SESSION['admin_logged'] = true;
-            $_SESSION['admin_user']   = $user['username'];
+            $_SESSION['admin_logged']    = true;
+            $_SESSION['admin_user']      = $user['username'];
+            $_SESSION['admin_subdomain'] = $user['subdomain'] ?? null; // Stockage du sous-domaine
             header('Location: admin.php');
             exit;
         } else {
@@ -55,11 +57,9 @@ if (!isset($_SESSION['admin_logged']) || $_SESSION['admin_logged'] !== true):
         button { width: 100%; padding: 12px; background: #3182ce; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; }
         button:hover { background: #2b6cb0; }
         .err { background: #fed7d7; color: #9b2c2c; padding: 10px; border-radius: 6px; font-size: 14px; margin-bottom: 15px; text-align: center; }
-
     </style>
 </head>
 <body>
-   
     <div class="card">
         <h2>Administration</h2>
         <?php if ($error): ?><div class="err"><?= htmlspecialchars($error) ?></div><?php endif; ?>
@@ -75,7 +75,6 @@ if (!isset($_SESSION['admin_logged']) || $_SESSION['admin_logged'] !== true):
             <button type="submit" name="login">Se connecter</button>
         </form>
     </div>
-
 </body>
 </html>
 <?php
@@ -84,11 +83,19 @@ endif;
 
 // --- ZONE CONNECTÉE : Tableau de bord ---
 
+$user_subdomain = $_SESSION['admin_subdomain'] ?? null;
+$is_super_admin = ($_SESSION['admin_user'] === 'admin'); // Votre compte principal voit tout
+
 // Traitement de l'archivage
 if (isset($_GET['action']) && $_GET['action'] === 'archiver' && isset($_GET['id'])) {
     $id = (int)$_GET['id'];
-    $stmt = $bdd->prepare("UPDATE commandes SET statut = 'Archivée' WHERE id = ?");
-    $stmt->execute([$id]);
+    if ($is_super_admin) {
+        $stmt = $bdd->prepare("UPDATE commandes SET statut = 'Archivée' WHERE id = ?");
+        $stmt->execute([$id]);
+    } else {
+        $stmt = $bdd->prepare("UPDATE commandes SET statut = 'Archivée' WHERE id = ? AND subdomain = ?");
+        $stmt->execute([$id, $user_subdomain]);
+    }
     header('Location: admin.php#section-commandes');
     exit;
 }
@@ -96,49 +103,33 @@ if (isset($_GET['action']) && $_GET['action'] === 'archiver' && isset($_GET['id'
 // Traitement de la suppression
 if (isset($_GET['action']) && $_GET['action'] === 'supprimer' && isset($_GET['id'])) {
     $id = (int)$_GET['id'];
-    $stmt = $bdd->prepare("DELETE FROM commandes WHERE id = ?");
-    $stmt->execute([$id]);
+    if ($is_super_admin) {
+        $stmt = $bdd->prepare("DELETE FROM commandes WHERE id = ?");
+        $stmt->execute([$id]);
+    } else {
+        $stmt = $bdd->prepare("DELETE FROM commandes WHERE id = ? AND subdomain = ?");
+        $stmt->execute([$id, $user_subdomain]);
+    }
     header('Location: admin.php#section-commandes');
     exit;
 }
 
-//////////////////////////////////////////////////////////////ORIGINE//////Récupération des commandes sans filtre de recherche
-// $commandes = [];
-// if (isset($bdd)) {
-//     $stmt = $bdd->query("SELECT * FROM commandes ORDER BY date_commande DESC");
-//     $commandes = $stmt->fetchAll(PDO::FETCH_ASSOC);
-// }
-///////////////////////////////////////////////////////////////////////////
-
-// 2. ///OPTION////Récupération des commandes avec filtre de recherche
+// Récupération des commandes avec filtrage par sous-domaine
 $search = trim($_GET['search_commande'] ?? '');
 $commandes = [];
 
-// if (isset($bdd)) {
-//     $sql = "SELECT * FROM commandes WHERE 1=1";
-//     $params = [];
-
-//     if (!empty($search)) {
-//         $sql .= " AND (client_nom LIKE :search OR client_email LIKE :search OR domaine_souhaite LIKE :search OR id = :id_exact)";
-//         $params[':search'] = '%' . $search . '%';
-//         $params[':id_exact'] = is_numeric($search) ? (int)$search : 0;
-//     }
-
-//     $sql .= " ORDER BY date_commande DESC";
-
-//     $stmt = $bdd->prepare($sql);
-//     $stmt->execute($params);
-//     $commandes = $stmt->fetchAll(PDO::FETCH_ASSOC);
-// }
-/////////////////////////////////////////////////////////////////////////////////
-
 if (isset($bdd)) {
-    // Requête avec jointure pour récupérer le statut de déploiement
     $sql = "SELECT c.*, p.statut_deploiement, p.id AS config_id
             FROM commandes c
             LEFT JOIN prospects_configurations p ON c.id = p.commande_id
             WHERE 1=1";
     $params = [];
+
+    // Si ce n'est PAS le super-admin global, on filtre la liste par sous-domaine
+    if (!$is_super_admin) {
+        $sql .= " AND c.subdomain = :subdomain";
+        $params[':subdomain'] = $user_subdomain;
+    }
 
     if (!empty($search)) {
         $sql .= " AND (c.client_nom LIKE :search OR c.client_email LIKE :search OR c.domaine_souhaite LIKE :search OR c.id = :id_exact)";
@@ -152,23 +143,7 @@ if (isset($bdd)) {
     $stmt->execute($params);
     $commandes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/////////////////////////////////////////////////////////////////////////////////
-?> 
+?>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -189,30 +164,7 @@ if (isset($bdd)) {
         .badge { display: inline-block; padding: 3px 8px; border-radius: 12px; font-weight: 600; font-size: 12px; }
         .badge-payee { background: #dcfce7; color: #166534; }
         .badge-attente { background: #fef3c7; color: #92400e; }
-    
-        /* --- Correctifs Responsive Mobile --- */
 
-        /* 1. En-tête : passage en colonne sur mobile */
-        .admin-header,
-        header,
-        .header-container {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 12px;
-            padding: 15px;
-        }
-
-        .user-info,
-        .admin-user-block {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            width: 100%;
-            justify-content: space-between;
-        }
-
-        /* 2. Tableau : défilement horizontal fluide sur petit écran */
         .table-responsive {
             width: 100%;
             overflow-x: auto;
@@ -223,29 +175,16 @@ if (isset($bdd)) {
         table {
             width: 100%;
             border-collapse: collapse;
-            white-space: nowrap; /* Évite que le texte casse bizarrement */
+            white-space: nowrap;
         }
 
-        th, td {
-            padding: 10px 12px;
-        }
-
-        /* Adaptation pour écrans mobiles */
         @media (max-width: 768px) {
             .top {
                 flex-direction: column !important;
                 align-items: flex-start !important;
                 gap: 12px !important;
             }
-        
-            .top > div {
-                display: flex;
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 8px;
-            }
         }
-
     </style>
 </head>
 <body>
@@ -258,7 +197,7 @@ if (isset($bdd)) {
                 <a href="admin.php?action=logout" class="btn-out">Déconnexion 🚪</a>
             </div>
         </div>
-        
+       
         <div class="table-responsive">
 
             <div style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
@@ -266,11 +205,11 @@ if (isset($bdd)) {
                     <input type="text" name="search_commande" placeholder="Rechercher par nom, email, domaine..."
                         value="<?= htmlspecialchars($_GET['search_commande'] ?? '') ?>"
                         style="padding: 8px 12px; width: 300px; border: 1px solid #ccc; border-radius: 4px;">
-                
+               
                     <button type="submit" style="padding: 8px 15px; background-color: #3182ce; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">
                         🔍 Rechercher
                     </button>
-                
+               
                     <?php if (!empty($_GET['search_commande'])): ?>
                         <a href="admin.php" style="padding: 8px 12px; background-color: #e2e8f0; color: #2d3748; text-decoration: none; border-radius: 4px; font-size: 0.9rem;">
                             ✖ Réinitialiser
@@ -295,7 +234,7 @@ if (isset($bdd)) {
                 </thead>
                 <tbody>
                     <?php if (empty($commandes)): ?>
-                        <tr><td colspan="8" style="text-align:center; padding: 30px; color: #64748b;">Aucune commande pour le moment.</td></tr>
+                        <tr><td colspan="9" style="text-align:center; padding: 30px; color: #64748b;">Aucune commande pour le moment.</td></tr>
                     <?php else: ?>
                         <?php foreach ($commandes as $cmd): ?>
                             <tr>
@@ -313,42 +252,36 @@ if (isset($bdd)) {
                                     <?php endif; ?>
                                 </td>
                                 <td><?= date('d/m/Y H:i', strtotime($cmd['date_commande'])) ?></td>
-                                <td>
+                                <td style="display: flex; gap: 5px; align-items: center;">
                                     <a href="facture.php?slug=<?= $cmd['slug'] ?>" target="_blank" style="background-color: #2b6cb0; color: white; padding: 4px 8px; border-radius: 4px; text-decoration: none; font-size: 12px;">
                                         📄 Facture PDF
                                     </a>
-                                    <!-- 2. Bouton / Statut de Déploiement -->
+
                                     <?php if (!empty($cmd['config_id'])): ?>
                                         <?php if ($cmd['statut_deploiement'] === 'en_attente'): ?>
-                                            <a href="deployer.php?commande_id=<?= $cmd['id'] ?>" onclick="return confirm('Lancer le déploiement de cette boutique ?');" style="padding: 4px 8px; margin-left: 10px; background-color: #38a169; color: white; text-decoration: none; border-radius: 4px; font-size: 0.85rem; font-weight: bold;">
+                                            <a href="deployer.php?commande_id=<?= $cmd['id'] ?>" onclick="return confirm('Lancer le déploiement de cette boutique ?');" style="padding: 4px 8px; background-color: #38a169; color: white; text-decoration: none; border-radius: 4px; font-size: 0.85rem; font-weight: bold;">
                                                 🚀 Déployer
                                             </a>
                                         <?php else: ?>
-                                            <span style="padding: 4px 8px; background-color: #c6f6d5; color: #22543d; margin-left: 10px; border-radius: 4px; font-size: 0.85rem; font-weight: bold;">
+                                            <span style="padding: 4px 8px; background-color: #c6f6d5; color: #22543d; border-radius: 4px; font-size: 0.85rem; font-weight: bold;">
                                                 ✅ Déployé
                                             </span>
                                         <?php endif; ?>
-                                        <?php else: ?>
-                                            <span style="padding: 4px 8px; background-color: #edf2f7; color: #718096; margin-left: 10px; border-radius: 4px; font-size: 0.85rem;" title="En attente des infos du client">
-                                                ⏳ Attente config
-                                            </span>
-                                    <?php endif; ?> 
+                                    <?php else: ?>
+                                        <span style="padding: 4px 8px; background-color: #edf2f7; color: #718096; border-radius: 4px; font-size: 0.85rem;" title="En attente des infos du client">
+                                            ⏳ Attente config
+                                        </span>
+                                    <?php endif; ?>
 
-                                    <td style="display: flex; gap: 5px; align-items: center;">
-
-                                    <!-- Bouton Archiver (si la commande n'est pas déjà archivée) -->
                                     <?php if (($cmd['statut'] ?? '') !== 'Archivée'): ?>
                                         <a href="admin.php?action=archiver&id=<?= $cmd['id'] ?>" onclick="return confirm('Archiver la commande #<?= $cmd['id'] ?> ?');" style="padding: 4px 8px; background-color: #718096; color: white; text-decoration: none; border-radius: 4px; font-size: 0.85rem;" title="Archiver">
                                             📦
                                         </a>
                                     <?php endif; ?>
 
-                                    <!-- Bouton Supprimer -->
                                     <a href="admin.php?action=supprimer&id=<?= $cmd['id'] ?>" onclick="return confirm('Supprimer définitivement la commande #<?= $cmd['id'] ?> ?');" style="padding: 4px 8px; background-color: #e53e3e; color: white; text-decoration: none; border-radius: 4px; font-size: 0.85rem;" title="Supprimer">
                                         🗑️
                                     </a>
-                                </td>
-
                                 </td>
                             </tr>
                         <?php endforeach; ?>

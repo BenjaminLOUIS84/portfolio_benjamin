@@ -16,7 +16,7 @@ if (file_exists(__DIR__ . '/facture.php')) {
 }
 
 
-// Connexion BDD
+// Connexion BDD Landing Page
 try {
     $bdd = new PDO('mysql:host=localhost;dbname=' . $dbname . ';charset=utf8mb4', $username, $password, [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
@@ -46,10 +46,34 @@ if (!$config) {
     die("Configuration introuvable pour cette commande.");
 }
 
-// 2. LOGIQUE D'AUTO-DÉPLOIEMENT (Exemple : Génération du sous-dossier ou de la BDD client)
-// Ici tu exécutes la création des tables / dossiers de la boutique du client
+// =========================================================================
+// AJOUT : Inscription des accès du client dans la BDD de la boutique
+// =========================================================================
+try {
+    // Connexion à la BDD de la boutique
+    $bdd_boutique = new PDO('mysql:host=localhost;dbname=toso8422_boutique;charset=utf8mb4', $username, $password, [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+    ]);
 
+    // Insertion du compte client s'il n'existe pas déjà
+    $stmt_user = $bdd_boutique->prepare("
+        INSERT INTO admin_users (username, password_hash)
+        VALUES (?, ?)
+        ON DUPLICATE KEY UPDATE password_hash = VALUES(password_hash)
+    ");
+    $stmt_user->execute([
+        $config['email_admin'],
+        $config['mot_de_passe_hash']
+    ]);
+} catch (Exception $e) {
+    die('Erreur lors de la création du compte boutique : ' . $e->getMessage());
+}
+// =========================================================================
+
+
+// 2. LOGIQUE D'AUTO-DÉPLOIEMENT
 // ... (Ton code d'instanciation de la boutique) ...
+
 
 // 3. Mise à jour du statut
 $update = $bdd->prepare("UPDATE prospects_configurations SET statut_deploiement = 'deploye' WHERE commande_id = ?");

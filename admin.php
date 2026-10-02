@@ -320,16 +320,16 @@ if (isset($bdd)) {
                                     <!-- 2. Bouton / Statut de Déploiement -->
                                     <?php if (!empty($cmd['config_id'])): ?>
                                         <?php if ($cmd['statut_deploiement'] === 'en_attente'): ?>
-                                            <a href="deployer.php?commande_id=<?= $cmd['id'] ?>" onclick="return confirm('Lancer le déploiement de cette boutique ?');" style="padding: 4px 8px; background-color: #38a169; color: white; text-decoration: none; border-radius: 4px; font-size: 0.85rem; font-weight: bold;">
+                                            <a href="deployer.php?commande_id=<?= $cmd['id'] ?>" onclick="return confirm('Lancer le déploiement de cette boutique ?');" style="padding: 4px 8px; margin-left: 10px; background-color: #38a169; color: white; text-decoration: none; border-radius: 4px; font-size: 0.85rem; font-weight: bold;">
                                                 🚀 Déployer
                                             </a>
                                         <?php else: ?>
-                                            <span style="padding: 4px 8px; background-color: #c6f6d5; color: #22543d; border-radius: 4px; font-size: 0.85rem; font-weight: bold;">
+                                            <span style="padding: 4px 8px; background-color: #c6f6d5; color: #22543d; margin-left: 10px; border-radius: 4px; font-size: 0.85rem; font-weight: bold;">
                                                 ✅ Déployé
                                             </span>
                                         <?php endif; ?>
                                         <?php else: ?>
-                                            <span style="padding: 4px 8px; background-color: #edf2f7; color: #718096; border-radius: 4px; font-size: 0.85rem;" title="En attente des infos du client">
+                                            <span style="padding: 4px 8px; background-color: #edf2f7; color: #718096; margin-left: 10px; border-radius: 4px; font-size: 0.85rem;" title="En attente des infos du client">
                                                 ⏳ Attente config
                                             </span>
                                     <?php endif; ?> 

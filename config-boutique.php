@@ -669,7 +669,9 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
  
-
+<a href="index.html" style="display: inline-block; padding: 12px 25px; background: #2b6cb0; color: #ffffff; text-decoration: none; font-weight: bold; border-radius: 6px;">
+    Retour à l'accueil
+</a>
 
 
 </body>

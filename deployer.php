@@ -1,4 +1,10 @@
 <?php
+// Activation de l'affichage des erreurs pour le débogage
+//ini_set('display_errors', 1);
+//error_reporting(E_ALL);
+
+//ini_set('display_errors', 0);
+//error_reporting(0);
 session_start();
 
 require_once __DIR__ . '/config.php';
@@ -67,7 +73,8 @@ try {
     // ]);
 
     // On extrait le sous-domaine à partir du nom d'entreprise
-    $subdomain = strtolower(preg_replace('/[^a-zA-Z0-9]/', '', $config['nom_entreprise']));
+    // $subdomain = strtolower(preg_replace('/[^a-zA-Z0-9]/', '', $config['nom_entreprise']));
+    $subdomain = $config['subdomain'];
 
     // Insertion / Mise à jour de l'utilisateur avec son sous-domaine
     $check_stmt = $bdd_boutique->prepare("SELECT id FROM admin_users WHERE username = ?");
@@ -97,6 +104,9 @@ try {
 // 3. Mise à jour du statut
 $update = $bdd->prepare("UPDATE prospects_configurations SET statut_deploiement = 'deploye' WHERE commande_id = ?");
 $update->execute([$commande_id]);
+
+$updateCmd = $bdd->prepare("UPDATE commandes SET statut = 'deploye' WHERE id = ?");
+$updateCmd->execute([$commande_id]);
 
 // 4. Envoi du mail d'accès au client
 /////////////////////////////////////////////////////

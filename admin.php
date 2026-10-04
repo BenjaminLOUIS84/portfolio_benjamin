@@ -273,6 +273,12 @@ if (isset($bdd)) {
                                         </span>
                                     <?php endif; ?>
 
+                                    <!-- Lien pour ouvrir le site avec la config du client en mode prévisualisation -->
+                                    <a href="https://benjaminlouis.eu/index.php?preview_subdomain=<?= urlencode($client['subdomain']) ?>" target="_blank" style="padding: 5px 10px; background-color: #17a2b8; color: white; border-radius: 4px; text-decoration: none;">
+                                        👁️ Aperçu
+                                    </a>
+                                    
+
                                     <?php if (($cmd['statut'] ?? '') !== 'Archivée'): ?>
                                         <a href="admin.php?action=archiver&id=<?= $cmd['id'] ?>" onclick="return confirm('Archiver la commande #<?= $cmd['id'] ?> ?');" style="padding: 4px 8px; background-color: #718096; color: white; text-decoration: none; border-radius: 4px; font-size: 0.85rem;" title="Archiver">
                                             📦
@@ -282,6 +288,7 @@ if (isset($bdd)) {
                                     <a href="admin.php?action=supprimer&id=<?= $cmd['id'] ?>" onclick="return confirm('Supprimer définitivement la commande #<?= $cmd['id'] ?> ?');" style="padding: 4px 8px; background-color: #e53e3e; color: white; text-decoration: none; border-radius: 4px; font-size: 0.85rem;" title="Supprimer">
                                         🗑️
                                     </a>
+
                                 </td>
                             </tr>
                         <?php endforeach; ?>

@@ -274,7 +274,7 @@ if (isset($bdd)) {
                                     <?php endif; ?>
 
                                     <!-- Lien pour ouvrir le site avec la config du client en mode prévisualisation -->
-                                    <a href="https://benjaminlouis.eu/index.php?preview_subdomain=<?= urlencode($client['subdomain']) ?>" target="_blank" style="padding: 5px 10px; background-color: #17a2b8; color: white; border-radius: 4px; text-decoration: none;">
+                                    <a href="https://benjaminlouis.eu/boutique/index.php?preview_subdomain=<?= urlencode($client['subdomain']) ?>" target="_blank" style="padding: 5px 10px; background-color: #17a2b8; color: white; border-radius: 4px; text-decoration: none;">
                                         👁️ Aperçu
                                     </a>
                                     

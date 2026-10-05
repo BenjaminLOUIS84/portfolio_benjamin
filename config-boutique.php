@@ -388,8 +388,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
 
             <div class="form-group">
-                <label for="google_maps_iframe">Intégration Google Maps (Iframe)</label>
-                <textarea id="google_maps_iframe" name="google_maps_iframe" rows="2" placeholder="Collez le code <iframe...> de Google Maps"><?= htmlspecialchars($prospect['google_maps_iframe'] ?? '') ?></textarea>
+                <label for="google_maps_iframe">Google Maps</label>
+                <textarea id="google_maps_iframe" name="google_maps_iframe" rows="2" placeholder="Partager votre localisation"><?= htmlspecialchars($prospect['google_maps_iframe'] ?? '') ?></textarea>
             </div>
 
             <h3>4. Charte Graphique & Médias</h3>
@@ -425,14 +425,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <div class="form-group">
                 <label for="mot_de_passe_hash">Mot de passe *</label>
-                <input type="password" id="mot_de_passe_hash" name="mot_de_passe_hash" required placeholder="••••••••••"
+                <input type="password" id="mot_de_passe_hash" name="mot_de_passe_hash" placeholder="••••••••••"
                 pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&]).{8,}"
                 title="Au moins 8 caractères, 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial.">
             </div>
 
             <div class="form-group">
                 <label for="mot_de_passe_hash_confirm">Confirmer le mot de passe *</label>
-                <input type="password" id="mot_de_passe_hash_confirm" name="mot_de_passe_hash_confirm" required placeholder="••••••••••"
+                <input type="password" id="mot_de_passe_hash_confirm" name="mot_de_passe_hash_confirm"placeholder="••••••••••"
                 pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&]).{8,}"
                 title="Au moins 8 caractères, 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial.">
             </div>
@@ -446,7 +446,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <!-- Header (Menu & Panier) -->
             <div id="prev-header" style="display: flex; justify-content: space-between; align-items: center; padding: 12px 15px; background-color: #f8d7da;">
                 <div style="font-weight: bold; font-size: 14px; color: #333;">🛒 (0)</div>
-                <div id="prev-title" style="font-weight: bold; font-size: 15px; color: #333;">SARL LOUIS</div>
+                <div id="prev-title" style="font-weight: bold; font-size: 15px; color: #333;"  value="<?= htmlspecialchars($prospect['nom_entreprise'] ?? '') ?>" required placeholder="Votre entreprise"></div>
                 <div style="font-size: 18px; color: #333;">☰</div>
             </div>
 
@@ -514,6 +514,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </form>
 
     <?php endif; ?>
+
+    <a href="index.html" style="display: inline-block; padding: 12px 25px; background: #2b6cb0; color: #ffffff; text-decoration: none; font-weight: bold; border-radius: 6px;">
+    Retour à l'accueil
+</a>
 </div>
 
 <!--<script>
@@ -686,12 +690,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 </script>
-
- 
-<a href="index.html" style="display: inline-block; padding: 12px 25px; background: #2b6cb0; color: #ffffff; text-decoration: none; font-weight: bold; border-radius: 6px;">
-    Retour à l'accueil
-</a>
-
 
 </body>
 </html>

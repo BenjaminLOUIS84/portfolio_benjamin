@@ -264,7 +264,7 @@ if (isset($bdd)) {
 
                                     <?php if (!empty($cmd['config_id'])): ?>
                                         <?php if ($cmd['statut_deploiement'] === 'en_attente'): ?>
-                                            <a href="deployer.php?commande_id=<?= $cmd['id'] ?>" onclick="return confirm('Lancer le déploiement de cette boutique ?');" style="padding: 4px 8px; background-color: #38a169; color: white; text-decoration: none; border-radius: 4px; font-size: 0.85rem; font-weight: bold;">
+                                            <a href="deployer.php?token=<?= $cmd['config_token'] ?>" onclick="return confirm('Lancer le déploiement de cette boutique ?');" style="padding: 4px 8px; background-color: #38a169; color: white; text-decoration: none; border-radius: 4px; font-size: 0.85rem; font-weight: bold;">
                                                 🚀 Déployer
                                             </a>
                                         <?php else: ?>

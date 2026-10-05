@@ -32,10 +32,15 @@ try {
     die('Erreur BDD : ' . $e->getMessage());
 }
 
-$commande_id = (int)($_GET['commande_id'] ?? 0);
+// $commande_id = (int)($_GET['commande_id'] ?? 0);
+//if ($commande_id <= 0) {
+//    die("ID de commande invalide.");
+//}
 
-if ($commande_id <= 0) {
-    die("ID de commande invalide.");
+$token = $_GET['token'] ?? '';
+
+if (empty($token)) {
+    die("Token de configuration invalide ou absent.");
 }
 
 // 1. Récupération des données client
@@ -43,9 +48,9 @@ $stmt = $bdd->prepare("
     SELECT c.*, p.*
     FROM commandes c
     JOIN prospects_configurations p ON c.id = p.commande_id
-    WHERE c.id = ?
+    WHERE p.token = ?
 ");
-$stmt->execute([$commande_id]);
+$stmt->execute([$token]);
 $config = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$config) {
@@ -102,11 +107,13 @@ try {
 
 
 // 3. Mise à jour du statut
-$update = $bdd->prepare("UPDATE prospects_configurations SET statut_deploiement = 'deploye' WHERE commande_id = ?");
-$update->execute([$commande_id]);
+$update = $bdd->prepare("UPDATE prospects_configurations SET statut_deploiement = 'deploye' WHERE token = ?");
+$update->execute([$token]);
 
 $updateCmd = $bdd->prepare("UPDATE commandes SET statut = 'deploye' WHERE id = ?");
 $updateCmd->execute([$commande_id]);
+
+
 
 // 4. Envoi du mail d'accès au client
 /////////////////////////////////////////////////////

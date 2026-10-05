@@ -337,74 +337,59 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <h3>1. Informations Légales</h3>
             <div class="form-group">
                 <label for="nom_entreprise">Nom de l'entreprise *</label>
-                <input type="text" id="nom_entreprise" name="nom_entreprise" value="<?= htmlspecialchars($_POST['nom_entreprise'] ?? '') ?>" required placeholder="Ex: Ma Société SAS">
+                <input type="text" id="nom_entreprise" name="nom_entreprise"value="<?= htmlspecialchars($prospect['nom_entreprise'] ?? '') ?>" required placeholder="ex: Nom de votre société">
             </div>
 
             <div class="form-group">
                 <label for="subdomain">Sous-domaine souhaité *</label>
-                <input type="text" id="subdomain" name="subdomain" value="<?= htmlspecialchars($_POST['subdomain'] ?? '') ?>" required placeholder="ex: ma-boutique (sans espace)">
+                
+                <input type="text" id="subdomain" name="subdomain"value="<?= htmlspecialchars($prospect['subdomain'] ?? '') ?>" required placeholder="ex: ma-boutique (sans espace)">
             </div>
 
             <div class="form-group">
                 <label for="siret">Numéro SIRET (14 chiffres) *</label>
-                <input type="text" id="siret" name="siret" value="<?= htmlspecialchars($_POST['siret'] ?? '') ?>" maxlength="17" required placeholder="Ex: 123 456 789 00012">
+                <input type="text" id="siret" name="siret"value="<?= htmlspecialchars($prospect['siret'] ?? '') ?>" required placeholder="Ex: 123 456 789 00012">
             </div>
 
             <div class="form-group">
                 <label for="capital_social">Capital Social</label>
-                <input type="text" id="capital_social" name="capital_social" value="<?= htmlspecialchars($_POST['capital_social'] ?? '') ?>" placeholder="Ex: 1 000 €">
+               <input type="text" id="capital_social" name="capital_social"value="<?= htmlspecialchars($prospect['capital_social'] ?? '') ?>" placeholder="Ex: 1 000 €">
             </div>
 
             <div class="form-group">
                 <label for="tva_intra">N° TVA Intracommunautaire</label>
-                <input type="text" id="tva_intra" name="tva_intra" value="<?= htmlspecialchars($_POST['tva_intra'] ?? '') ?>" placeholder="Ex: FR12345678901 ou Non assujetti">
+                 <input type="text" id="tva_intra" name="tva_intra"value="<?= htmlspecialchars($prospect['tva_intra'] ?? '') ?>" placeholder="Ex: FR12345678901 ou Non assujetti">
             </div>
 
             <div class="form-group">
                 <label for="adresse_postale">Adresse du siège social *</label>
-                <textarea id="adresse_postale" name="adresse_postale" rows="2" required placeholder="Ex: 10 Rue du Commerce, 75001 Paris"><?= htmlspecialchars($_POST['adresse_postale'] ?? '') ?></textarea>
+                <input type="text" id="adresse_postale" name="adresse_postale"value="<?= htmlspecialchars($prospect['adresse_postale'] ?? '') ?>">
             </div>
 
             <div class="form-group">
                 <label for="telephone">Téléphone de contact</label>
-                <input type="tel" id="telephone" name="telephone" value="<?= htmlspecialchars($_POST['telephone'] ?? '') ?>" placeholder="Ex: 01 02 03 04 05">
-            </div>
-
-            <h3>2. CGV & Politiques</h3>
-            <div class="form-group">
-                <label for="delai_retractation">Délai de rétractation</label>
-                <input type="text" id="delai_retractation" name="delai_retractation" value="<?= htmlspecialchars($_POST['delai_retractation'] ?? '14 jours') ?>">
-            </div>
-
-            <div class="form-group">
-                <label for="delai_livraison">Délai de livraison</label>
-                <input type="text" id="delai_livraison" name="delai_livraison" value="<?= htmlspecialchars($_POST['delai_livraison'] ?? '2 à 5 jours ouvrés') ?>">
-            </div>
-
-            <div class="form-group">
-                <label for="frais_port">Frais de port</label>
-                <input type="text" id="frais_port" name="frais_port" value="<?= htmlspecialchars($_POST['frais_port'] ?? 'Calculés lors de la commande') ?>">
+                <input type="tel" id="telephone" name="telephone" value="<?= htmlspecialchars($prospect['telephone'] ?? '') ?>" placeholder="Ex: 01 02 03 04 05">
             </div>
 
             <div class="form-group">
                 <label for="tribunal_competent">Tribunal compétent</label>
-                <input type="text" id="tribunal_competent" name="tribunal_competent" value="<?= htmlspecialchars($_POST['tribunal_competent'] ?? '') ?>" placeholder="Ex: Tribunal de Commerce de Paris">
+                <input type="text" id="tribunal_competent" name="tribunal_competent" value="<?= htmlspecialchars($prospect['tribunal_competent'] ?? '') ?>" placeholder="Ex: Tribunal de Commerce de Paris">
             </div>
 
             <h3>3. Réseaux & Localisation</h3>
             <div class="form-group">
                 <label for="lien_facebook">Lien Facebook</label>
-                <input type="url" id="lien_facebook" name="lien_facebook" value="<?= htmlspecialchars($_POST['lien_facebook'] ?? '') ?>" placeholder="https://facebook.com/votrepage">
+                <input type="url" id="lien_facebook" name="lien_facebook" value="<?= htmlspecialchars($prospect['lien_facebook'] ?? '') ?>" placeholder="https://facebook.com/votrepage">
             </div>
 
             <div class="form-group">
                 <label for="lien_instagram">Lien Instagram</label>
-                <input type="url" id="lien_instagram" name="lien_instagram" value="<?= htmlspecialchars($_POST['lien_instagram'] ?? '') ?>" placeholder="https://instagram.com/votrecompte">
+                <input type="url" id="lien_instagram" name="lien_instagram" value="<?= htmlspecialchars($prospect['lien_instagram'] ?? '') ?>" placeholder="https://instagram.com/votrecompte">
             </div>
 
             <div class="form-group">
                 <label for="google_maps_iframe">Intégration Google Maps (Iframe)</label>
-                <textarea id="google_maps_iframe" name="google_maps_iframe" rows="2" placeholder="Collez le code <iframe...> de Google Maps"><?= htmlspecialchars($_POST['google_maps_iframe'] ?? '') ?></textarea>
+                <textarea id="google_maps_iframe" name="google_maps_iframe" rows="2" placeholder="Collez le code <iframe...> de Google Maps"><?= htmlspecialchars($prospect['google_maps_iframe'] ?? '') ?></textarea>
             </div>
 
             <h3>4. Charte Graphique & Médias</h3>

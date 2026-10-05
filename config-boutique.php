@@ -408,13 +408,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
 
             <div class="form-group">
-                <label for="image_fond_file">Image de fond (JPG, PNG, WEBP — Max 5 Mo)</label>
-                <input type="file" id="image_fond_file" name="image_fond_file" accept="image/jpeg,image/png,image/webp">
+                <label for="image_fond_url">Image de fond (JPG, PNG, WEBP — Max 5 Mo)</label>
+                <input type="url" id="image_fond_url" name="image_fond_url" value="<?= htmlspecialchars($prospect['image_fond_url'] ?? '') ?>" placeholder="https://votre-boutique.com/images/fond.jpg">
             </div>
 
             <div class="form-group">
-                <label for="video_fond_file">Vidéo de fond (MP4, WEBM — Max 20 Mo)</label>
-                <input type="file" id="video_fond_file" name="video_fond_file" accept="video/mp4,video/webm">
+                <label for="video_fond_url">Vidéo de fond (MP4, WEBM — Max 20 Mo)</label>
+                <input type="url" id="video_fond_url" name="video_fond_url" value="<?= htmlspecialchars($prospect['video_fond_url'] ?? '') ?>" placeholder="https://votre-boutique.com/videos/fond.mp4">
             </div>
 
             <h3>5. Identifiants Administrateur</h3>

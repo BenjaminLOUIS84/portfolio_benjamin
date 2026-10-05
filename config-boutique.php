@@ -18,26 +18,63 @@ try {
 } catch (Exception $e) {
     die('Erreur de connexion à la base de données.');
 }
+/*////////////////////////////////////////////////////////////////////////////////*/
+// $token = trim($_GET['token'] ?? '');
+// $erreur = '';
+// $succes = false;
+
+// // 2. Vérification de la présence du token
+// if (empty($token)) {
+//     die("Jeton de configuration manquant ou invalide.");
+// }
+
+// // Récupération automatique de la commande liée à ce token
+// $stmtToken = $bdd->prepare("SELECT id, statut FROM commandes WHERE config_token = ?");
+// $stmtToken->execute([$token]);
+// $commande = $stmtToken->fetch();
+
+// if (!$commande) {
+//     die("Jeton invalide ou commande introuvable.");
+// }
+
+// $commande_id = (int)$commande['id'];
+/*//////////////////////////////////////////////////////////////////////////////*/
+
+/*/Verification accès au formulaire avec token ou id/*/
 
 $token = trim($_GET['token'] ?? '');
+$commande_id_get = (int)($_GET['id'] ?? 0);
 $erreur = '';
 $succes = false;
 
-// 2. Vérification de la présence du token
-if (empty($token)) {
-    die("Jeton de configuration manquant ou invalide.");
+// Si passage par ID (depuis l'admin)
+if ($commande_id_get > 0) {
+    $stmtCmd = $bdd->prepare("SELECT id, statut FROM commandes WHERE id = ?");
+    $stmtCmd->execute([$commande_id_get]);
+    $commande = $stmtCmd->fetch();
+}
+// Si passage par token (lien client)
+elseif (!empty($token)) {
+    $stmtToken = $bdd->prepare("SELECT id, statut FROM commandes WHERE config_token = ?");
+    $stmtToken->execute([$token]);
+    $commande = $stmtToken->fetch();
+}
+else {
+    die("Paramètre d'accès manquant.");
 }
 
-// Récupération automatique de la commande liée à ce token
-$stmtToken = $bdd->prepare("SELECT id, statut FROM commandes WHERE config_token = ?");
-$stmtToken->execute([$token]);
-$commande = $stmtToken->fetch();
-
 if (!$commande) {
-    die("Jeton invalide ou commande introuvable.");
+    die("Commande introuvable.");
 }
 
 $commande_id = (int)$commande['id'];
+
+// Récupération de la configuration existante
+$stmtConfig = $bdd->prepare("SELECT * FROM prospects_configurations WHERE commande_id = ?");
+$stmtConfig->execute([$commande_id]);
+$prospect = $stmtConfig->fetch();
+
+/*/////////////////////////////////////////////////////////////////////////////////*/ 
 
 // Vérification si la configuration a déjà été effectuée
 if (in_array($commande['statut'], ['configure', 'en_attente', 'deploye'])) {
@@ -374,18 +411,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="color-group">
                 <div class="form-group">
                     <label for="couleur_principale">Couleur Principale</label>
-               <input type="color" id="couleur_principale" name="couleur_principale" value="<?= !empty($config['couleur_principale']) ? htmlspecialchars($config['couleur_principale']) : '#007bff' ?>">
-                </div>
+            <input type="color" id="couleur_principale" name="couleur_principale" value="<?= htmlspecialchars($_POST['couleur_principale'] ?? $prospect['couleur_principale'] ?? $client['couleur_principale'] ?? '#e5829b') ?>"> </div>
 
                 <div class="form-group">
                     <label for="couleur_secondaire">Couleur Secondaire</label>
-                    <input type="color" id="couleur_secondaire" name="couleur_secondaire" value="<?= !empty($config['couleur_secondaire']) ? htmlspecialchars($config['couleur_secondaire']) : '#6c757d' ?>">
-                </div>
+                <input type="color" id="couleur_secondaire" name="couleur_secondaire" value="<?= htmlspecialchars($_POST['couleur_secondaire'] ?? $prospect['couleur_secondaire'] ?? $client['couleur_secondaire'] ?? '#dde9e9') ?>"> </div>
 
                 <div class="form-group">
                     <label for="couleur_texte">Couleur Texte</label>
-                    <input type="color" id="couleur_texte" name="couleur_texte" value="<?= !empty($config['couleur_texte']) ? htmlspecialchars($config['couleur_texte']) : '#212529' ?>">
-                </div>
+                <input type="color" id="couleur_texte" name="couleur_texte" value="<?= htmlspecialchars($_POST['couleur_texte'] ?? $prospect['couleur_texte'] ?? $client['couleur_texte'] ?? '#212529') ?>">
             </div>
 
             <div class="form-group">

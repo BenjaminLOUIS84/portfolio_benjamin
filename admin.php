@@ -252,10 +252,15 @@ if (isset($bdd)) {
                                     <?php endif; ?>
                                 </td>
                                 <td><?= date('d/m/Y H:i', strtotime($cmd['date_commande'])) ?></td>
+
                                 <td style="display: flex; gap: 5px; align-items: center;">
+
+                                    <a href="config-boutique.php?id=<?= $commande['id'] ?>" class="btn btn-warning btn-sm">Modifier Config</a>
+
                                     <a href="facture.php?slug=<?= $cmd['slug'] ?>" target="_blank" style="background-color: #2b6cb0; color: white; padding: 4px 8px; border-radius: 4px; text-decoration: none; font-size: 12px;">
                                         📄 Facture PDF
                                     </a>
+
 
                                     <?php if (!empty($cmd['config_id'])): ?>
                                         <?php if ($cmd['statut_deploiement'] === 'en_attente'): ?>

@@ -374,17 +374,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="color-group">
                 <div class="form-group">
                     <label for="couleur_principale">Couleur Principale</label>
-                    <input type="color" id="couleur_principale" name="couleur_principale" value="<?= htmlspecialchars($_POST['couleur_principale'] ?? '#007bff') ?>">
+               <input type="color" id="couleur_principale" name="couleur_principale" value="<?= !empty($config['couleur_principale']) ? htmlspecialchars($config['couleur_principale']) : '#007bff' ?>">
                 </div>
 
                 <div class="form-group">
                     <label for="couleur_secondaire">Couleur Secondaire</label>
-                    <input type="color" id="couleur_secondaire" name="couleur_secondaire" value="<?= htmlspecialchars($_POST['couleur_secondaire'] ?? '#6c757d') ?>">
+                    <input type="color" id="couleur_secondaire" name="couleur_secondaire" value="<?= !empty($config['couleur_secondaire']) ? htmlspecialchars($config['couleur_secondaire']) : '#6c757d' ?>">
                 </div>
 
                 <div class="form-group">
                     <label for="couleur_texte">Couleur Texte</label>
-                    <input type="color" id="couleur_texte" name="couleur_texte" value="<?= htmlspecialchars($_POST['couleur_texte'] ?? '#212529') ?>">
+                    <input type="color" id="couleur_texte" name="couleur_texte" value="<?= !empty($config['couleur_texte']) ? htmlspecialchars($config['couleur_texte']) : '#212529' ?>">
                 </div>
             </div>
 
@@ -477,9 +477,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div style="background-color: #1a1a1a; padding: 15px 10px; text-align: center; color: #fff;">
                 <!-- Icônes Réseaux -->
                 <div style="display: flex; justify-content: center; gap: 15px; margin-bottom: 12px; font-size: 16px;">
-                    <span>🌐</span>
-                    <span>▶</span>
-                    <span>📍</span>
+                    <i class="fab fa-facebook"></i>
+                    <i class="fab fa-youtube"></i></a>
+                    <i class="fas fa-map-marker-alt"></i>
                 </div>
             
                 <!-- Liens Légaux -->

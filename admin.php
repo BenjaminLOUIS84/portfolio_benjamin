@@ -255,7 +255,7 @@ if (isset($bdd)) {
 
                                 <td style="display: flex; gap: 5px; align-items: center;">
 
-                                    <a href="config-boutique.php?id=<?= $cmd['id'] ?>" target="_blank" style="background-color: #7ae24a; color: white; padding: 4px 8px; border-radius: 4px; text-decoration: none; font-size: 12px;">Modifier Config</a>
+                                    <a href="config-boutique.php?token=<?= $cmd['config_token'] ?>" target="_blank" style="background-color: #7ae24a; color: white; padding: 4px 8px; border-radius: 4px; text-decoration: none; font-size: 12px;">Modifier Config</a>
 
                                     <a href="facture.php?slug=<?= $cmd['slug'] ?>" target="_blank" style="background-color: #2b6cb0; color: white; padding: 4px 8px; border-radius: 4px; text-decoration: none; font-size: 12px;">
                                         📄 Facture PDF

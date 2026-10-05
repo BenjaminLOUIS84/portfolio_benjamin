@@ -42,22 +42,65 @@ try {
 
 /*/Verification accès au formulaire avec token ou id/*/
 
+// $token = trim($_GET['token'] ?? '');
+// $commande_id_get = (int)($_GET['id'] ?? 0);
+// $erreur = '';
+// $succes = false;
+
+// // Si passage par ID (depuis l'admin)
+// if ($commande_id_get > 0) {
+//     $stmtCmd = $bdd->prepare("SELECT id, statut FROM commandes WHERE id = ?");
+//     $stmtCmd->execute([$commande_id_get]);
+//     $commande = $stmtCmd->fetch();
+// }
+// // Si passage par token (lien client)
+// elseif (!empty($token)) {
+//     $stmtToken = $bdd->prepare("SELECT id, statut FROM commandes WHERE config_token = ?");
+//     $stmtToken->execute([$token]);
+//     $commande = $stmtToken->fetch();
+// }
+// else {
+//     die("Paramètre d'accès manquant.");
+// }
+
+// if (!$commande) {
+//     die("Commande introuvable.");
+// }
+
+// $commande_id = (int)$commande['id'];
+
+// // Récupération de la configuration existante
+// $stmtConfig = $bdd->prepare("SELECT * FROM prospects_configurations WHERE commande_id = ?");
+// $stmtConfig->execute([$commande_id]);
+// $prospect = $stmtConfig->fetch();
+
+/*/Verification accès au formulaire avec token ou id ou slug/*/
 $token = trim($_GET['token'] ?? '');
+$slug = trim($_GET['slug'] ?? $_GET['subdomain'] ?? '');
 $commande_id_get = (int)($_GET['id'] ?? 0);
 $erreur = '';
 $succes = false;
 
-// Si passage par ID (depuis l'admin)
-if ($commande_id_get > 0) {
-    $stmtCmd = $bdd->prepare("SELECT id, statut FROM commandes WHERE id = ?");
-    $stmtCmd->execute([$commande_id_get]);
-    $commande = $stmtCmd->fetch();
-}
-// Si passage par token (lien client)
-elseif (!empty($token)) {
+// 1. Passage par token (lien client)
+if (!empty($token)) {
     $stmtToken = $bdd->prepare("SELECT id, statut FROM commandes WHERE config_token = ?");
     $stmtToken->execute([$token]);
     $commande = $stmtToken->fetch();
+}
+// 2. Passage par slug / sous-domaine (ex: ?slug=sasbenby)
+elseif (!empty($slug)) {
+    $stmtSlug = $bdd->prepare("SELECT c.id, c.statut
+                               FROM commandes c
+                               JOIN prospects_configurations p ON p.commande_id = c.id
+                               WHERE p.subdomain = ?");
+    $stmtSlug->execute([$slug]);
+    $commande = $stmtSlug->fetch();
+}
+// 3. Passage par ID (fallback admin)
+elseif ($commande_id_get > 0) {
+    $stmtCmd = $bdd->prepare("SELECT id, statut FROM commandes WHERE id = ?");
+    $stmtCmd->execute([$commande_id_get]);
+    $commande = $stmtCmd->fetch();
 }
 else {
     die("Paramètre d'accès manquant.");

@@ -396,15 +396,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="color-group">
                 <div class="form-group">
                     <label for="couleur_principale">Couleur Principale</label>
-            <input type="color" id="couleur_principale" name="couleur_principale" value="<?= htmlspecialchars($_POST['couleur_principale'] ?? $prospect['couleur_principale'] ?? $client['couleur_principale'] ?? '#e5829b') ?>"> </div>
+            <input type="color" id="couleur_principale" name="couleur_principale" value="<?= htmlspecialchars($prospect['couleur_principale'] ?? $client['couleur_principale'] ?? '#e5829b') ?>"> </div>
 
                 <div class="form-group">
                     <label for="couleur_secondaire">Couleur Secondaire</label>
-                <input type="color" id="couleur_secondaire" name="couleur_secondaire" value="<?= htmlspecialchars($_POST['couleur_secondaire'] ?? $prospect['couleur_secondaire'] ?? $client['couleur_secondaire'] ?? '#dde9e9') ?>"> </div>
+                <input type="color" id="couleur_secondaire" name="couleur_secondaire" value="<?= htmlspecialchars($prospect['couleur_secondaire'] ?? $client['couleur_secondaire'] ?? '#dde9e9') ?>"> </div>
 
                 <div class="form-group">
                     <label for="couleur_texte">Couleur Texte</label>
-                <input type="color" id="couleur_texte" name="couleur_texte" value="<?= htmlspecialchars($_POST['couleur_texte'] ?? $prospect['couleur_texte'] ?? $client['couleur_texte'] ?? '#212529') ?>">
+                <input type="color" id="couleur_texte" name="couleur_texte" value="<?= htmlspecialchars($prospect['couleur_texte'] ?? $client['couleur_texte'] ?? '#212529') ?>">
             </div>
 
             <div class="form-group">
@@ -420,19 +420,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <h3>5. Identifiants Administrateur</h3>
             <div class="form-group">
                 <label for="email_admin">E-mail administrateur *</label>
-                <input type="email" id="email_admin" name="email_admin" value="<?= htmlspecialchars($_POST['email_admin'] ?? '') ?>" required placeholder="admin@votre-boutique.com">
+                <input type="email" id="email_admin" name="email_admin" value="<?= htmlspecialchars($prospect['email_admin'] ?? '') ?>" required placeholder="admin@votre-boutique.com">
             </div>
 
             <div class="form-group">
-                <label for="mot_de_passe">Mot de passe *</label>
-                <input type="password" id="mot_de_passe" name="mot_de_passe" required placeholder="••••••••••"
+                <label for="mot_de_passe_hash">Mot de passe *</label>
+                <input type="password" id="mot_de_passe_hash" name="mot_de_passe_hash" required placeholder="••••••••••"
                 pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&]).{8,}"
                 title="Au moins 8 caractères, 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial.">
             </div>
 
             <div class="form-group">
-                <label for="mot_de_passe_confirm">Confirmer le mot de passe *</label>
-                <input type="password" id="mot_de_passe_confirm" name="mot_de_passe_confirm" required placeholder="••••••••••"
+                <label for="mot_de_passe_hash_confirm">Confirmer le mot de passe *</label>
+                <input type="password" id="mot_de_passe_hash_confirm" name="mot_de_passe_hash_confirm" required placeholder="••••••••••"
                 pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&]).{8,}"
                 title="Au moins 8 caractères, 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial.">
             </div>

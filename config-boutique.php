@@ -217,15 +217,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $couleur_texte      = $_POST['couleur_texte'] ?? '#212529';
 
     // Validations
-    if (empty($nom_entreprise) || empty($siret) || empty($adresse) || empty($email_admin) || empty($pass) || empty($subdomain)) {
+    // Est ce une nouvelle configuration ou une mise à jour ? Si c'est une mise à jour, on ne force pas le mot de passe.
+    $est_creation = empty($prospect); // Si $prospect est vide, c'est une création
+
+    if (empty($nom_entreprise) || empty($siret) || empty($adresse) || empty($email_admin) || empty($subdomain) || ( $est_creation && empty($pass) )) {
         $erreur = "Veuillez remplir tous les champs obligatoires (*).";
     } elseif (!filter_var($email_admin, FILTER_VALIDATE_EMAIL)) {
         $erreur = "L'adresse e-mail renseignée n'est pas valide.";
     } elseif (!ctype_digit($siret) || strlen($siret) !== 14) {
         $erreur = "Le numéro SIRET doit contenir exactement 14 chiffres.";
-    } elseif ($pass !== $pass_confirm) {
+    } elseif (!empty($pass) && $pass !== $pass_confirm) {
         $erreur = "Les mots de passe ne correspondent pas.";
-    } elseif (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/', $pass)) {
+    } elseif (!empty($pass) && !preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/', $pass)) {
         $erreur = "Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial.";
     } else {
 
@@ -452,12 +455,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <div class="form-group">
                 <label for="image_fond_url">Image de fond (JPG, PNG, WEBP — Max 5 Mo)</label>
-                <input type="url" id="image_fond_url" name="image_fond_url" value="<?= htmlspecialchars($prospect['image_fond_url'] ?? '') ?>" placeholder="https://votre-boutique.com/images/fond.jpg">
+                <input type="text" id="image_fond_url" name="image_fond_url" value="<?= htmlspecialchars($prospect['image_fond_url'] ?? '') ?>" placeholder="https://votre-boutique.com/images/fond.jpg">
             </div>
 
             <div class="form-group">
                 <label for="video_fond_url">Vidéo de fond (MP4, WEBM — Max 20 Mo)</label>
-                <input type="url" id="video_fond_url" name="video_fond_url" value="<?= htmlspecialchars($prospect['video_fond_url'] ?? '') ?>" placeholder="https://votre-boutique.com/videos/fond.mp4">
+                <input type="text" id="video_fond_url" name="video_fond_url" value="<?= htmlspecialchars($prospect['video_fond_url'] ?? '') ?>" placeholder="https://votre-boutique.com/videos/fond.mp4">
             </div>
 
             <h3>5. Identifiants Administrateur</h3>
@@ -554,13 +557,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div> <!-- Fin du conteneur d'aperçu -->
 
             <button type="submit">Valider et enregistrer</button>
+             <a href="index.html" style="display: flex; justify-content: center; margin-top: 20px; padding: 12px 25px; background: #2b6cb0; color: #ffffff; text-decoration: none; font-weight: bold; border-radius: 6px;">Retour à l'accueil</a>
         </form>
 
     <?php endif; ?>
 
-    <a href="index.html" style="display: inline-block; padding: 12px 25px; background: #2b6cb0; color: #ffffff; text-decoration: none; font-weight: bold; border-radius: 6px;">
-    Retour à l'accueil
-</a>
+   
 </div>
 
 <!--<script>

@@ -191,7 +191,12 @@ if (isset($bdd)) {
     <div class="container">
 
         <div class="top">
-            <h1>Commandes benjaminlouis.eu</h1>
+            <h1>Commandes benjaminlouis.eu</h1><br>
+           
+            <div>
+                <a href="https://benjaminlouis.eu" class="btn-out" style="margin-right: 15px; font-size: 14px; color: #64748b;">Aller sur ma landing page</a>
+            </div>
+
             <div>
                 <span style="margin-right: 15px; font-size: 14px; color: #64748b;">Connecté : <strong><?= htmlspecialchars($_SESSION['admin_user']) ?></strong></span>
                 <a href="admin.php?action=logout" class="btn-out">Déconnexion 🚪</a>

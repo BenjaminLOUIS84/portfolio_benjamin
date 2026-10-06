@@ -119,7 +119,7 @@ $search = trim($_GET['search_commande'] ?? '');
 $commandes = [];
 
 if (isset($bdd)) {
-    $sql = "SELECT c.*, p.statut_deploiement, p.id AS config_id
+    $sql = "SELECT c.*, p.telephone, p.statut_deploiement, p.id AS config_id
             FROM commandes c
             LEFT JOIN prospects_configurations p ON c.id = p.commande_id
             WHERE 1=1";
@@ -224,6 +224,7 @@ if (isset($bdd)) {
                         <th>#ID</th>
                         <th>Nom / Client</th>
                         <th>E-mail</th>
+                        <th>Téléphone</th>
                         <th>Domaine</th>
                         <th>Option Int.</th>
                         <th>Montant HT</th>
@@ -241,6 +242,9 @@ if (isset($bdd)) {
                                 <td><strong>#<?= $cmd['id'] ?></strong></td>
                                 <td><?= htmlspecialchars($cmd['client_nom']) ?></td>
                                 <td><a href="mailto:<?= htmlspecialchars($cmd['client_email']) ?>"><?= htmlspecialchars($cmd['client_email']) ?></a></td>
+                                
+                                <td><code><?= htmlspecialchars($cmd['telephone'] ?? '') ?></code></td>
+                                
                                 <td><code><?= htmlspecialchars($cmd['domaine_souhaite']) ?></code></td>
                                 <td><?= $cmd['option_multilingue'] ? '✅ Oui' : '❌ Non' ?></td>
                                 <td><strong><?= number_format($cmd['montant_ht'], 2, ',', ' ') ?> €</strong></td>

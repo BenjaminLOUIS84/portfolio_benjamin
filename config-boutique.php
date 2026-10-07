@@ -73,10 +73,56 @@ try {
 // $stmtConfig = $bdd->prepare("SELECT * FROM prospects_configurations WHERE commande_id = ?");
 // $stmtConfig->execute([$commande_id]);
 // $prospect = $stmtConfig->fetch();
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-/*/Verification accès au formulaire avec token ou id ou slug/*/
+// /*/Verification accès au formulaire avec token ou id ou slug/*/
+// $token = trim($_GET['token'] ?? '');
+// $slug = trim($_GET['slug'] ?? $_GET['subdomain'] ?? '');
+// $commande_id_get = (int)($_GET['id'] ?? 0);
+// $erreur = '';
+// $succes = false;
+
+// // 1. Passage par token (lien client)
+// if (!empty($token)) {
+//     $stmtToken = $bdd->prepare("SELECT id, statut FROM commandes WHERE config_token = ?");
+//     $stmtToken->execute([$token]);
+//     $commande = $stmtToken->fetch();
+// }
+// // 2. Passage par slug / sous-domaine (ex: ?slug=sasbenby)
+// elseif (!empty($slug)) {
+//     $stmtSlug = $bdd->prepare("SELECT c.id, c.statut
+//                                FROM commandes c
+//                                JOIN prospects_configurations p ON p.commande_id = c.id
+//                                WHERE p.subdomain = ?");
+//     $stmtSlug->execute([$slug]);
+//     $commande = $stmtSlug->fetch();
+// }
+// if (!$commande|| empty($commande['subdomain'])) {
+//     header('Location: https://www.benjaminlouis.eu/'); // Redirection vers la landing page si commande introuvable
+//     exit;
+// }
+
+// // 3. Passage par ID (fallback admin)
+// elseif ($commande_id_get > 0) {
+//     $stmtCmd = $bdd->prepare("SELECT id, statut FROM commandes WHERE id = ?");
+//     $stmtCmd->execute([$commande_id_get]);
+//     $commande = $stmtCmd->fetch();
+// }
+// else {
+//     die("Paramètre d'accès manquant.");
+// }
+
+// if (!$commande) {
+//     header('Location: https://www.benjaminlouis.eu/'); // Redirection vers la landing page si commande introuvable
+// }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Détection du sous-domaine depuis l'URL ou le paramètre GET
+$host = $_SERVER['HTTP_HOST'] ?? '';
+$subdomain_from_url = explode('.', $host)[0];
+
 $token = trim($_GET['token'] ?? '');
-$slug = trim($_GET['slug'] ?? $_GET['subdomain'] ?? '');
+$slug = trim($_GET['slug'] ?? $_GET['subdomain'] ?? $subdomain_from_url);
 $commande_id_get = (int)($_GET['id'] ?? 0);
 $erreur = '';
 $succes = false;
@@ -87,12 +133,14 @@ if (!empty($token)) {
     $stmtToken->execute([$token]);
     $commande = $stmtToken->fetch();
 }
-// 2. Passage par slug / sous-domaine (ex: ?slug=sasbenby)
-elseif (!empty($slug)) {
-    $stmtSlug = $bdd->prepare("SELECT c.id, c.statut
-                               FROM commandes c
-                               JOIN prospects_configurations p ON p.commande_id = c.id
-                               WHERE p.subdomain = ?");
+// 2. Passage par slug / sous-domaine (ex: sarllouis)
+elseif (!empty($slug) && $slug !== 'www' && $slug !== 'benjaminlouis') {
+    $stmtSlug = $bdd->prepare("
+        SELECT c.id, c.statut, p.subdomain
+        FROM commandes c
+        JOIN prospects_configurations p ON p.commande_id = c.id
+        WHERE LOWER(p.subdomain) = LOWER(?)
+    ");
     $stmtSlug->execute([$slug]);
     $commande = $stmtSlug->fetch();
 }
@@ -102,13 +150,16 @@ elseif ($commande_id_get > 0) {
     $stmtCmd->execute([$commande_id_get]);
     $commande = $stmtCmd->fetch();
 }
-else {
-    die("Paramètre d'accès manquant.");
+
+// 🔴 REDIRECTION AUTOMATIQUE SI BOUTIQUE INTROUVABLE OU SUPPRIMÉE
+if (!$commande) {
+    header('Location: https://www.benjaminlouis.eu/');
+    exit();
 }
 
-if (!$commande) {
-    header('Location: https://www.benjaminlouis.eu/'); // Redirection vers la landing page si commande introuvable
-}
+//////////////////////////////////////////////////////////////////////////////////////////////////
+
+// 4. Récupération de la configuration existante
 
 $commande_id = (int)$commande['id'];
 

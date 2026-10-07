@@ -1,3 +1,9 @@
 RewriteEngine On
+# 1 Force le https
 RewriteCond %{HTTPS} off
 RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# 2 l'URL commence par www. suivi d'un sous-domaine (ex: www.sarllouis.benjaminlouis.eu)
+RewriteCond %{HTTP_HOST} ^www\.([a-z0-9-]+)\.benjaminlouis\.eu$ [NC]
+# Rediriger vers la version sans www en HTTPS
+RewriteRule ^(.*)$ https://%1.benjaminlouis.eu/$1 [R=301,L]

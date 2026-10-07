@@ -107,7 +107,7 @@ else {
 }
 
 if (!$commande) {
-    die("Commande introuvable.");
+    header('Location: https://www.benjaminlouis.eu/'); // Redirection vers la landing page si commande introuvable
 }
 
 $commande_id = (int)$commande['id'];
@@ -122,16 +122,10 @@ $prospect = $stmtConfig->fetch();
 // Vérification si la configuration a déjà été effectuée
 if (in_array($commande['statut'], ['configure', 'en_attente', 'deploye'])) {
     // Option A : Message clair et propre
-    die('
-        <div style="text-align:center; padding:50px; font-family:sans-serif;">
-            <h2>Configuration déjà effectuée !</h2>
-            <p>Votre boutique est en cours de création ou déjà déployée.</p>
-            <p>Vous pouvez accéder à votre espace administration ou contacter le support.</p>
-        </div>
-    ');
-   
+    header("Location: https://www.benjaminlouis.eu/"); // Redirection vers la landing page si déjà configuré
+
     // Option B (alternative) : Redirection directe vers leur boutique ou dashboard
-    header('Location: https://' . $commande['subdomain'] . '.benjaminlouis.eu/admin');
+    // header('Location: https://' . $commande['subdomain'] . '.benjaminlouis.eu/admin');
     exit;
 }
 

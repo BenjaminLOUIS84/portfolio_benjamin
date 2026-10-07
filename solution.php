@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/config.php';
+require_once __DIR__ . '/config-boutique.php';
 ?>
 <!DOCTYPE html>
 <html lang="fr" style="height: auto !important; overflow-y: auto !important;">

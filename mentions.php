@@ -1,4 +1,5 @@
 <?php require_once 'config.php'; ?>
+<?php require_once 'config-boutique.php'; ?>
 <!DOCTYPE html>
 <html lang="fr">
 

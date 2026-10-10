@@ -1,7 +1,7 @@
 <?php
 // Activation de l'affichage des erreurs pour le débogage
-//ini_set('display_errors', 1);
-//error_reporting(E_ALL);
+// ini_set('display_errors', 1);
+// error_reporting(E_ALL);
 
 //ini_set('display_errors', 0);
 //error_reporting(0);
@@ -353,6 +353,57 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $frais_port, $tribunal_competent, $lien_facebook, $lien_instagram, $google_maps_iframe,
                 $couleur_principale, $couleur_secondaire, $couleur_texte, $image_fond_url, $video_fond_url
             ]);
+                
+      
+            // 1. On récupère la saisie du formulaire avec le nom exact du champ HTML
+            $pass = $_POST['mot_de_passe_hash'] ?? '';
+
+            // 2. Enregistrement en Base de Données et Synchronisation
+            if (empty($erreur)) {
+            
+                // On vérifie si un nouveau mot de passe a été saisi
+                if (!empty($pass)) {
+                    $pass_hash = password_hash($pass, PASSWORD_BCRYPT);
+                } else {
+                    // S'il est vide, on garde l'ancien hash ou on gère selon ton besoin (ici on récupère l'existant si besoin)
+                    // Mais si le champ est obligatoire dans ton form, il sera rempli.
+                }
+
+                // Requête d'insertion/mise à jour dans prospects_configurations (ton code initial)
+                $stmt = $bdd->prepare("
+                    INSERT INTO prospects_configurations (...)
+                    VALUES (...)
+                    ON DUPLICATE KEY UPDATE ...
+                ");
+                // ... execution de ton insert/update principal ...
+
+                // 3. Synchronisation automatique et robuste dans toso8422_boutique.admin_users
+                try {
+                    if (!empty($token) && !empty($pass_hash)) {
+                        $stmt_conf = $bdd->prepare("SELECT email_admin FROM prospects_configurations WHERE token = :token LIMIT 1");
+                        $stmt_conf->execute([':token' => $token]);
+                        $config = $stmt_conf->fetch(PDO::FETCH_ASSOC);
+
+                        if ($config && !empty($config['email_admin'])) {
+                            $email_cible = trim($config['email_admin']);
+
+                            $stmt_sync = $bdd->prepare("
+                                UPDATE toso8422_boutique.admin_users
+                                SET password_hash = :pass_hash
+                                WHERE username = :email
+                            ");
+                            $stmt_sync->execute([
+                                ':pass_hash' => $pass_hash,
+                                ':email'     => $email_cible
+                            ]);
+                        }
+                    }
+                } catch (Exception $e) {
+                    echo "Erreur de synchronisation : " . $e->getMessage();
+                    exit;
+                }
+            }
+
 
             $succes = true;
         }

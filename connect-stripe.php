@@ -33,20 +33,23 @@ try {
 
     $stripe_account_id = $prospect['stripe_account_id'] ?? null;
 
-    // 1. Si le marchand n'a pas encore de compte Stripe Connect associé, on en crée un via l'API v2 (cURL)
+ // 1. Si le marchand n'a pas encore de compte associé, on en crée un via l'API v2 (cURL)
     if (empty($stripe_account_id)) {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, 'https://api.stripe.com/v2/core/accounts');
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode([
-            'dashboard' => 'express',
             'contact_email' => $prospect['email_admin'] ?? null,
+            'dashboard' => 'express',
+            'configuration' => [
+                'recipient' => []
+            ]
         ]));
         curl_setopt($ch, CURLOPT_USERPWD, STRIPE_SECRET_KEY . ':');
         curl_setopt($ch, CURLOPT_HTTPHEADER, [
             'Content-Type: application/json',
-            'Stripe-Version: 2026-09-30.preview' // Version supportant les comptes v2 connect
+            'Stripe-Version: 2025-04-30.preview'
         ]);
 
         $result = curl_exec($ch);
@@ -64,6 +67,16 @@ try {
         $updateStmt = $bdd->prepare("UPDATE prospects_configurations SET stripe_account_id = ? WHERE commande_id = ?");
         $updateStmt->execute([$stripe_account_id, $commande_id]);
     }
+
+ 
+ 
+
+
+ 
+
+ 
+
+
 
 
 

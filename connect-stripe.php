@@ -29,26 +29,24 @@ try {
     // Définition de ta clé secrète Stripe (Mode Test)
     // Remplace par ta vraie clé secrète sk_test_... ou stocke-la dans config.php
     \Stripe\Stripe::setApiKey(STRIPE_SECRET_KEY);
+    \Stripe\Stripe::setApiVersion('2023-10-16');
 
     $stripe_account_id = $prospect['stripe_account_id'] ?? null;
 
-// 1. Si le marchand n'a pas encore de compte Stripe Connect associé, on en crée un via cURL
+    // 1. Si le marchand n'a pas encore de compte Stripe Connect associé, on en crée un via l'API v2 (cURL)
     if (empty($stripe_account_id)) {
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, 'https://api.stripe.com/v1/accounts');
+        curl_setopt($ch, CURLOPT_URL, 'https://api.stripe.com/v2/core/accounts');
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([
-            'type' => 'express',
-            'email' => $prospect['email_admin'] ?? null,
-            'capabilities' => [
-                'card_payments' => ['requested' => 'true'],
-                'transfers' => ['requested' => 'true'],
-            ],
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode([
+            'dashboard' => 'express',
+            'contact_email' => $prospect['email_admin'] ?? null,
         ]));
         curl_setopt($ch, CURLOPT_USERPWD, STRIPE_SECRET_KEY . ':');
         curl_setopt($ch, CURLOPT_HTTPHEADER, [
-            'Stripe-Version: 2023-10-16' // Version forcée pour accepter v1
+            'Content-Type: application/json',
+            'Stripe-Version: 2026-09-30.preview' // Version supportant les comptes v2 connect
         ]);
 
         $result = curl_exec($ch);
@@ -57,17 +55,25 @@ try {
         $account = json_decode($result, true);
 
         if (isset($account['error'])) {
-            die('Erreur Stripe : ' . $account['error']['message']);
+            die('Erreur Stripe API v2 : ' . ($account['error']['message'] ?? json_encode($account['error'])));
         }
 
         $stripe_account_id = $account['id'];
 
-        // Sauvegarde immediate en BDD
+        // Sauvegarde immédiate en BDD
         $updateStmt = $bdd->prepare("UPDATE prospects_configurations SET stripe_account_id = ? WHERE commande_id = ?");
         $updateStmt->execute([$stripe_account_id, $commande_id]);
     }
 
-    // 2. Génération du lien d'onboarding avec le SDK classique
+
+
+    // 2. Génération du lien d'onboarding (Account Link) pour rediriger le marchand sur Stripe
+    $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+    $domainName = $_SERVER['HTTP_HOST'];
+
+    $refresh_url = $protocol . $domainName . "/config-boutique.php?id=" . $commande_id;
+    $return_url = $protocol . $domainName . "/config-boutique.php?id=" . $commande_id . "&stripe_success=1";
+
     $accountLink = \Stripe\AccountLink::create([
         'account' => $stripe_account_id,
         'refresh_url' => $refresh_url,
@@ -75,10 +81,11 @@ try {
         'type' => 'account_onboarding',
     ]);
 
-    // Redirection vers Stripe
+    // 3. Redirection vers l'interface Stripe Connect
     header("Location: " . $accountLink->url);
-    exit;
+    exit();
 
+ 
 
 } catch (Exception $e) {
     die("Erreur Stripe Connect : " . htmlspecialchars($e->getMessage()));

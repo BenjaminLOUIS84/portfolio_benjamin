@@ -32,13 +32,17 @@ try {
 
     $stripe_account_id = $prospect['stripe_account_id'] ?? null;
 
-   // 1. Si le marchand n'a pas encore de compte Stripe Connect associé, on en crée un via l'API v2
+    // 1. Si le marchand n'a pas encore de compte Stripe Connect associé, on en crée un
     if (empty($stripe_account_id)) {
-        $account = \Stripe\V2\Core\Accounts::create([
+        $account = \Stripe\Account::create([
             'type' => 'express',
-            'contact_email' => $prospect['email_admin'] ?? null,
+            'email' => $prospect['email_admin'] ?? null,
+            'capabilities' => [
+                'card_payments' => ['requested' => true],
+                'transfers' => ['requested' => true],
+            ],
         ]);
-
+        
         $stripe_account_id = $account->id;
 
         // On sauvegarde immédiatement le stripe_account_id en base de données

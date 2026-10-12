@@ -186,8 +186,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 video_fond_url = IFNULL(VALUES(video_fond_url), video_fond_url)
             ");
            
+            // On conserve l'ancien token s'il n'est pas présent dans l'URL
+            $token_a_enregistrer = !empty($token) ? $token : ($prospect['token'] ?? null);
+
             $stmt->execute([
-                $commande_id, $token, $nom_entreprise, $siret, $adresse, $email_admin, $pass_hash,
+                $commande_id, $token_a_enregister, $nom_entreprise, $siret, $adresse, $email_admin, $pass_hash,
                 $subdomain, $capital_social, $tva_intra, $telephone, $delai_retractation, $delai_livraison,
                 $frais_port, $tribunal_competent, $lien_facebook, $lien_instagram, $google_maps_iframe,
                 $couleur_principale, $couleur_secondaire, $couleur_texte, $image_fond_url, $video_fond_url

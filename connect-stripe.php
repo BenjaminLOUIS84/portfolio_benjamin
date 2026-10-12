@@ -32,15 +32,11 @@ try {
 
     $stripe_account_id = $prospect['stripe_account_id'] ?? null;
 
-    // 1. Si le marchand n'a pas encore de compte Stripe Connect associé, on en crée un (type Express)
+   // 1. Si le marchand n'a pas encore de compte Stripe Connect associé, on en crée un via l'API v2
     if (empty($stripe_account_id)) {
-        $account = \Stripe\Account::create([
+        $account = \Stripe\V2\Core\Accounts::create([
             'type' => 'express',
-            'email' => $prospect['email_admin'] ?? null,
-            'capabilities' => [
-                'card_payments' => ['requested' => true],
-                'transfers' => ['requested' => true],
-            ],
+            'contact_email' => $prospect['email_admin'] ?? null,
         ]);
 
         $stripe_account_id = $account->id;
@@ -49,6 +45,7 @@ try {
         $updateStmt = $bdd->prepare("UPDATE prospects_configurations SET stripe_account_id = ? WHERE commande_id = ?");
         $updateStmt->execute([$stripe_account_id, $commande_id]);
     }
+
 
     // 2. Génération du lien d'onboarding (Account Link) pour rediriger le marchand sur Stripe
     $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";

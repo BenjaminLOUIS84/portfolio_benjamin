@@ -1,8 +1,6 @@
 <?php
 require_once __DIR__ . '/db_config.php';
-echo STRIPE_PUBLIC_KEY;
-die();
-?>
+?> 
 
 <!DOCTYPE html>
 <html lang="fr">

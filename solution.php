@@ -30,7 +30,31 @@ require_once __DIR__ . '/config.php';
       }
     }
     </script>
+        <script>
+        let currentLang = 'fr';
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'fr' ? 'en' : 'fr';
+            const langBtn = document.getElementById('lang-btn');
+
+            if (langBtn) {
+                langBtn.textContent = currentLang === 'fr' ? '🇬🇧 EN' : '🇫🇷 FR';
+            }
+
+            // Met à jour tous les éléments contenant data-fr et data-en
+            document.querySelectorAll('[data-fr][data-en]').forEach(el => {
+                el.textContent = el.getAttribute(`data-${currentLang}`);
+            });
+
+            // Gestion spécifique pour la valeur du bouton d'envoi du formulaire
+            const submitBtn = document.getElementById('submit-btn');
+            if (submitBtn) {
+                submitBtn.value = currentLang === 'fr' ? 'ENVOYER' : 'SEND';
+            }
+        }
+    </script>
 </head>
+
 <body style="height: auto !important; overflow-y: auto !important; background-color: #f4f6f9 !important; color: #1a202c !important; font-family: system-ui, -apple-system, sans-serif; margin: 0; padding: 0;">
 
 <div style="max-width: 1200px; margin: 0 auto; padding: 15px;">

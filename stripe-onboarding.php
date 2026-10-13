@@ -30,10 +30,15 @@ require_once __DIR__ . '/db_config.php';
     </div>
 
    <script>
+
+    console.log('Script chargé');
     const stripe = Stripe('<?= STRIPE_PUBLIC_KEY ?>');
     console.log('Clé publique :', '<?= STRIPE_PUBLIC_KEY ?>');
+    console.log('Stripe initialisé');
+    
 
     document.getElementById('onboarding-form').addEventListener('submit', async function(e) {
+        console.log('Formulaire soumis');
         e.preventDefault();
         
         console.log('Formulaire soumis');

@@ -103,7 +103,7 @@ require_once __DIR__ . '/db_config.php';
 require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/vendor/autoload.php';
 
-$commande_id = (int)($_GET['commande_id'] ?? 0);
+$commande_id = (int)($_POST['commande_id'] ?? $_GET['commande_id'] ?? 0);
 
 if ($commande_id <= 0) {
     die("Commande invalide.");

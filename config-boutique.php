@@ -361,7 +361,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <p style="color: #166534; font-weight: bold; margin-bottom: 10px;">
                     ✅ Compte connecté : <?= htmlspecialchars($prospect['stripe_account_id']) ?>
                 </p>
-                <a href="stripe-onboarding.php?commande_id=<?= $commande_id ?>" style="display: block; text-align: center; background: #635bff; color: white; padding: 12px 20px; border-radius: 6px; text-decoration: none; font-weight: bold;">
+                <a href="connect-stripe.php?commande_id=<?= $commande_id ?>" style="display: block; text-align: center; background: #635bff; color: white; padding: 12px 20px; border-radius: 6px; text-decoration: none; font-weight: bold;">
                     Modifier / Gérer le compte
                 </a>
 
@@ -369,7 +369,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <p style="color: #475569; font-size: 0.9rem; margin-bottom: 10px;">
                         Connectez votre compte Stripe (en mode test) pour recevoir directement les paiements de vos ventes sur votre boutique.
                     </p>
-                    <a href="stripe-onboarding.php?commande_id=<?= $commande_id ?>" style="display: block; text-align: center; background: #635bff; color: white; padding: 12px 20px; border-radius: 6px; text-decoration: none; font-weight: bold;">
+                    <a href="connect-stripe.php?commande_id=<?= $commande_id ?>" style="display: block; text-align: center; background: #635bff; color: white; padding: 12px 20px; border-radius: 6px; text-decoration: none; font-weight: bold;">
                         Connecter mon compte Stripe
                     </a>
                 <?php endif; ?>

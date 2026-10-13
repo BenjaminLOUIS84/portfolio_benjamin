@@ -1,4 +1,6 @@
 <?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 // if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 //     var_dump($_POST);
 //     die();
@@ -122,6 +124,23 @@ try {
         die("Token Stripe manquant.");
     }
 
+    // Fonction utilitaire pour les appels cURL v2
+    function stripeV2Request($url, $data) {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+        curl_setopt($ch, CURLOPT_USERPWD, STRIPE_SECRET_KEY . ':');
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'Content-Type: application/json',
+            'Stripe-Version: 2025-04-30.preview'
+        ]);
+        $result = curl_exec($ch);
+        curl_close($ch);
+        return json_decode($result, true);
+    }
+
     // Récupération des infos du prospect/boutique
     $stmt = $bdd->prepare("SELECT * FROM prospects_configurations WHERE commande_id = ?");
     $stmt->execute([$commande_id]);
@@ -199,29 +218,29 @@ try {
     // }
 
     if (empty($stripe_account_id)) {
-        $account = stripeV2Request('https://api.stripe.com/v2/core/accounts', [
-            'contact_email' => $prospect['email_admin'] ?? null,
-            'configuration' => [
-                'merchant' => new \stdClass()
-            ],
-            'identity' => [
-                'attestations' => [
-                    'stripe_service_agreement_acceptance' => [
-                        'account_token' => $stripe_token
-                    ]
-                ]
-            ]
-        ]);
+    \Stripe\Stripe::setApiKey(STRIPE_SECRET_KEY);
+    
+    $account = \Stripe\Account::create([
+        'controller' => [
+            'requirement_collection' => 'stripe',
+            'stripe_dashboard' => ['type' => 'express'],
+            'fees' => ['payer' => 'application'],
+            'losses' => ['payments' => 'application'],
+        ],
+        'country' => 'FR',
+        'email' => $prospect['email_admin'] ?? null,
+      
+    ]);
 
-        if (isset($account['error'])) {
-            die('Erreur création compte Stripe : ' . ($account['error']['message'] ?? json_encode($account['error'])));
-        }
-
-        $stripe_account_id = $account['id'];
-
-        $updateStmt = $bdd->prepare("UPDATE prospects_configurations SET stripe_account_id = ? WHERE commande_id = ?");
-        $updateStmt->execute([$stripe_account_id, $commande_id]);
+    if (isset($account->error)) {
+        die('Erreur création compte Stripe : ' . $account->error->message);
     }
+
+    $stripe_account_id = $account->id;
+
+    $updateStmt = $bdd->prepare("UPDATE prospects_configurations SET stripe_account_id = ? WHERE commande_id = ?");
+    $updateStmt->execute([$stripe_account_id, $commande_id]);
+}
 
     // 2. Création du lien d'onboarding v2
     $link = stripeV2Request('https://api.stripe.com/v2/core/account_links', [

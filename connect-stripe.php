@@ -1,6 +1,6 @@
 <?php
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
+// ini_set('display_errors', 1);
+// error_reporting(E_ALL);
 // if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 //     var_dump($_POST);
 //     die();
@@ -105,7 +105,7 @@ require_once __DIR__ . '/db_config.php';
 require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/vendor/autoload.php';
 
-$commande_id = (int)($_POST['commande_id'] ?? $_GET['commande_id'] ?? 0);
+$commande_id = (int)($_GET['commande_id'] ?? 0);
 
 if ($commande_id <= 0) {
     die("Commande invalide.");
@@ -118,11 +118,11 @@ try {
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
     ]);
 
-    $stripe_token = $_POST['stripe_token'] ?? null;
+    // $stripe_token = $_POST['stripe_token'] ?? null;
 
-    if (empty($stripe_token)) {
-        die("Token Stripe manquant.");
-    }
+    // if (empty($stripe_token)) {
+    //     die("Token Stripe manquant.");
+    // }
 
     // Fonction utilitaire pour les appels cURL v2
     function stripeV2Request($url, $data) {
@@ -242,20 +242,19 @@ try {
     $updateStmt->execute([$stripe_account_id, $commande_id]);
 }
 
-    // 2. Création du lien d'onboarding v2
-    $link = stripeV2Request('https://api.stripe.com/v2/core/account_links', [
+    // Définition de la clé API
+    \Stripe\Stripe::setApiKey(STRIPE_SECRET_KEY);
+
+    // 2. Création du lien d'onboarding
+    $accountLink = \Stripe\AccountLink::create([
         'account' => $stripe_account_id,
-        'use_case' => ['type' => 'account_onboarding'],
         'refresh_url' => $refresh_url,
-        'return_url'  => $return_url,
+        'return_url' => $return_url,
+        'type' => 'account_onboarding',
     ]);
 
-    if (isset($link['error'])) {
-        die('Erreur création lien onboarding : ' . ($link['error']['message'] ?? json_encode($link['error'])));
-    }
-
-    // 3. Redirection vers l'interface Stripe Connect
-    header("Location: " . $link['url']);
+    // 3. Redirection
+    header("Location: " . $accountLink->url);
     exit();
 
 } catch (Exception $e) {

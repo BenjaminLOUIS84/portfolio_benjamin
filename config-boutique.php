@@ -19,7 +19,7 @@ try {
 // Détection du sous-domaine depuis l'URL ou le paramètre GET
 $host = $_SERVER['HTTP_HOST'] ?? '';
 $subdomain_from_url = explode('.', $host)[0];
-$token = trim($_GET['token'] ?? '');
+$token = trim($_GET['token'] ?? $_GET['token'] ?? '');
 $slug = trim($_GET['slug'] ?? $_GET['subdomain'] ?? $subdomain_from_url);
 $commande_id_get = (int)($_GET['id'] ?? 0);
 
@@ -68,6 +68,7 @@ if (in_array($commande['statut'], ['configure', 'deploye']) && empty($token) && 
     header("Location: https://www.benjaminlouis.eu/");
     exit;
 }
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Nettoyage des champs de base
@@ -186,11 +187,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 video_fond_url = IFNULL(VALUES(video_fond_url), video_fond_url)
             ");
            
-            // On conserve l'ancien token s'il n'est pas présent dans l'URL
-            $token_a_enregistrer = !empty($token) ? $token : ($prospect['token'] ?? null);
+      
+            $token_a_enregistrer = $_POST['token'] ?? $_GET['token'] ?? ($token ?? ($prospect['token'] ?? ''));
+            if (empty($token_a_enregistrer)) {
+                $token_a_enregistrer = bin2hex(random_bytes(16));
+            }
 
-            $stmt->execute([
-                $commande_id, $token_a_enregister, $nom_entreprise, $siret, $adresse, $email_admin, $pass_hash,
+                $stmt->execute([
+                $commande_id, $token_a_enregistrer, $nom_entreprise, $siret, $adresse, $email_admin, $pass_hash,
                 $subdomain, $capital_social, $tva_intra, $telephone, $delai_retractation, $delai_livraison,
                 $frais_port, $tribunal_competent, $lien_facebook, $lien_instagram, $google_maps_iframe,
                 $couleur_principale, $couleur_secondaire, $couleur_texte, $image_fond_url, $video_fond_url
@@ -257,6 +261,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
        
         <form method="POST" enctype="multipart/form-data">
             <input type="hidden" name="commande_id" value="<?= $commande_id ?>">
+           <input type="hidden" name="token" value="<?php echo htmlspecialchars($_POST['token'] ?? $token ?? $prospect['token'] ?? ''); ?>">
            
             <h3>1. Informations Légales</h3>
             <div class="form-group">

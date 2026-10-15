@@ -1,7 +1,7 @@
 <?php
 // Activation de l'affichage des erreurs pour le débogage (si besoin)
-// ini_set('display_errors', 1);
-// error_reporting(E_ALL);
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 
 // 1. Connexion à la base de données
 require_once __DIR__ . '/db_config.php';
@@ -139,11 +139,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // Upload Logo
-        if (isset($_FILES['']) && $_FILES['']['error'] === UPLOAD_ERR_OK && $_FILES['i']['size'] > 0) {
-            $ext = strtolower(pathinfo($_FILES['']['name'], PATHINFO_EXTENSION));
-            if (in_array($ext, ['jpg', 'jpeg', 'png', 'webp']) && $_FILES['']['size'] <= 5 * 1024 * 1024) {
+        if (isset($_FILES['logo_entreprise']) && $_FILES['logo_entreprise']['error'] === UPLOAD_ERR_OK && $_FILES['i']['size'] > 0) {
+            $ext = strtolower(pathinfo($_FILES['logo_entreprise']['name'], PATHINFO_EXTENSION));
+            if (in_array($ext, ['jpg', 'jpeg', 'png', 'webp']) && $_FILES['logo_entreprise']['size'] <= 5 * 1024 * 1024) {
                 $filename = 'img_' . $subdomain . '_' . time() . '.' . $ext;
-                if (move_uploaded_file($_FILES['']['tmp_name'], $upload_dir . $filename)) {
+                if (move_uploaded_file($_FILES['logo_entreprise']['tmp_name'], $upload_dir . $filename)) {
                     $logo_url = 'uploads/' . $filename;
                 }
             } else {
@@ -151,18 +151,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
 
-       
-
-        // 2. Traitement du Médiateur
-        if (isset($_FILES['image_mediateur']) && $_FILES['image_mediateur']['error'] === UPLOAD_ERR_OK) {
-            $ext = pathinfo($_FILES['image_mediateur']['name'], PATHINFO_EXTENSION);
-            $filename = 'mediateur_' . uniqid() . '.' . strtolower($ext);
-            $target_file = $upload_dir . $filename;
-        
-            if (move_uploaded_file($_FILES['image_mediateur']['tmp_name'], $target_file)) {
-                $image_mediateur_url = $target_file;
+        // Upload Médiateur
+        if (isset($_FILES['image_mediateur']) && $_FILES['image_mediateur']['error'] === UPLOAD_ERR_OK && $_FILES['i']['size'] > 0) {
+            $ext = strtolower(pathinfo($_FILES['image_mediateur']['name'], PATHINFO_EXTENSION));
+            if (in_array($ext, ['jpg', 'jpeg', 'png', 'webp']) && $_FILES['image_mediateur']['size'] <= 5 * 1024 * 1024) {
+                $filename = 'img_' . $subdomain . '_' . time() . '.' . $ext;
+                if (move_uploaded_file($_FILES['image_mediateur']['tmp_name'], $upload_dir . $filename)) {
+                    $logo_url = 'uploads/' . $filename;
+                }
+            } else {
+                $erreur = "Le logo doit être au format JPG, PNG ou WEBP et faire moins de 5 Mo.";
             }
-        } 
+        }
+
 
         // Upload Vidéo
         if (empty($erreur) && isset($_FILES['video_fond_file']) && $_FILES['video_fond_file']['error'] === UPLOAD_ERR_OK && $_FILES['video_fond_file']['size'] > 0) {
@@ -193,7 +194,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 frais_port, tribunal_competent, lien_facebook, lien_instagram, google_maps_iframe,
                 couleur_principale, couleur_secondaire, couleur_texte, image_fond_url, image_mediateur_url, logo_url, video_fond_url, statut_deploiement)
                 VALUES
-                (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?; ?, 'en_attente')
+                (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'en_attente')
                 ON DUPLICATE KEY UPDATE
                 nom_entreprise = VALUES(nom_entreprise),
                 siret = VALUES(siret),
@@ -215,7 +216,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 couleur_secondaire = VALUES(couleur_secondaire),
                 couleur_texte = VALUES(couleur_texte),
                 image_fond_url = IFNULL(VALUES(image_fond_url), image_fond_url),
-                image_mesiateur_url = IFNULL(VALUES(image_mediateur_url), image_mediateur_url),
+                image_mediateur_url = IFNULL(VALUES(image_mediateur_url), image_mediateur_url),
                 logo_url = IFNULL(VALUES(logo_url), logo_url),
                 video_fond_url = IFNULL(VALUES(video_fond_url), video_fond_url)
             ");

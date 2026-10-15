@@ -139,11 +139,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // Upload Logo
-        if (isset($_FILES['logo_entreprise']) && $_FILES['logo_entreprise']['error'] === UPLOAD_ERR_OK && $_FILES['i']['size'] > 0) {
-            $ext = strtolower(pathinfo($_FILES['logo_entreprise']['name'], PATHINFO_EXTENSION));
-            if (in_array($ext, ['jpg', 'jpeg', 'png', 'webp']) && $_FILES['logo_entreprise']['size'] <= 5 * 1024 * 1024) {
+        if (isset($_FILES['logo']) && $_FILES['logo']['error'] === UPLOAD_ERR_OK && $_FILES['i']['size'] > 0) {
+            $ext = strtolower(pathinfo($_FILES['logo']['name'], PATHINFO_EXTENSION));
+            if (in_array($ext, ['jpg', 'jpeg', 'png', 'webp']) && $_FILES['logo']['size'] <= 5 * 1024 * 1024) {
                 $filename = 'img_' . $subdomain . '_' . time() . '.' . $ext;
-                if (move_uploaded_file($_FILES['logo_entreprise']['tmp_name'], $upload_dir . $filename)) {
+                if (move_uploaded_file($_FILES['logo']['tmp_name'], $upload_dir . $filename)) {
                     $logo_url = 'uploads/' . $filename;
                 }
             } else {

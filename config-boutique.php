@@ -139,7 +139,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // Upload Logo
-        if (isset($_FILES['logo']) && $_FILES['logo']['error'] === UPLOAD_ERR_OK && $_FILES['i']['size'] > 0) {
+        if (isset($_FILES['logo']) && $_FILES['logo']['error'] === UPLOAD_ERR_OK && $_FILES['logo']['size'] > 0) {
             $ext = strtolower(pathinfo($_FILES['logo']['name'], PATHINFO_EXTENSION));
             if (in_array($ext, ['jpg', 'jpeg', 'png', 'webp']) && $_FILES['logo']['size'] <= 5 * 1024 * 1024) {
                 $filename = 'img_' . $subdomain . '_' . time() . '.' . $ext;
@@ -368,11 +368,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
 
             <div class="form-group">
-                <label for="image_logo_entreprise">Votre Logo (JPG, PNG, WEBP — Max 5 Mo)</label>
-                <?php if (!empty($prospect['image_logo_entreprise'])): ?>
-                    <small style="display: block; color: #666; margin-bottom: 5px;">Fichier actuel : <?= htmlspecialchars($prospect['image_logo_entreprise']) ?></small>
+                <label for="logo">Votre Logo (JPG, PNG, WEBP — Max 5 Mo)</label>
+                <?php if (!empty($prospect['logo'])): ?>
+                    <small style="display: block; color: #666; margin-bottom: 5px;">Fichier actuel : <?= htmlspecialchars($prospect['logo']) ?></small>
                 <?php endif; ?>
-                <input type="file" id="image_logo_entreprise" name="image_logo_entreprise" accept=".jpg, .jpeg, .png, .webp">
+                <input type="file" id="logo" name="logo" accept=".jpg, .jpeg, .png, .webp">
             </div>
 
             <div class="form-group">

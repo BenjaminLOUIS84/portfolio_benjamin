@@ -142,25 +142,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (isset($_FILES['logo']) && $_FILES['logo']['error'] === UPLOAD_ERR_OK && $_FILES['logo']['size'] > 0) {
             $ext = strtolower(pathinfo($_FILES['logo']['name'], PATHINFO_EXTENSION));
             if (in_array($ext, ['jpg', 'jpeg', 'png', 'webp']) && $_FILES['logo']['size'] <= 5 * 1024 * 1024) {
-                $filename = 'img_' . $subdomain . '_' . time() . '.' . $ext;
+                $filename = 'logo_' . $subdomain . '_' . time() . '.' . $ext;
                 if (move_uploaded_file($_FILES['logo']['tmp_name'], $upload_dir . $filename)) {
                     $logo_url = 'uploads/' . $filename;
                 }
             } else {
-                $erreur = "Le logo doit être au format JPG, PNG ou WEBP et faire moins de 5 Mo.";
+                $erreur = "Le logo de l'entreprise doit être au format JPG, PNG ou WEBP et faire moins de 5 Mo.";
             }
         }
 
         // Upload Médiateur
-        if (isset($_FILES['image_mediateur']) && $_FILES['image_mediateur']['error'] === UPLOAD_ERR_OK && $_FILES['i']['size'] > 0) {
+        if (isset($_FILES['image_mediateur']) && $_FILES['image_mediateur']['error'] === UPLOAD_ERR_OK && $_FILES['image_mediateur']['size'] > 0) {
             $ext = strtolower(pathinfo($_FILES['image_mediateur']['name'], PATHINFO_EXTENSION));
             if (in_array($ext, ['jpg', 'jpeg', 'png', 'webp']) && $_FILES['image_mediateur']['size'] <= 5 * 1024 * 1024) {
-                $filename = 'img_' . $subdomain . '_' . time() . '.' . $ext;
+                $filename = 'mediateur_' . $subdomain . '_' . time() . '.' . $ext;
                 if (move_uploaded_file($_FILES['image_mediateur']['tmp_name'], $upload_dir . $filename)) {
                     $image_mediateur_url = 'uploads/' . $filename;
                 }
             } else {
-                $erreur = "Le logo doit être au format JPG, PNG ou WEBP et faire moins de 5 Mo.";
+                $erreur = "Le logo du médiateur doit être au format JPG, PNG ou WEBP et faire moins de 5 Mo.";
             }
         }
 

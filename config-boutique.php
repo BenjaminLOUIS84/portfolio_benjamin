@@ -1,7 +1,7 @@
 <?php
 // Activation de l'affichage des erreurs pour le débogage (si besoin)
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
+// ini_set('display_errors', 1);
+// error_reporting(E_ALL);
 
 // 1. Connexion à la base de données
 require_once __DIR__ . '/db_config.php';

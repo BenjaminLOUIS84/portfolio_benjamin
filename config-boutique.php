@@ -380,10 +380,180 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <?php endif; ?>
             </div>
 
+            <div class="preview-container" style="margin-top: 30px; padding: 15px; border: 1px solid #e0e0e0; border-radius: 12px; background: #fafafa;">
+                <h3 style="margin-top:0; font-size:16px; color:#333; text-align:center;">Aperçu en temps réel</h3>
+            
+                <!-- Maquette Smartphone / Boutique -->
+            <div id="shop-preview" style="border: 1px solid #ddd; border-radius: 8px; overflow: hidden; background-color: #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
+        
+            <!-- Header (Menu & Panier) -->
+            <div id="prev-header" style="display: flex; justify-content: space-between; align-items: center; padding: 12px 15px; background-color: #f8d7da;">
+                <div style="font-weight: bold; font-size: 14px; color: #333;">🛒 (0)</div>
+                <div id="prev-title" style="font-weight: bold; font-size: 15px; color: #333;"  value="<?= htmlspecialchars($prospect['nom_entreprise'] ?? '') ?>" required placeholder="Votre entreprise"></div>
+                <div style="font-size: 18px; color: #333;">☰</div>
+            </div>
+
+            <!-- 1. SECTION HERO (IMAGE BOUTIQUE) -->
+            <div id="prev-hero" style="height: 200px; background-size: cover; background-position: center; position: relative;">
+            </div>
+
+           <!-- 2. GRAND CONTENEUR POUR LA VIDÉO DE FOND (PRODUITS + CONTACT) -->
+            <div id="prev-video-wrapper" style="position: relative; overflow: hidden;">
+
+                <!-- Le conteneur vidéo placé en arrière-plan -->
+                <div id="prev-video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;"></div>
+
+                <!-- Contenu positionné au-dessus de la vidéo -->
+                <div style="position: relative; z-index: 2;">
+
+                    <!-- SECTION PRODUITS -->
+                    <div id="prev-products-section" style="padding: 30px 15px; text-align: center;">
+                        <h4 id="prev-text" style="margin: 0 0 15px 0; font-size: 18px; color: #111; font-weight: bold;">
+                            Découvrir nos produits
+                        </h4>
+                        <button id="prev-btn" style="padding: 10px 20px; border: none; border-radius: 6px; background: linear-gradient(90deg, #6f42c1, #dc3545); color: #fff; font-weight: bold; font-size: 12px; text-transform: uppercase;">
+                            Découvrir notre boutique
+                        </button>
+                    </div>
+
+                    <!-- SECTION CONTACT (avec transparence) -->
+                    <div id="prev-contact-section" style="background-color: rgba(229, 179, 189, 0.8); padding: 20px 15px; text-align: center;">
+                        <div style="margin-bottom: 10px; color: #fff; font-weight: bold; font-size: 13px;">Votre nom</div>
+                        <div style="background: #fff; height: 28px; border-radius: 4px; margin-bottom: 12px;"></div>
+
+                        <div style="margin-bottom: 10px; color: #fff; font-weight: bold; font-size: 13px;">Votre email</div>
+                        <div style="background: #fff; height: 28px; border-radius: 4px; margin-bottom: 12px;"></div>
+
+                        <div style="margin-bottom: 10px; color: #fff; font-weight: bold; font-size: 13px;">Votre message</div>
+                        <div style="background: #fff; height: 60px; border-radius: 4px; margin-bottom: 15px;"></div>
+
+                        <button id="prev-contact-btn" style="padding: 8px 38px; border: none; border-radius: 6px; background: linear-gradient(90deg, #6f42c1, #dc3545); color: #fff; font-weight: bold; font-size: 12px;">
+                            OK
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- FOOTER NOIR (RÉSEAUX & MENTIONS) -->
+            <div style="background-color: #1a1a1a; padding: 15px 10px; text-align: center; color: #fff;">
+                <!-- Icônes Réseaux -->
+                <div style="display: flex; justify-content: center; gap: 15px; margin-bottom: 12px; font-size: 16px;">
+                    <i class="fab fa-facebook"></i>
+                    <i class="fab fa-youtube"></i></a>
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+            
+                <!-- Liens Légaux -->
+                <div style="font-size: 11px; line-height: 1.4; font-weight: 500; color: #e0e0e0;">
+                    <span>Mentions Légales</span> &nbsp; <span>Conditions Générales de Vente</span>
+                </div>
+            </div>
+
+            </div> <!-- Fin de la maquette smartphone -->
+            </div> <!-- Fin du conteneur d'aperçu -->
+
             <button type="submit" style="margin-top: 20px;">Valider et enregistrer</button>
         </form>
     <?php endif; ?>
 </div>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+
+    // 1. Détection des éléments d'entrée (inputs HTML)
+    const inputNom = document.querySelector('input[name="nom_entreprise"]');
+    const colorCouleurPrincipale = document.querySelector('input[name="couleur_principale"]');
+    const colorCouleurTexte = document.querySelector('input[name="couleur_texte"]');
+
+    // Détection auto (gère les noms avec ou sans _file)
+    const inputImage = document.querySelector('input[name="image_fond_file"]') || document.querySelector('input[name="image_fond"]');
+    const inputVideo = document.querySelector('input[name="video_fond_file"]') || document.querySelector('input[name="video_fond"]');
+
+    // 2. Gestion du nom de l'entreprise
+    if (inputNom) {
+        inputNom.addEventListener('input', function(e) {
+            const prevTitle = document.getElementById('prev-title');
+            if (prevTitle) prevTitle.textContent = e.target.value || 'SARL LOUIS';
+        });
+    }
+
+    // 3. Gestion des Couleurs
+    function mettreAJourCouleurs() {
+        const prevHeader = document.getElementById('prev-header');
+        const prevText = document.getElementById('prev-text');
+        const btn1 = document.getElementById('prev-btn');
+        const btn2 = document.getElementById('prev-contact-btn');
+
+        const c1 = colorCouleurPrincipale ? colorCouleurPrincipale.value : '#e5b3bd';
+        const c2 = colorCouleurTexte ? colorCouleurTexte.value : '#dc3545';
+
+        if (prevHeader) prevHeader.style.backgroundColor = c1;
+        if (prevText) prevText.style.color = c2;
+       
+        const gradient = `linear-gradient(90deg, ${c1}, ${c2})`;
+        if (btn1) btn1.style.background = gradient;
+        if (btn2) btn2.style.background = gradient;
+
+        // Met à jour la couleur du fond du formulaire de contact avec transparence (80% d'opacité)
+        if (sectionContact && colorCouleurPrincipale) {
+            sectionContact.style.backgroundColor = colorCouleurPrincipale.value + 'CC'; // 'CC' correspond à ~80% d'opacité en hexadécimal
+        }
+
+
+    }
+
+    if (colorCouleurPrincipale) colorCouleurPrincipale.addEventListener('input', mettreAJourCouleurs);
+    if (colorCouleurTexte) colorCouleurTexte.addEventListener('input', mettreAJourCouleurs);
+
+    // 4. Aperçu de l'IMAGE dans la zone Hero (#prev-hero)
+    if (inputImage) {
+        inputImage.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            const prevHero = document.getElementById('prev-hero');
+            if (file && prevHero) {
+                const imageUrl = URL.createObjectURL(file);
+                prevHero.style.backgroundImage = `url('${imageUrl}')`;
+                prevHero.style.backgroundSize = 'cover';
+                prevHero.style.backgroundPosition = 'center';
+                prevHero.style.backgroundRepeat = 'no-repeat';
+            }
+        });
+    }
+
+    // 5. Aperçu de la VIDÉO sous le texte (#prev-video-container)
+    if (inputVideo) {
+        inputVideo.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            const container = document.getElementById('prev-video-container');
+            if (file && container) {
+                container.innerHTML = ''; // Réinitialise
+               
+                const videoElem = document.createElement('video');
+                videoElem.src = URL.createObjectURL(file);
+                videoElem.autoplay = true;
+                videoElem.loop = true;
+                videoElem.muted = true;
+                videoElem.playsInline = true; // Indispensable sur iPhone/Android
+               
+                videoElem.style.width = '100%';
+                videoElem.style.height = '100%';
+                videoElem.style.objectFit = 'cover';
+               
+                container.appendChild(videoElem);
+               
+                // Forcer le lancement de la lecture
+                videoElem.play().catch(function(err) {
+                    console.log("Lecture automatique bloquée par le navigateur", err);
+                });
+            }
+        });
+    }
+
+});
+
+</script>
 </body>
 </html>
 

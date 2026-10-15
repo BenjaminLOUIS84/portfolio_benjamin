@@ -157,7 +157,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (in_array($ext, ['jpg', 'jpeg', 'png', 'webp']) && $_FILES['image_mediateur']['size'] <= 5 * 1024 * 1024) {
                 $filename = 'img_' . $subdomain . '_' . time() . '.' . $ext;
                 if (move_uploaded_file($_FILES['image_mediateur']['tmp_name'], $upload_dir . $filename)) {
-                    $logo_url = 'uploads/' . $filename;
+                    $image_mediateur_url = 'uploads/' . $filename;
                 }
             } else {
                 $erreur = "Le logo doit être au format JPG, PNG ou WEBP et faire moins de 5 Mo.";
@@ -369,16 +369,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <div class="form-group">
                 <label for="logo">Votre Logo (JPG, PNG, WEBP — Max 5 Mo)</label>
-                <?php if (!empty($prospect['logo'])): ?>
-                    <small style="display: block; color: #666; margin-bottom: 5px;">Fichier actuel : <?= htmlspecialchars($prospect['logo']) ?></small>
+                <?php if (!empty($prospect['logo_url'])): ?>
+                    <small style="display: block; color: #666; margin-bottom: 5px;">Fichier actuel : <?= htmlspecialchars($prospect['logo_url']) ?></small>
                 <?php endif; ?>
                 <input type="file" id="logo" name="logo" accept=".jpg, .jpeg, .png, .webp">
             </div>
 
             <div class="form-group">
                 <label for="image_mediateur">Logo ou attestation du médiateur (JPG, PNG, WEBP — Max 5 Mo)</label>
-                <?php if (!empty($prospect['image_mediateur'])): ?>
-                    <small style="display: block; color: #666; margin-bottom: 5px;">Fichier actuel : <?= htmlspecialchars($prospect['image_mediateur']) ?></small>
+                <?php if (!empty($prospect['image_mediateur_url'])): ?>
+                    <small style="display: block; color: #666; margin-bottom: 5px;">Fichier actuel : <?= htmlspecialchars($prospect['image_mediateur_url']) ?></small>
                 <?php endif; ?>
                 <input type="file" id="image_mediateur" name="image_mediateur" accept=".jpg, .jpeg, .png, .webp">
             </div>

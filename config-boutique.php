@@ -118,7 +118,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Récupération des anciennes valeurs par défaut pour ne pas les perdre
         $image_fond_url = $prospect['image_fond_url'] ?? null;
+
+        $logo_url = $prospect['logo_url'] ?? null;
+        $image_mediateur_url = $prospect['image_mediateur_url'] ?? null;
+
         $video_fond_url = $prospect['video_fond_url'] ?? null;
+
 
         // Upload Image
         if (isset($_FILES['image_fond_file']) && $_FILES['image_fond_file']['error'] === UPLOAD_ERR_OK && $_FILES['image_fond_file']['size'] > 0) {
@@ -132,6 +137,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $erreur = "L'image de fond doit être au format JPG, PNG ou WEBP et faire moins de 5 Mo.";
             }
         }
+
+        // Upload Logo
+        if (isset($_FILES['']) && $_FILES['']['error'] === UPLOAD_ERR_OK && $_FILES['i']['size'] > 0) {
+            $ext = strtolower(pathinfo($_FILES['']['name'], PATHINFO_EXTENSION));
+            if (in_array($ext, ['jpg', 'jpeg', 'png', 'webp']) && $_FILES['']['size'] <= 5 * 1024 * 1024) {
+                $filename = 'img_' . $subdomain . '_' . time() . '.' . $ext;
+                if (move_uploaded_file($_FILES['']['tmp_name'], $upload_dir . $filename)) {
+                    $logo_url = 'uploads/' . $filename;
+                }
+            } else {
+                $erreur = "Le logo doit être au format JPG, PNG ou WEBP et faire moins de 5 Mo.";
+            }
+        }
+
+       
+
+        // 2. Traitement du Médiateur
+        if (isset($_FILES['image_mediateur']) && $_FILES['image_mediateur']['error'] === UPLOAD_ERR_OK) {
+            $ext = pathinfo($_FILES['image_mediateur']['name'], PATHINFO_EXTENSION);
+            $filename = 'mediateur_' . uniqid() . '.' . strtolower($ext);
+            $target_file = $upload_dir . $filename;
+        
+            if (move_uploaded_file($_FILES['image_mediateur']['tmp_name'], $target_file)) {
+                $image_mediateur_url = $target_file;
+            }
+        } 
 
         // Upload Vidéo
         if (empty($erreur) && isset($_FILES['video_fond_file']) && $_FILES['video_fond_file']['error'] === UPLOAD_ERR_OK && $_FILES['video_fond_file']['size'] > 0) {
@@ -160,9 +191,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 (commande_id, token, nom_entreprise, siret, adresse_postale, email_admin, mot_de_passe_hash,
                 subdomain, capital_social, tva_intra, telephone, delai_retractation, delai_livraison,
                 frais_port, tribunal_competent, lien_facebook, lien_instagram, google_maps_iframe,
-                couleur_principale, couleur_secondaire, couleur_texte, image_fond_url, video_fond_url, statut_deploiement)
+                couleur_principale, couleur_secondaire, couleur_texte, image_fond_url, image_mediateur_url, logo_url, video_fond_url, statut_deploiement)
                 VALUES
-                (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'en_attente')
+                (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?; ?, 'en_attente')
                 ON DUPLICATE KEY UPDATE
                 nom_entreprise = VALUES(nom_entreprise),
                 siret = VALUES(siret),
@@ -184,6 +215,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 couleur_secondaire = VALUES(couleur_secondaire),
                 couleur_texte = VALUES(couleur_texte),
                 image_fond_url = IFNULL(VALUES(image_fond_url), image_fond_url),
+                image_mesiateur_url = IFNULL(VALUES(image_mediateur_url), image_mediateur_url),
+                logo_url = IFNULL(VALUES(logo_url), logo_url),
                 video_fond_url = IFNULL(VALUES(video_fond_url), video_fond_url)
             ");
            
@@ -197,7 +230,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $commande_id, $token_a_enregistrer, $nom_entreprise, $siret, $adresse, $email_admin, $pass_hash,
                 $subdomain, $capital_social, $tva_intra, $telephone, $delai_retractation, $delai_livraison,
                 $frais_port, $tribunal_competent, $lien_facebook, $lien_instagram, $google_maps_iframe,
-                $couleur_principale, $couleur_secondaire, $couleur_texte, $image_fond_url, $video_fond_url
+                $couleur_principale, $couleur_secondaire, $couleur_texte, $image_fond_url, $image_mediateur_url, $logo_url, $video_fond_url
             ]);
 
             // Synchronisation automatique et robuste dans toso8422_boutique.admin_users
@@ -334,6 +367,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
 
             <div class="form-group">
+                <label for="image_logo_entreprise">Votre Logo (JPG, PNG, WEBP — Max 5 Mo)</label>
+                <?php if (!empty($prospect['image_logo_entreprise'])): ?>
+                    <small style="display: block; color: #666; margin-bottom: 5px;">Fichier actuel : <?= htmlspecialchars($prospect['image_logo_entreprise']) ?></small>
+                <?php endif; ?>
+                <input type="file" id="image_logo_entreprise" name="image_logo_entreprise" accept=".jpg, .jpeg, .png, .webp">
+            </div>
+
+            <div class="form-group">
+                <label for="image_mediateur">Logo ou attestation du médiateur (JPG, PNG, WEBP — Max 5 Mo)</label>
+                <?php if (!empty($prospect['image_mediateur'])): ?>
+                    <small style="display: block; color: #666; margin-bottom: 5px;">Fichier actuel : <?= htmlspecialchars($prospect['image_mediateur']) ?></small>
+                <?php endif; ?>
+                <input type="file" id="image_mediateur" name="image_mediateur" accept=".jpg, .jpeg, .png, .webp">
+            </div>
+
+            <div class="form-group">
                 <label for="video_fond_file">Vidéo de fond (MP4, WEBM — Max 20 Mo)</label>
                 <?php if (!empty($prospect['video_fond_url'])): ?>
                     <small style="display: block; color: #666; margin-bottom: 5px;">Fichier actuel : <?= htmlspecialchars($prospect['video_fond_url']) ?></small>
@@ -440,7 +489,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <!-- Icônes Réseaux -->
                 <div style="display: flex; justify-content: center; gap: 15px; margin-bottom: 12px; font-size: 16px;">
                     <i class="fab fa-facebook"></i>
-                    <i class="fab fa-youtube"></i></a>
+                    <i class="fab fa-youtube"></i>
                     <i class="fas fa-map-marker-alt"></i>
                 </div>
             

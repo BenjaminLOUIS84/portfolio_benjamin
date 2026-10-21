@@ -20,8 +20,16 @@ $texts = [
         's5_text' => 'Le client s\'engage à fournir l\'ensemble des éléments nécessaires à la réalisation du projet (textes, logos, visuels, accès nom de domaine) dans un délai raisonnable. Benjamin Louis s\'engage à contacter le client sous 24h ouvrées suivant la commande pour initier le déploiement.',
         's6_title' => '6. Responsabilité et Propriété',
         's6_text' => 'Benjamin Louis est tenu à une obligation de moyens. La propriété des livrables et des accès est transférée au client à compter du paiement intégral de la commande.',
-        's7_title' => '7. Droit applicable et Juridiction',
-        's7_text' => 'Les présentes CGV sont soumises au droit français. Tout litige relatif à leur interprétation ou leur exécution sera de la compétence exclusive des tribunaux du siège social de l\'éditeur.',
+        's7_title' => '7. Clause de responsabilité du contenu',
+        's7_text' => 'Le Client est seul responsable de son contenu (textes, images, produits, tarifs, marques) publié sur sa boutique. La SARL Louis agit en qualité de simple prestataire technique et ne saurait être tenu responsable des contenus publiés par le Client.',
+        's8_title' => '8. Légalité des produits et activités :',
+        's8_text' => 'Le Client doit utliser la solution uniquement pour la vente de produits conformes à la réglementation en vigueur. Il est strictement interdit de vendre des produits illicites, contrefaits ou soumis à des restrictions spécifiques sans autorisation. En cas de signalement ou de relance administratif/judiciaire, la SARL Louis se réserve le droit de suspendre la boutique du client sans préavis ni indemnité.',
+        's9_title' => '9. Obligations fiscales et légales du Client :',
+        's9_text' => 'Le Client est seul responsable de la rédaction et de la conformité de ses propres mentions légales, CGV, politique de confidentialité, ainsi que de sa gestion comptable et fiscale (TVA, déclarations).',
+        's10_title' => '10. Disponibilité du service (Limitation de responsabilité technique)',
+        's10_text' => 'La SARL Louis met en œuvre tous les moyens raisonnables pour assurer un accès au service (obligation de moyens). Sa responsabilité ne saurait être engagée en cas de maintenance, de force majeure ou de dysfonctionnement du réseau Internet.',
+        's11_title' => '11. Droit applicable et Juridiction',
+        's11_text' => 'Les présentes CGV sont soumises au droit français. Tout litige relatif à leur interprétation ou leur exécution sera de la compétence exclusive des tribunaux du siège social de l\'éditeur.',
         'back' => '← Retour au site'
     ],
     'en' => [
@@ -41,8 +49,15 @@ $texts = [
         's5_text' => 'The client agrees to provide all necessary assets (texts, logos, images, domain access) in a timely manner. Benjamin Louis commits to contacting the client within 24 business hours following the order to initiate deployment.',
         's6_title' => '6. Liability and Ownership',
         's6_text' => 'Benjamin Louis operates under an obligation of means. Ownership of deliverables and credentials is transferred to the client upon full payment.',
-        's7_title' => '7. Applicable Law and Jurisdiction',
-        's7_text' => 'These terms are governed by French law. Any dispute shall fall under the exclusive jurisdiction of the competent courts of the publisher\'s registered address.',
+        's7_title' => '7. Content Liability Clause',
+        's7_text' => 'The Client is solely responsible for the content (text, images, products, pricing, trademarks) published on their store. SARL Louis acts merely as a technical service provider and cannot be held liable for content published by the Client.',
+        's8_title' => '8. Legality of Products and Activities:',
+        's8_text' => 'The Client must use the solution exclusively for the sale of products that comply with applicable regulations. It is strictly prohibited to sell illicit or counterfeit goods, or products subject to specific restrictions without proper authorization. In the event of a report or administrative/legal inquiry, SARL Louis reserves the right to suspend the Client’s store without prior notice or compensation.',
+        's9_title' => '9. Client’s Tax and Legal Obligations:',
+        's9_text' => 'The Client is solely responsible for drafting and ensuring the compliance of their own legal notices, terms and conditions of sale (T&Cs), and privacy policy, as well as for managing their own accounting and tax obligations (VAT, tax filings).',
+        's10_title' => '10. Service Availability (Limitation of Technical Liability)',
+        's10_text' => 'SARL Louis employs all reasonable means to ensure access to the service (an "obligation of means"). It shall not be held liable in the event of maintenance, *force majeure*, or malfunctions within the Internet network.','s11_title' => '11. Applicable Law and Jurisdiction',
+        's11_text' => 'These terms are governed by French law. Any dispute shall fall under the exclusive jurisdiction of the competent courts of the publisher\'s registered address.',
         'back' => '← Back to website'
     ]
 ];
@@ -93,6 +108,18 @@ $t = $texts[$lang];
 
     <h2><?= $t['s7_title'] ?></h2>
     <p><?= $t['s7_text'] ?></p>
+
+    <h2><?= $t['s8_title'] ?></h2>
+    <p><?= $t['s8_text'] ?></p>
+
+    <h2><?= $t['s9_title'] ?></h2>
+    <p><?= $t['s9_text'] ?></p>
+    
+    <h2><?= $t['s10_title'] ?></h2>
+    <p><?= $t['s10_text'] ?></p>
+
+    <h2><?= $t['s11_title'] ?></h2>
+    <p><?= $t['s11_text'] ?></p>
 
     <p style="margin-top: 40px;"><a href="solution.php"><?= $t['back'] ?></a></p>
 

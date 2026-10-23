@@ -81,7 +81,7 @@ require_once __DIR__ . '/config.php';
                 
 
                 <!-- Option Multilingue (Upsell) -->
-                <div style="background: #f7fafc; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 20px;">
+                <div style="background: #f7fafc; margin-top:10px; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 20px;">
                     <label style="display: flex; align-items: center; flex-start cursor: pointer; font-weight: bold; color: #2d3748;">
                         <input type="checkbox" id="opt_multilingue" name="opt_multilingue" value="1" onchange="updateTotal()" value="1" style="margin-right: 10px; transform: scale(1.2);">
                         <span data-fr="Ajouter l'option Pack International (Boutique multilingue FR/EN)" data-en="Add the International Pack option (Multilingual store FR/EN)">
@@ -108,7 +108,7 @@ require_once __DIR__ . '/config.php';
                 </button>
             </form>
 
-            <div style="background: #f7fafc; margin: 5px; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 20px;">
+            <div style="background: #f7fafc; margin-top:10px; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 20px;">
                 
                 <p data-fr="Informations importantes – Prestations et frais annexes
                 Le montant de 990,00 € HT couvre l'intégralité de la licence du logiciel, du paramétrage, de l'intégration de la solution de paiement Stripe et de la mise en service de votre plateforme e-commerce en marque blanche.
@@ -120,7 +120,7 @@ require_once __DIR__ . '/config.php';
                 To ensure you maintain full ownership and independence regarding your tools, certain operating costs remain the direct responsibility of the Client:
                 Domain Name and Web Hosting: Must be purchased from a hosting provider of your choice (estimated cost: between €15 and €35 excl. tax per year).
                 Consumer Mediation: In accordance with Articles L.612-1 et seq. of the French Consumer Code, subscription to an approved consumer mediation service is mandatory for all sales to private individuals (estimated cost: starting from €30 excl. tax per year).
-                Stripe Transaction Fees: Processing commissions charged directly by the payment platform, in accordance with its current fee schedule."><strong>Informations importantes – Prestations et frais annexes<strong>
+                Stripe Transaction Fees: Processing commissions charged directly by the payment platform, in accordance with its current fee schedule.">Informations importantes – Prestations et frais annexes
                 Le montant de 990,00 € HT couvre l'intégralité de la licence du logiciel, du paramétrage, de l'intégration de la solution de paiement Stripe et de la mise en service de votre plateforme e-commerce en marque blanche.
                 Afin de vous garantir la pleine propriété et l'indépendance de vos outils, certains frais de fonctionnement restent à la charge directe du Client :
                 Nom de domaine et Hébergement Web : Souscription obligatoire auprès de l'hébergeur de votre choix (coût estimé : entre 15 € et 35 € HT / an).

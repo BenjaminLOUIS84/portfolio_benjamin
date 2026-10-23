@@ -30,6 +30,17 @@ $texts = [
         's10_text' => 'La SARL Louis met en œuvre tous les moyens raisonnables pour assurer un accès au service (obligation de moyens). Sa responsabilité ne saurait être engagée en cas de maintenance, de force majeure ou de dysfonctionnement du réseau Internet.',
         's11_title' => '11. Droit applicable et Juridiction',
         's11_text' => 'Les présentes CGV sont soumises au droit français. Tout litige relatif à leur interprétation ou leur exécution sera de la compétence exclusive des tribunaux du siège social de l\'éditeur.',
+        's12_title' => '12. Titularité du Code Source :',
+        's12_text' => 'Le Prestataire demeure le propriétaire exclusif  des droits de propriété intellectuelle relatifs à la plateforme logicielle, à son code source, son architecture technique et ses fonctionnalités.',
+        's13_title' => '13. Concession de Licence :',
+        's13_text' => 'La fourniture de la plateforme à 990 € HT octroie au Client une licence personnelle, non exclusive, non cessible et pour son propre compte. Le Client ne doit pas reproduire, reverse engineering ou revendre la plateforme logicielle sous sa forme originale.',
+        's14_title' => '14. Propriété des Données Client :',
+        's14_text' => 'Le Client conserve la pleine et entière propriété de ses données (fichiers produits, catalogue, base de données clients et données de commande).',
+        's15_title' => '15. Frais Infrastructure et Obligations Légales Exclus :',
+        's15_text' => 'Ne sont pas inclus dans le tarif de la prestation et restent à la charge exclusive du Client :
+        - La souscription et le renouvellement du nom de domaine et du service hébergement.
+        - Adhésion obligatoire à un organisme de médiation de la consommation (dans le cadre de la vente B2C).
+        - Les frais de commission de transaction prélevés par la solution de paiement Stripe.',
         'back' => '← Retour au site'
     ],
     'en' => [
@@ -58,6 +69,17 @@ $texts = [
         's10_title' => '10. Service Availability (Limitation of Technical Liability)',
         's10_text' => 'SARL Louis employs all reasonable means to ensure access to the service (an "obligation of means"). It shall not be held liable in the event of maintenance, *force majeure*, or malfunctions within the Internet network.','s11_title' => '11. Applicable Law and Jurisdiction',
         's11_text' => 'These terms are governed by French law. Any dispute shall fall under the exclusive jurisdiction of the competent courts of the publisher\'s registered address.',
+        's12_title' => '12. Ownership of Source Code:',
+        's12_text' => 'The Service Provider remains the exclusive owner of the intellectual property rights relating to the software platform, its source code, its technical architecture, and its functionalities.',
+        's13_title' => '13. Grant of License:',
+        's13_text' => 'The provision of the platform for €990 (excl. tax) grants the Client a personal, non-exclusive, non-transferable license for their own use. The Client may not reproduce, reverse engineer, or resell the software platform in its original form.',
+        's14_title' => '14. Ownership of Client Data:',
+        's14_text' => 'The Client retains full and complete ownership of their data (product files, catalog, customer database, and order data).',
+        's15_title' => '15. Infrastructure Costs and Legal Obligations Excluded:',
+        's15_text' => 'The following are not included in the service fee and remain the sole responsibility of the Client:
+        - Subscription to and renewal of the domain name and hosting service. 
+        - Mandatory membership in a consumer mediation body (in the context of B2C sales). 
+        - Transaction commission fees charged by the payment solution provider, Stripe.',
         'back' => '← Back to website'
     ]
 ];
@@ -120,6 +142,18 @@ $t = $texts[$lang];
 
     <h2><?= $t['s11_title'] ?></h2>
     <p><?= $t['s11_text'] ?></p>
+
+    <h2><?= $t['s12_title'] ?></h2>
+    <p><?= $t['s12_text'] ?></p>
+
+    <h2><?= $t['s13_title'] ?></h2>
+    <p><?= $t['s13_text'] ?></p>
+
+    <h2><?= $t['s14_title'] ?></h2>
+    <p><?= $t['s14_text'] ?></p>
+
+    <h2><?= $t['s15_title'] ?></h2>
+    <p><?= $t['s15_text'] ?></p>
 
     <p style="margin-top: 40px;"><a href="solution.php"><?= $t['back'] ?></a></p>
 

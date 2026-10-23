@@ -108,25 +108,38 @@ require_once __DIR__ . '/config.php';
                 </button>
             </form>
 
-            <div style="background: #f7fafc; margin-top:10px; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 20px;">
-                
-                <p data-fr="Informations importantes – Prestations et frais annexes
-                Le montant de 990,00 € HT couvre l'intégralité de la licence du logiciel, du paramétrage, de l'intégration de la solution de paiement Stripe et de la mise en service de votre plateforme e-commerce en marque blanche.
-                Afin de vous garantir la pleine propriété et l'indépendance de vos outils, certains frais de fonctionnement restent à la charge directe du Client :
-                Nom de domaine et Hébergement Web : Souscription obligatoire auprès de l'hébergeur de votre choix (coût estimé : entre 15 € et 35 € HT / an).
-                Médiation de la consommation : En application des articles L.612-1 et suivants du Code de la consommation, l'adhésion à un dispositif de médiation agréé est obligatoire pour toute vente aux particuliers (coût estimé : à partir de 30 € HT / an).
-                Frais de transaction Stripe : Commissions de traitement prélevées directement par la plateforme de paiement selon ses tarifs en vigueur." data-en="Important Information – Services and Additional Costs
-                The amount of €990.00 (excl. tax) covers the full software license, system configuration, integration of the Stripe payment solution, and the launch of your white-label e-commerce platform.
-                To ensure you maintain full ownership and independence regarding your tools, certain operating costs remain the direct responsibility of the Client:
-                Domain Name and Web Hosting: Must be purchased from a hosting provider of your choice (estimated cost: between €15 and €35 excl. tax per year).
-                Consumer Mediation: In accordance with Articles L.612-1 et seq. of the French Consumer Code, subscription to an approved consumer mediation service is mandatory for all sales to private individuals (estimated cost: starting from €30 excl. tax per year).
-                Stripe Transaction Fees: Processing commissions charged directly by the payment platform, in accordance with its current fee schedule.">Informations importantes – Prestations et frais annexes
-                Le montant de 990,00 € HT couvre l'intégralité de la licence du logiciel, du paramétrage, de l'intégration de la solution de paiement Stripe et de la mise en service de votre plateforme e-commerce en marque blanche.
-                Afin de vous garantir la pleine propriété et l'indépendance de vos outils, certains frais de fonctionnement restent à la charge directe du Client :
-                Nom de domaine et Hébergement Web : Souscription obligatoire auprès de l'hébergeur de votre choix (coût estimé : entre 15 € et 35 € HT / an).
-                Médiation de la consommation : En application des articles L.612-1 et suivants du Code de la consommation, l'adhésion à un dispositif de médiation agréé est obligatoire pour toute vente aux particuliers (coût estimé : à partir de 30 € HT / an).
-                Frais de transaction Stripe : Commissions de traitement prélevées directement par la plateforme de paiement selon ses tarifs en vigueur. </p>
-            </div> 
+            <div style="background: #f7fafc; margin-top: 15px; padding: 18px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 20px; text-align: left; font-size: 14px; line-height: 1.5; color: #4a5568;">
+                <h4 style="margin-top: 0; margin-bottom: 8px; color: #2d3748; font-size: 15px; font-weight: 600;"
+                    data-fr="Informations importantes – Prestations et frais annexes"
+                    data-en="Important information – Services and additional fees">
+                    Informations importantes – Prestations et frais annexes
+                </h4>
+
+                <p style="margin-bottom: 10px;"
+                data-fr="Le montant de 990,00 € HT couvre l'intégralité de la licence du logiciel, du paramétrage, de l'intégration de la solution de paiement Stripe et de la mise en service. Afin de vous garantir la pleine propriété de vos outils, certains frais de fonctionnement restent à la charge directe du Client :"
+                data-en="The amount of €990.00 (excl. tax) covers the full software license, system configuration, integration of the Stripe payment solution, and the launch. To ensure you maintain full ownership, certain operating costs remain the direct responsibility of the Client:">
+                Le montant de 990,00 € HT couvre l'intégralité de la licence du logiciel, du paramétrage, de l'intégration de la solution de paiement Stripe et de la mise en service. Afin de vous garantir la pleine propriété de vos outils, certains frais de fonctionnement restent à la charge directe du Client :
+                </p>
+
+                <ul style="margin: 0; padding-left: 20px;">
+                    <li style="margin-bottom: 6px;"
+                        data-fr="<strong>Nom de domaine et Hébergement Web :</strong> Souscription obligatoire auprès de l'hébergeur de votre choix (coût estimé : entre 15 € et 35 € HT / an)."
+                        data-en="<strong>Domain Name and Web Hosting:</strong> Must be purchased from a hosting provider of your choice (estimated cost: between €15 and €35 excl. tax per year).">
+                        <strong>Nom de domaine et Hébergement Web :</strong> Souscription obligatoire auprès de l'hébergeur de votre choix (coût estimé : entre 15 € et 35 € HT / an).
+                    </li>
+                    <li style="margin-bottom: 6px;"
+                        data-fr="<strong>Médiation de la consommation :</strong> En application des articles L.612-1 et suivants du Code de la consommation, l'adhésion à un dispositif de médiation agréé est obligatoire pour toute vente aux particuliers (coût estimé : à partir de 30 € HT / an)."
+                        data-en="<strong>Consumer Mediation:</strong> In accordance with Articles L.612-1 et seq. of the French Consumer Code, subscription to an approved consumer mediation service is mandatory for B2C sales (estimated cost: from €30 excl. tax per year).">
+                        <strong>Médiation de la consommation :</strong> En application des articles L.612-1 et suivants du Code de la consommation, l'adhésion à un dispositif de médiation agréé est obligatoire pour toute vente aux particuliers (coût estimé : à partir de 30 € HT / an).
+                    </li>
+                    <li style="margin-bottom: 0;"
+                        data-fr="<strong>Frais de transaction Stripe :</strong> Commissions de traitement prélevées directement par la plateforme de paiement selon ses tarifs en vigueur."
+                        data-en="<strong>Stripe Transaction Fees:</strong> Processing commissions charged directly by the payment platform, in accordance with its current fee schedule.">
+                        <strong>Frais de transaction Stripe :</strong> Commissions de traitement prélevées directement par la plateforme de paiement selon ses tarifs en vigueur.
+                    </li>
+                </ul>
+
+            </div>
 
         </section>
         <br><a href="https://benjaminlouis.eu/index.html" data-fr="Retour" data-en="Back" class="badge"><strong>Retour</strong></a><br>

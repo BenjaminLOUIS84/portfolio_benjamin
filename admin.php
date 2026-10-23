@@ -251,7 +251,26 @@ if (isset($bdd)) {
                                 <td><code><?= htmlspecialchars($cmd['telephone'] ?? '') ?></code></td>
                                 
                                 <td><code><?= htmlspecialchars($cmd['domaine_souhaite']) ?></code></td>
+                                
                                 <td><?= $cmd['option_multilingue'] ? '✅ Oui' : '❌ Non' ?></td>
+                                
+                                <td>
+                                    <form action="toggle_option.php" method="POST" style="display:inline;">
+                                        <input type="hidden" name="id" value="<?= $cmd['id'] ?>">
+                                        <input type="hidden" name="current_opt" value="<?= $cmd['option_multilingue'] ?>">
+                                        <?php if ($cmd['option_multilingue']): ?>
+                                            <button type="submit" style="background:#e8f5e9; color:#2e7d32; border:1px solid #c8e6c9; padding:4px 8px; border-radius:4px; font-weight:bold; cursor:pointer;" title="Cliquez pour désactiver">
+                                                ✅ Oui
+                                            </button>
+                                        <?php else: ?>
+                                            <button type="submit" onclick="return confirm('Activer le Pack International (Multilingue) pour ce client ?');" style="background:#ffebee; color:#c62828; border:1px solid #ffcdd2; padding:4px 8px; border-radius:4px; font-weight:bold; cursor:pointer;" title="Cliquez pour activer (+290€ HT)">
+                                                ❌ Non (Activer)
+                                            </button>
+                                        <?php endif; ?>
+                                    </form>
+                                </td>
+
+
                                 <td><strong><?= number_format($cmd['montant_ht'], 2, ',', ' ') ?> €</strong></td>
                                 <td>
                                     <?php if ($cmd['statut'] === 'paye'): ?>

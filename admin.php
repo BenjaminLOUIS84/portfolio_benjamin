@@ -252,8 +252,8 @@ if (isset($bdd)) {
                                 
                                 <td><code><?= htmlspecialchars($cmd['domaine_souhaite']) ?></code></td>
                                 
-                                <td><?= $cmd['option_multilingue'] ? '✅ Oui' : '❌ Non' ?></td>
-                                
+                               
+
                                 <td>
                                     <form action="toggle_option.php" method="POST" style="display:inline;">
                                         <input type="hidden" name="id" value="<?= $cmd['id'] ?>">

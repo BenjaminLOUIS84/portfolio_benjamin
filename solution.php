@@ -120,7 +120,7 @@ require_once __DIR__ . '/config.php';
                 To ensure you maintain full ownership and independence regarding your tools, certain operating costs remain the direct responsibility of the Client:
                 Domain Name and Web Hosting: Must be purchased from a hosting provider of your choice (estimated cost: between €15 and €35 excl. tax per year).
                 Consumer Mediation: In accordance with Articles L.612-1 et seq. of the French Consumer Code, subscription to an approved consumer mediation service is mandatory for all sales to private individuals (estimated cost: starting from €30 excl. tax per year).
-                Stripe Transaction Fees: Processing commissions charged directly by the payment platform, in accordance with its current fee schedule.">Informations importantes – Prestations et frais annexes
+                Stripe Transaction Fees: Processing commissions charged directly by the payment platform, in accordance with its current fee schedule."><strong>Informations importantes – Prestations et frais annexes<strong>
                 Le montant de 990,00 € HT couvre l'intégralité de la licence du logiciel, du paramétrage, de l'intégration de la solution de paiement Stripe et de la mise en service de votre plateforme e-commerce en marque blanche.
                 Afin de vous garantir la pleine propriété et l'indépendance de vos outils, certains frais de fonctionnement restent à la charge directe du Client :
                 Nom de domaine et Hébergement Web : Souscription obligatoire auprès de l'hébergeur de votre choix (coût estimé : entre 15 € et 35 € HT / an).

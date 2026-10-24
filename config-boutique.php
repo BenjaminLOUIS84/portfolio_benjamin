@@ -419,26 +419,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                        title="Au moins 8 caractères, 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial.">
             </div>
 
-            <h3>6. Paiement & Stripe Connect</h3>
-            <div class="form-group" style="background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px dashed #cbd5e1;">
-                <label>Compte Stripe pour les paiements</label>
-                <?php if (!empty($prospect['stripe_account_id'])): ?>
-                <p style="color: #166534; font-weight: bold; margin-bottom: 10px;">
-                    ✅ Compte connecté : <?= htmlspecialchars($prospect['stripe_account_id']) ?>
-                </p>
-                <a href="connect-stripe.php?commande_id=<?= $commande_id ?>" style="display: block; text-align: center; background: #635bff; color: white; padding: 12px 20px; border-radius: 6px; text-decoration: none; font-weight: bold;">
-                    Modifier / Gérer le compte
-                </a>
-
-                <?php else: ?>
-                    <p style="color: #475569; font-size: 0.9rem; margin-bottom: 10px;">
-                        Connectez votre compte Stripe (en mode test) pour recevoir directement les paiements de vos ventes sur votre boutique.
-                    </p>
-                    <a href="connect-stripe.php?commande_id=<?= $commande_id ?>" style="display: block; text-align: center; background: #635bff; color: white; padding: 12px 20px; border-radius: 6px; text-decoration: none; font-weight: bold;">
-                        Connecter mon compte Stripe
-                    </a>
-                <?php endif; ?>
-            </div>
+          
 
             <div class="preview-container" style="margin-top: 30px; padding: 15px; border: 1px solid #e0e0e0; border-radius: 12px; background: #fafafa;">
                 <h3 style="margin-top:0; font-size:16px; color:#333; text-align:center;">Aperçu en temps réel</h3>

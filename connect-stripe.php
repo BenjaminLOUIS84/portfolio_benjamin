@@ -154,8 +154,11 @@ try {
 
     $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
     $domainName = $_SERVER['HTTP_HOST'];
-    $refresh_url = $protocol . $domainName . "/config-boutique.php?id=" . $commande_id;
-    $return_url  = $protocol . $domainName . "/config-boutique.php?id=" . $commande_id . "&stripe_success=1";
+    $refresh_url = $protocol . $domainName . "/admin.php?commande_id=" . $commande_id;
+    $return_url  = $protocol . $domainName . "/admin.php?commande_id=" . $commande_id . "&stripe_success=1";
+
+    // $refresh_url = $protocol . $domainName . "/config-boutique.php?id=" . $commande_id;
+    // $return_url  = $protocol . $domainName . "/config-boutique.php?id=" . $commande_id . "&stripe_success=1";
 
     // Fonction utilitaire pour les appels cURL v2
     // function stripeV2Request($url, $data) {

@@ -75,6 +75,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nom_entreprise = htmlspecialchars(trim($_POST['nom_entreprise'] ?? ''), ENT_QUOTES, 'UTF-8');
     $siret = preg_replace('/\s+/', '', $_POST['siret'] ?? '');
     $adresse = htmlspecialchars(trim($_POST['adresse_postale'] ?? ''), ENT_QUOTES, 'UTF-8');
+
+    $rcs = htmlspecialchars(trim($_POST['rcs'] ?? ''), ENT_QUOTES, 'UTF-8');
+
     $email_admin = filter_var(trim($_POST['email_admin'] ?? ''), FILTER_SANITIZE_EMAIL);
    
     $pass = $_POST['mot_de_passe_hash'] ?? '';
@@ -189,15 +192,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $stmt = $bdd->prepare("
                 INSERT INTO prospects_configurations
-                (commande_id, token, nom_entreprise, siret, adresse_postale, email_admin, mot_de_passe_hash,
+                (commande_id, token, nom_entreprise, siret, rcs, adresse_postale, email_admin, mot_de_passe_hash,
                 subdomain, capital_social, tva_intra, telephone, delai_retractation, delai_livraison,
                 frais_port, tribunal_competent, lien_facebook, lien_instagram, google_maps_iframe,
                 couleur_principale, couleur_secondaire, couleur_texte, image_fond_url, image_mediateur_url, logo_url, video_fond_url, statut_deploiement)
                 VALUES
-                (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'en_attente')
+                (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'en_attente')
                 ON DUPLICATE KEY UPDATE
                 nom_entreprise = VALUES(nom_entreprise),
                 siret = VALUES(siret),
+                rcs = VALUES(rcs),
                 adresse_postale = VALUES(adresse_postale),
                 email_admin = VALUES(email_admin),
                 mot_de_passe_hash = VALUES(mot_de_passe_hash),
@@ -228,7 +232,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
 
                 $stmt->execute([
-                $commande_id, $token_a_enregistrer, $nom_entreprise, $siret, $adresse, $email_admin, $pass_hash,
+                $commande_id, $token_a_enregistrer, $nom_entreprise, $siret, $rcs, $adresse, $email_admin, $pass_hash,
                 $subdomain, $capital_social, $tva_intra, $telephone, $delai_retractation, $delai_livraison,
                 $frais_port, $tribunal_competent, $lien_facebook, $lien_instagram, $google_maps_iframe,
                 $couleur_principale, $couleur_secondaire, $couleur_texte, $image_fond_url, $image_mediateur_url, $logo_url, $video_fond_url
@@ -310,6 +314,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <label for="siret">Numéro SIRET (14 chiffres) *</label>
                 <input type="text" id="siret" name="siret" value="<?= htmlspecialchars($_POST['siret'] ?? $prospect['siret'] ?? '') ?>" required placeholder="Ex: 123 456 789 00012">
             </div>
+
+            <div class="form-group">
+                <label for="rcs">RCS *</label>
+                <input type="text" id="rcs" name="rcs" value="<?= htmlspecialchars($_POST['rcs'] ?? $prospect['rcs'] ?? '') ?>" required placeholder="Ex: Guéret">
+            </div>
+
             <div class="form-group">
                 <label for="capital_social">Capital Social</label>
                 <input type="text" id="capital_social" name="capital_social" value="<?= htmlspecialchars($_POST['capital_social'] ?? $prospect['capital_social'] ?? '') ?>" placeholder="Ex: 1 000 €">

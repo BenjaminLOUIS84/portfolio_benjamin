@@ -55,7 +55,7 @@ require_once __DIR__ . '/config.php';
     <main style="padding: 20px 0;">
         <section style="text-align: center; margin-bottom: 30px;">
             <h1 data-fr="Votre Boutique E-commerce Clé en Main" data-en="Your turnkey e-commerce store" style="color: #1a202c !important; font-size: 1.8rem; margin-bottom: 10px;">Votre Boutique E-commerce Clé en Main</h1>
-            <p data-fr="Une solution complète et prête à vendre pour" data-en="A complete, ready-to-sell solution for" style="color: #4a5568 !important; font-size: 1.1rem; margin: 0;">
+            <p data-fr="Une solution complète et prête à vendre pour 990 € HT" data-en="A complete, ready-to-sell solution for 990 € HT" style="color: #4a5568 !important; font-size: 1.1rem; margin: 0;">
                 Une solution complète et prête à vendre pour <strong>990 € HT</strong>.
             </p>
         </section>
@@ -123,18 +123,18 @@ require_once __DIR__ . '/config.php';
 
                 <ul style="margin: 0; padding-left: 20px;">
                     <li style="margin-bottom: 6px;"
-                        data-fr="<strong>Nom de domaine et Hébergement Web :</strong> Souscription obligatoire auprès de l'hébergeur de votre choix (coût estimé : entre 15 € et 35 € HT / an)."
-                        data-en="<strong>Domain Name and Web Hosting:</strong> Must be purchased from a hosting provider of your choice (estimated cost: between €15 and €35 excl. tax per year).">
-                        <strong>Nom de domaine et Hébergement Web :</strong> Souscription obligatoire auprès de l'hébergeur de votre choix (coût estimé : entre 15 € et 35 € HT / an).
+                        data-fr="Nom de domaine et Hébergement Web : Souscription annuelle obligatoire de votre nom de domaine (coût estimé : entre 8 € et 15 € HT / an). L'hébergement web est entièrement inclus et géré sur nos serveurs en France."
+                        data-en="Mandatory annual subscription for your domain name (estimated cost: between €8 and €15 excl. tax per year). Web hosting is fully included and managed on our servers in France.">
+                        <strong>Nom de domaine et Hébergement Web :</strong> Souscription annuelle obligatoire de votre nom de domaine (coût estimé : entre 8 € et 15 € HT / an). L'hébergement web est entièrement inclus et géré sur nos serveurs en France.
                     </li>
                     <li style="margin-bottom: 6px;"
-                        data-fr="<strong>Médiation de la consommation :</strong> En application des articles L.612-1 et suivants du Code de la consommation, l'adhésion à un dispositif de médiation agréé est obligatoire pour toute vente aux particuliers (coût estimé : à partir de 30 € HT / an)."
-                        data-en="<strong>Consumer Mediation:</strong> In accordance with Articles L.612-1 et seq. of the French Consumer Code, subscription to an approved consumer mediation service is mandatory for B2C sales (estimated cost: from €30 excl. tax per year).">
+                        data-fr="Médiation de la consommation : En application des articles L.612-1 et suivants du Code de la consommation, l'adhésion à un dispositif de médiation agréé est obligatoire pour toute vente aux particuliers (coût estimé : à partir de 30 € HT / an)."
+                        data-en="Consumer Mediation: In accordance with Articles L.612-1 et seq. of the French Consumer Code, subscription to an approved consumer mediation service is mandatory for B2C sales (estimated cost: from €30 excl. tax per year).">
                         <strong>Médiation de la consommation :</strong> En application des articles L.612-1 et suivants du Code de la consommation, l'adhésion à un dispositif de médiation agréé est obligatoire pour toute vente aux particuliers (coût estimé : à partir de 30 € HT / an).
                     </li>
                     <li style="margin-bottom: 0;"
-                        data-fr="<strong>Frais de transaction Stripe :</strong> Commissions de traitement prélevées directement par la plateforme de paiement selon ses tarifs en vigueur."
-                        data-en="<strong>Stripe Transaction Fees:</strong> Processing commissions charged directly by the payment platform, in accordance with its current fee schedule.">
+                        data-fr="Frais de transaction Stripe : Commissions de traitement prélevées directement par la plateforme de paiement selon ses tarifs en vigueur."
+                        data-en="Stripe Transaction Fees: Processing commissions charged directly by the payment platform, in accordance with its current fee schedule.">
                         <strong>Frais de transaction Stripe :</strong> Commissions de traitement prélevées directement par la plateforme de paiement selon ses tarifs en vigueur.
                     </li>
                 </ul>

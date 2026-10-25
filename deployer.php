@@ -120,7 +120,7 @@ $updateCmd->execute([$commande_id]);
 $to = $config['email_admin'];
 
 // Génération de l'URL dédiée au client (basée sur son sous-domaine / nom d'entreprise)
-$url_admin_client = get_client_admin_url($config['nom_entreprise']);
+$url_admin_client = get_client_admin_url($config['subdomain']);
 
 $charset = 'UTF-8';
 $subject = mb_encode_mimeheader("Votre boutique est prête ! 🚀", $charset);

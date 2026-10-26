@@ -7,8 +7,8 @@ require_once __DIR__ . '/vendor/autoload.php';
 $commande_id = (int)($_GET['commande_id'] ?? 0);
 
 // --- SÉCURITÉ BOUTIQUE DÉMO / PRODUCTION ---
-if (strpos($_SERVER['HTTP_HOST'], 'boutique.benjaminlouis.eu') !== false) {
-    // Clé de TEST pour la démo
+// Si on est sur le domaine de base ou un sous-domaine de test/démo (*.benjaminlouis.eu ou localhost)
+if (strpos($_SERVER['HTTP_HOST'], 'benjaminlouis.eu') !== false || strpos($_SERVER['HTTP_HOST'], 'localhost') !== false) {
     $active_stripe_key = STRIPE_SECRET_KEY;
 } else {
     // Clé LIVE (production) pour tes vrais clients

@@ -45,7 +45,7 @@ if (isset($bdd)) {
 }
 
 // 4. Configuration Stripe Checkout avec montants TTC (1 188 € TTC de base / 348 € TTC option)
-Stripe::setApiKey(STRIPE_SECRET_KEY);
+Stripe::setApiKey(STRIPE_SECRET_KEY_LIVE);
 
 // 990 € HT + 20% TVA = 1 188 € TTC (soit 118800 centimes)
 $line_items = [

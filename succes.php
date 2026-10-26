@@ -37,7 +37,7 @@ $commande = null;
 
 if (!empty($session_id)) {
     try {
-        Stripe::setApiKey(STRIPE_SECRET_KEY);
+        Stripe::setApiKey(STRIPE_SECRET_KEY_LIVE);
         $session = Session::retrieve($session_id);
 
         if ($session->payment_status === 'paid') {

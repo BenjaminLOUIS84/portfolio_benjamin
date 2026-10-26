@@ -51,7 +51,7 @@ try {
     
     // $domainName = $_SERVER['HTTP_HOST'];
     // On reconstruit proprement le domaine du client à partir de ce qui est enregistré en BDD (ex: eurllinx -> eurllinx.benjaminlouis.eu)
-    $clientDomain = $prospect['domaine_souhaite'] . ".benjaminlouis.eu";
+    $clientDomain = $prospect['domaine_souhaite'] . "benjaminlouis.eu";
 
     $refresh_url = $protocol . $clientDomain . "/admin.php?commande_id=" . $commande_id;
     $return_url  = $protocol . $clientDomain . "/admin.php?commande_id=" . $commande_id . "&stripe_success=1";

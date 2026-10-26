@@ -53,8 +53,8 @@ try {
     // On reconstruit proprement le domaine du client à partir de ce qui est enregistré en BDD (ex: eurllinx -> eurllinx.benjaminlouis.eu)
     $clientDomain = $prospect['domaine_souhaite'] . ".benjaminlouis.eu";
 
-    $refresh_url = $protocol . $domainName . "/admin.php?commande_id=" . $commande_id;
-    $return_url  = $protocol . $domainName . "/admin.php?commande_id=" . $commande_id . "&stripe_success=1";
+    $refresh_url = $protocol . $clientDomain . "/admin.php?commande_id=" . $commande_id;
+    $return_url  = $protocol . $clientDomain . "/admin.php?commande_id=" . $commande_id . "&stripe_success=1";
 
 
     // 1. Création du token de compte (obligatoire pour les plateformes FR)

@@ -48,7 +48,11 @@ try {
     $stripe_account_id = $prospect['stripe_account_id'] ?? null;
 
     $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
-    $domainName = $_SERVER['HTTP_HOST'];
+    
+    // $domainName = $_SERVER['HTTP_HOST'];
+    // On reconstruit proprement le domaine du client à partir de ce qui est enregistré en BDD (ex: eurllinx -> eurllinx.benjaminlouis.eu)
+    $clientDomain = $prospect['domaine_souhaite'] . ".benjaminlouis.eu";
+
     $refresh_url = $protocol . $domainName . "/admin.php?commande_id=" . $commande_id;
     $return_url  = $protocol . $domainName . "/admin.php?commande_id=" . $commande_id . "&stripe_success=1";
 

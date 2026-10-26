@@ -141,6 +141,7 @@ if (!empty($session_id)) {
 
                         // Pièce jointe PDF
                         $mail->addStringAttachment($pdf_content, "Facture_{$num_fac}.pdf", 'base64', 'application/pdf');
+                        $mail->addBCC('contact@benjaminlouis.eu');
                     }
 
                     $mail->isHTML(true);

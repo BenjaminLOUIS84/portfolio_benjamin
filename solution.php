@@ -77,7 +77,7 @@ require_once __DIR__ . '/config.php';
 
                 <div>
                     <label data-fr="Nom de domaine souhaité" data-en="Desired Domain Name *" for="domaine_souhaite" style="display: block; color: #2d3748 !important; font-weight: 600; font-size: 0.9rem; margin-bottom: 5px;">Nom de domaine souhaité</label>
-                    <input type="text" id="domaine_souhaite" name="domaine_souhaite" placeholder="maboutique.com" style="width: 100%; padding: 10px; background: #fff !important; color: #000 !important; border: 1px solid #cbd5e1; border-radius: 5px; box-sizing: border-box; font-size: 0.95rem;">
+                    <input type="text" id="domaine_souhaite" name="domaine_souhaite" style="width: 100%; padding: 10px; background: #fff !important; color: #000 !important; border: 1px solid #cbd5e1; border-radius: 5px; box-sizing: border-box; font-size: 0.95rem;">
                 
 
                 <!-- Option Multilingue (Upsell) -->

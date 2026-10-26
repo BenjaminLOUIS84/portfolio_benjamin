@@ -1,5 +1,6 @@
 <?php
 require_once 'config.php';
+require_once 'db_config.php';
 require_once 'vendor/autoload.php';
 
 use Stripe\Stripe;
@@ -15,6 +16,23 @@ $client_nom       = trim($_POST['client_nom'] ?? '');
 $client_email     = trim($_POST['client_email'] ?? '');
 $domaine_souhaite = trim($_POST['domaine_souhaite'] ?? '');
 $opt_multilingue  = isset($_POST['opt_multilingue']) && $_POST['opt_multilingue'] == '1';
+
+// --- GESTION DYNAMIQUE TEST / LIVE ---
+$domaine_souhaite = trim($_POST['domaine_souhaite'] ?? '');
+
+if (
+    strpos($_SERVER['HTTP_HOST'], 'boutique.benjaminlouis.eu') !== false ||
+    strpos($domaine_souhaite, 'demo') !== false ||
+    strpos($domaine_souhaite, 'test') !== false
+) {
+    // Mode TEST (si on est sur la démo ou si le nom contient "demo"/"test")
+    $active_stripe_key = STRIPE_SECRET_KEY; // ou STRIPE_SECRET_KEY_TEST selon ton db_config
+} else {
+    // Mode LIVE (pour les vrais clients)
+    $active_stripe_key = STRIPE_SECRET_KEY_LIVE;
+}
+
+\Stripe\Stripe::setApiKey($active_stripe_key);
 
 if (empty($client_nom) || empty($client_email) || empty($domaine_souhaite)) {
     die('Veuillez remplir tous les champs obligatoires.');
@@ -45,7 +63,7 @@ if (isset($bdd)) {
 }
 
 // 4. Configuration Stripe Checkout avec montants TTC (1 188 € TTC de base / 348 € TTC option)
-Stripe::setApiKey(STRIPE_SECRET_KEY_LIVE);
+Stripe::setApiKey($active_stripe_key);
 
 // 990 € HT + 20% TVA = 1 188 € TTC (soit 118800 centimes)
 $line_items = [

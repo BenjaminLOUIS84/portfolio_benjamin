@@ -6,6 +6,15 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 $commande_id = (int)($_GET['commande_id'] ?? 0);
 
+// --- SÉCURITÉ BOUTIQUE DÉMO / PRODUCTION ---
+if (strpos($_SERVER['HTTP_HOST'], 'boutique.benjaminlouis.eu') !== false) {
+    // Clé de TEST pour la démo
+    $active_stripe_key = STRIPE_SECRET_KEY;
+} else {
+    // Clé LIVE (production) pour tes vrais clients
+    $active_stripe_key = STRIPE_SECRET_KEY_LIVE;
+}
+
 if ($commande_id <= 0) {
     die("Commande invalide.");
 }
@@ -26,7 +35,7 @@ try {
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
-        curl_setopt($ch, CURLOPT_USERPWD, STRIPE_SECRET_KEY . ':');
+        curl_setopt($ch, CURLOPT_USERPWD, $active_stripe_key . ':');
         curl_setopt($ch, CURLOPT_HTTPHEADER, [
             'Content-Type: application/json',
             'Stripe-Version: 2025-04-30.preview'
@@ -64,7 +73,7 @@ try {
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
-        curl_setopt($ch, CURLOPT_USERPWD, STRIPE_SECRET_KEY . ':');
+        curl_setopt($ch, CURLOPT_USERPWD, $active_stripe_key . ':');
         curl_setopt($ch, CURLOPT_HTTPHEADER, [
             'Content-Type: application/x-www-form-urlencoded',
             'Stripe-Version: 2025-04-30.preview'
@@ -76,7 +85,7 @@ try {
 
 
     if (empty($stripe_account_id)) {
-    \Stripe\Stripe::setApiKey(STRIPE_SECRET_KEY);
+    \Stripe\Stripe::setApiKey($active_stripe_key);
     
     $account = \Stripe\Account::create([
         'controller' => [
@@ -101,7 +110,7 @@ try {
 }
 
     // Définition de la clé API
-    \Stripe\Stripe::setApiKey(STRIPE_SECRET_KEY);
+    \Stripe\Stripe::setApiKey($active_stripe_key);
 
     // 2. Création du lien d'onboarding
     $accountLink = \Stripe\AccountLink::create([

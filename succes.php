@@ -29,7 +29,19 @@ use PHPMailer\PHPMailer\Exception;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 
+// Détection automatique du mode Test ou Live selon l'ID de session Stripe
 $session_id = $_GET['session_id'] ?? '';
+
+if (strpos($session_id, 'cs_test_') === 0) {
+    // Si c'est une session de test, on utilise la clé de test
+    $active_stripe_key = STRIPE_SECRET_KEY; // ou STRIPE_SECRET_KEY_TEST selon ton db_config
+} else {
+    // Sinon, on utilise la clé de production
+    $active_stripe_key = STRIPE_SECRET_KEY_LIVE;
+}
+
+\Stripe\Stripe::setApiKey($active_stripe_key);
+
 $customer_email = '';
 $client_nom = '';
 $paiement_valide = false;
@@ -37,7 +49,7 @@ $commande = null;
 
 if (!empty($session_id)) {
     try {
-        Stripe::setApiKey(STRIPE_SECRET_KEY_LIVE);
+        
         $session = Session::retrieve($session_id);
 
         if ($session->payment_status === 'paid') {

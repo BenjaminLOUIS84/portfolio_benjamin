@@ -1041,6 +1041,7 @@ input[type='submit'] {
 
     .illustration {
         width: 80%;
+        padding: 10px;
     }
 
     .sizeS {

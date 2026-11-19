@@ -296,6 +296,124 @@ figcaption {
     position: static;
 }
 
+.service-cards-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
+  gap: 24px;
+  width: 100%;
+  max-width: 920px;
+  margin: 24px auto;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+.service-card {
+  flex: 1 1 0;
+  min-width: 280px;
+  max-width: 430px;
+  background: #ffffff;
+  color: #162238;
+  border-radius: 14px;
+  padding: 22px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left;
+  box-sizing: border-box;
+}
+
+.service-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px solid #e5e9f0;
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+}
+
+.service-card-header h3 {
+  margin: 0;
+  font-size: 1.15rem;
+  line-height: 1.3;
+  color: #162238;
+}
+
+.service-price {
+  flex-shrink: 0;
+  background: #0f766e;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 6px 12px;
+  border-radius: 999px;
+  text-align: center;
+  line-height: 1.15;
+}
+
+.service-price small {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.service-subtitle {
+  margin: 0 0 12px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #0f766e;
+}
+
+.service-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px;
+}
+
+.service-list li {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 8px;
+  font-size: 0.92rem;
+  line-height: 1.4;
+  color: #2b3a55;
+}
+
+.service-list li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #0f766e;
+  font-weight: 700;
+}
+
+.service-footer {
+  margin: 0;
+  padding-top: 10px;
+  border-top: 1px dashed #d6dde8;
+  font-size: 0.82rem;
+  color: #52607a;
+  text-align: center;
+}
+
+/* Passage en colonne sur mobile pour éviter l'écrasement */
+@media (max-width: 720px) {
+  .service-cards-row {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .service-card {
+    width: 100%;
+    max-width: 420px;
+  }
+}
+
 .illustration {
     width: 100%;
      padding: 10px;
@@ -1174,5 +1292,97 @@ input[type='submit'] {
     .ico {
         width: 50%;
     }
+
+    @media (max-width: 720px) {
+  .accueil .service-cards-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    width: 100%;
+    padding: 0 14px;
+    margin: 20px auto;
+  }
+
+  .accueil .service-card {
+    background: #ffffff;
+    color: #162238;
+    width: 100%;
+    max-width: 390px;
+    min-width: 0;
+    border-radius: 14px;
+    padding: 18px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    text-align: left;
+  }
+
+  .accueil .service-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    border-bottom: 1px solid #e5e9f0;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+  }
+
+  .accueil .service-card-header h3 {
+    color: #162238;
+    font-size: 1.05rem;
+    margin: 0;
+    text-align: left;
+  }
+
+  .accueil .service-price {
+    background: #0f766e;
+    color: #ffffff;
+    padding: 6px 10px;
+    border-radius: 10px;
+    font-size: 0.92rem;
+    flex-shrink: 0;
+  }
+
+  .accueil .service-subtitle {
+    color: #0f766e;
+    font-size: 0.9rem;
+    margin: 0 0 10px;
+    text-align: left;
+  }
+
+  .accueil .service-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 14px;
+  }
+
+  .accueil .service-list li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 7px;
+    color: #2b3a55;
+    font-size: 0.88rem;
+    line-height: 1.35;
+    text-align: left;
+  }
+
+  .accueil .service-list li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #0f766e;
+    font-weight: 700;
+  }
+
+  .accueil .service-footer {
+    color: #52607a;
+    border-top: 1px dashed #d6dde8;
+    padding-top: 8px;
+    margin: 0;
+    font-size: 0.8rem;
+    text-align: center;
+  }
+}
+
 
 }

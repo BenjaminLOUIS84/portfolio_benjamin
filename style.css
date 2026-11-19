@@ -298,6 +298,7 @@ figcaption {
 
 .illustration {
     width: 100%;
+     padding: 10px;
 }
 
 .accueil figure {
